@@ -94,13 +94,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'explosive',
-        name: 'explosive',
+        name: 'explosiveCaseSamples',
         component: () => import('@/views/CaseSamples/explosive'),
         meta: { title: '炸药与原材料', icon: 'table' }
       },
       {
         path: 'device',
-        name: 'device',
+        name: 'deviceCaseSamples',
         component: () => import('@/views/CaseSamples/device'),
         meta: { title: '爆炸装置', icon: 'table' }
       }
@@ -116,13 +116,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'explosive',
-        name: 'explosive',
+        name: 'explosiveCommonSamples',
         component: () => import('@/views/CommonSamples/explosive'),
         meta: { title: '炸药与原材料', icon: 'table' }
       },
       {
         path: 'device',
-        name: 'device',
+        name: 'deviceCommonSamples',
         component: () => import('@/views/CommonSamples/device'),
         meta: { title: '爆炸装置', icon: 'table' }
       }
@@ -138,13 +138,13 @@ export const constantRouterMap = [
     children: [
       {
         path: 'explosive',
-        name: 'explosive',
+        name: 'explosiveAnalysisAndJudgment',
         component: () => import('@/views/AnalysisAndJudgment/explosive'),
         meta: { title: '炸药与原材料', icon: 'table' }
       },
       {
         path: 'device',
-        name: 'device',
+        name: 'deviceAnalysisAndJudgment',
         component: () => import('@/views/AnalysisAndJudgment/device'),
         meta: { title: '爆炸装置', icon: 'table' }
       }

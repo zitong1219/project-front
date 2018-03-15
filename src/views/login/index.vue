@@ -1,31 +1,66 @@
 <template>
   <div class="login-container">
-    <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
+    <!-- 登陆表单 -->
+    <el-form 
+      autoComplete="on" 
+      :model="loginForm" 
+      :rules="loginRules" 
+      ref="loginForm" 
+      label-position="left" 
+      label-width="0px"
       class="card-box login-form">
-      <h3 class="title">vue-element-admin</h3>
+
+      <h3 class="title">系 统 登 陆</h3>
+
+      <!-- 用户名输入 -->
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
         </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />
+        <el-input 
+          name="username" 
+          type="text" 
+          v-model="loginForm.username" 
+          autoComplete="on" 
+          placeholder="username" />
       </el-form-item>
+
+      <!-- 密码输入 -->
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password"></svg-icon>
         </span>
-        <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on"
-          placeholder="password"></el-input>
-          <span class="show-pwd" @click="showPwd"><svg-icon icon-class="eye" /></span>
+        <el-input 
+          name="password" 
+          :type="pwdType" 
+          @keyup.enter.native="handleLogin" 
+          v-model="loginForm.password" 
+          autoComplete="on"
+          placeholder="password">
+        </el-input>
+        <span
+          class="show-pwd" 
+          @click="showPwd">
+          <svg-icon icon-class="eye" />
+        </span>
       </el-form-item>
+
+      <!-- 登陆按键 -->
       <el-form-item>
-        <el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
-          Sign in
+        <el-button 
+          type="primary" 
+          style="width:100%;" 
+          :loading="loading" 
+          @click.native.prevent="handleLogin">
+          登 陆
         </el-button>
       </el-form-item>
+
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: admin</span>
       </div>
+
     </el-form>
   </div>
 </template>
@@ -35,7 +70,9 @@ import { isvalidUsername } from '@/utils/validate'
 
 export default {
   name: 'login',
+
   data() {
+    /* 用户名验证 */
     const validateUsername = (rule, value, callback) => {
       if (!isvalidUsername(value)) {
         callback(new Error('请输入正确的用户名'))
@@ -43,6 +80,7 @@ export default {
         callback()
       }
     }
+    /* 密码验证 */
     const validatePass = (rule, value, callback) => {
       if (value.length < 5) {
         callback(new Error('密码不能小于5位'))
@@ -63,7 +101,9 @@ export default {
       pwdType: 'password'
     }
   },
+
   methods: {
+    /* 显示密码 */
     showPwd() {
       if (this.pwdType === 'password') {
         this.pwdType = ''
@@ -71,16 +111,19 @@ export default {
         this.pwdType = 'password'
       }
     },
+    /* 登陆操作 */
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('Login', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: '/' })
-          }).catch(() => {
-            this.loading = false
-          })
+          this.$store.dispatch('Login', this.loginForm)
+            .then(() => {
+              this.loading = false
+              this.$router.push({ path: '/' })
+            })
+            .catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false
