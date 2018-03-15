@@ -37,41 +37,6 @@ export const constantRouterMap = [
     }]
   },
 
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/table',
-  //   name: 'Example',
-  //   meta: { title: 'Example', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'table',
-  //       name: 'Table',
-  //       component: () => import('@/views/table/index'),
-  //       meta: { title: 'Table', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'tree',
-  //       name: 'Tree',
-  //       component: () => import('@/views/tree/index'),
-  //       meta: { title: 'Tree', icon: 'tree' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/form',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Form',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: 'Form', icon: 'form' }
-  //     }
-  //   ]
-  // },
-
   {
     path: '/PersonnelManagement',
     component: Layout,
@@ -80,7 +45,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'PersonnelManagement',
         component: () => import('@/views/PersonnelManagement/index'),
-        meta: { title: '人员管理', icon: 'form' }
+        meta: { title: '人员管理', icon: 'user' }
       }
     ]
   },
@@ -90,7 +55,7 @@ export const constantRouterMap = [
     component: Layout,
     // redirect: '/example/table',
     name: 'CaseSamples',
-    meta: { title: '案件样本', icon: 'example' },
+    meta: { title: '案件样本', icon: 'tree' },
     children: [
       {
         path: 'explosive',
@@ -112,7 +77,7 @@ export const constantRouterMap = [
     component: Layout,
     // redirect: '/example/table',
     name: 'CommonSamples',
-    meta: { title: '常见样本', icon: 'example' },
+    meta: { title: '常见样本', icon: 'tree' },
     children: [
       {
         path: 'explosive',
