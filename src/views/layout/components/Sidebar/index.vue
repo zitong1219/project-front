@@ -7,7 +7,7 @@
       background-color="#304156" 
       text-color="#fff" 
       active-text-color="#409EFF"> 
-      <!-- #304156  unique-opened-->
+      <!-- #304156 0593D3 unique-opened-->
 
       <sidebar-item :routes="routes"></sidebar-item>
       

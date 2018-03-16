@@ -3,17 +3,21 @@
   .main-container {
     min-height: 100%;
     transition: margin-left 0.28s;
-    margin-left: 180px;
-  } // 侧边栏
+    margin-left: 200px;
+    /*margin-top: 30px;*/
+  } 
+
+  // 侧边栏
   .sidebar-container {
     transition: width 0.28s;
-    width: 180px!important;
+    width: 200px!important;
     height: 100%;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     z-index: 1001;
+    margin-top: 50px;
     a {
       display: inline-block;
       width: 100%;
@@ -26,6 +30,7 @@
       width: 100%;
     }
   }
+
   .hideSidebar {
     .sidebar-container,.sidebar-container .el-menu {
       width: 36px!important;
@@ -35,6 +40,7 @@
       margin-left: 36px;
     }
   }
+
   .hideSidebar {
     .submenu-title-noDropdown {
       padding-left: 10px!important;
@@ -66,6 +72,7 @@
         }
       }
     }
+
     .el-submenu {
       &>.el-submenu__title {
         padding-left: 10px!important;
@@ -86,6 +93,7 @@
       }
     }
   }
+
   .nest-menu .el-submenu>.el-submenu__title,
   .el-submenu .el-menu-item {
     min-width: 180px!important;
@@ -94,6 +102,7 @@
       background-color: $menuHover!important;
     }
   }
+
   .el-menu--collapse .el-menu .el-submenu{
     min-width: 180px!important;
   }

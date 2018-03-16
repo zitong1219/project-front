@@ -72,6 +72,14 @@
       </el-table-column>
 
       <el-table-column 
+        align="center" 
+        label="Infomation">
+        <template slot-scope="scope">
+          <span>{{scope.row.title}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
         align="center"
         class-name="status-col" 
         label="Status" 
@@ -136,6 +144,7 @@ export default {
 
   created() {
     this.fetchData()
+    console.log('Router: ', this.$route)
   },
 
   methods: {
@@ -144,6 +153,7 @@ export default {
       getList(this.listQuery).then(response => {
         this.list = response.data.items
         this.listLoading = false
+        console.log('List: ', this.list)
       })
     },
     handleEdit(index, row) {
