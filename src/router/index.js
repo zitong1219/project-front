@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+const _import = require('./_import_' + process.env.NODE_ENV)
+
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
@@ -22,29 +24,33 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
+  { path: '/login', component: _import('login/index'), hidden: true },
+  { path: '/404', component: _import('errorPages/404'), hidden: true },
 
   {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    name: 'Dashboard',
     hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: _import('dashboard/index'),
+        name: 'dashboard',
+        meta: { title: 'dashboard', icon: '' }
+      }
+    ]
   },
 
   {
     path: '/PersonnelManagement',
     component: Layout,
+    redirect: '/PersonnelManagement/index',
     children: [
       {
         path: 'index',
         name: 'PersonnelManagement',
-        component: () => import('@/views/PersonnelManagement/index'),
+        component: _import('PersonnelManagement/index'),
         meta: { title: '人员管理', icon: 'user' }
       }
     ]
@@ -60,13 +66,13 @@ export const constantRouterMap = [
       {
         path: 'explosive',
         name: 'explosiveCaseSamples',
-        component: () => import('@/views/CaseSamples/explosive'),
+        component: _import('CaseSamples/explosive'),
         meta: { title: '炸药与原材料', icon: 'table' }
       },
       {
         path: 'device',
         name: 'deviceCaseSamples',
-        component: () => import('@/views/CaseSamples/device'),
+        component: _import('CaseSamples/device'),
         meta: { title: '爆炸装置', icon: 'table' }
       }
     ]
@@ -82,13 +88,13 @@ export const constantRouterMap = [
       {
         path: 'explosive',
         name: 'explosiveCommonSamples',
-        component: () => import('@/views/CommonSamples/explosive'),
+        component: _import('CommonSamples/explosive'),
         meta: { title: '炸药与原材料', icon: 'table' }
       },
       {
         path: 'device',
         name: 'deviceCommonSamples',
-        component: () => import('@/views/CommonSamples/device'),
+        component: _import('CommonSamples/device'),
         meta: { title: '爆炸装置', icon: 'table' }
       }
     ]
@@ -104,13 +110,13 @@ export const constantRouterMap = [
       {
         path: 'explosive',
         name: 'explosiveAnalysisAndJudgment',
-        component: () => import('@/views/AnalysisAndJudgment/explosive'),
+        component: _import('AnalysisAndJudgment/explosive'),
         meta: { title: '炸药与原材料', icon: 'table' }
       },
       {
         path: 'device',
         name: 'deviceAnalysisAndJudgment',
-        component: () => import('@/views/AnalysisAndJudgment/device'),
+        component: _import('AnalysisAndJudgment/device'),
         meta: { title: '爆炸装置', icon: 'table' }
       }
     ]
@@ -125,3 +131,6 @@ export default new Router({
   routes: constantRouterMap
 })
 
+export const asyncRouterMap = [
+
+]
