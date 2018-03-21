@@ -13,10 +13,10 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next({ path: '/' })
     } else {
-      if (store.getters.roles.length === 0) {
-        store.dispatch('GetInfo')
-          .then(res => { // 拉取用户信息
-            console.log('*** Permission is receiving userInfo!')
+      if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
+        store.dispatch('GetInfo') // 拉取用户信息
+          .then(res => {
+            console.log('*** Permission store.dispatch(GetInfo) then res: ', res)
             next()
           })
           .catch(() => {
@@ -27,14 +27,14 @@ router.beforeEach((to, from, next) => {
               })
           })
       } else {
-        next()
+        next() // 当有用户权限的时候，说明所有可访问路由已生成 如访问没权限的全面会自动进入404页面
       }
     }
   } else {
-    if (whiteList.indexOf(to.path) !== -1) {
+    if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
       next()
     } else {
-      next('/login')
+      next('/login') // 否则全部重定向到登录页
       NProgress.done()
     }
   }

@@ -144,7 +144,7 @@ export default {
 
   created() {
     this.fetchData()
-    console.log('Router: ', this.$route)
+    console.log('--- PersonnelManagement Router: ', this.$route)
   },
 
   methods: {
@@ -153,7 +153,7 @@ export default {
       getList(this.listQuery).then(response => {
         this.list = response.data.items
         this.listLoading = false
-        console.log('List: ', this.list)
+        console.log('--- PersonnelManagement List: ', this.list)
       })
     },
     handleEdit(index, row) {

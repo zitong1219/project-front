@@ -27,6 +27,7 @@ export default {
       'sidebar'
     ]),
     routes() {
+      console.log('*** Sidebar $router.options.routes: ', this.$router.options.routes)
       return this.$router.options.routes
     },
     isCollapse() {
