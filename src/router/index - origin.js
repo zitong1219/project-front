@@ -28,7 +28,7 @@ export const constantRouterMap = [
   { path: '/404', component: _import('errorPages/404'), hidden: true },
 
   {
-    path: '',
+    path: '/',
     component: Layout,
     redirect: '/dashboard',
     hidden: true,
@@ -42,30 +42,16 @@ export const constantRouterMap = [
     ]
   },
 
-]
-
-export default new Router({
-  // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
-})
-
-export const asyncRouterMap = [
   {
     path: '/PersonnelManagement',
     component: Layout,
     redirect: '/PersonnelManagement/index',
-    meta: { roles: ['admin'] },
     children: [
       {
         path: 'index',
         name: 'PersonnelManagement',
         component: _import('PersonnelManagement/index'),
-        meta: { 
-          title: '人员管理', 
-          icon: 'user',
-          roles: ['admin']
-        }
+        meta: { title: '人员管理', icon: 'user' }
       }
     ]
   },
@@ -137,5 +123,14 @@ export const asyncRouterMap = [
   },
 
   { path: '*', redirect: '/404', hidden: true }
+]
+
+export default new Router({
+  // mode: 'history', //后端支持可开
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRouterMap
+})
+
+export const asyncRouterMap = [
 
 ]

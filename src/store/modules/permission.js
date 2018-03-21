@@ -4,30 +4,34 @@ const permission = {
   state: {
     routers: constantRouterMap,
     addRouters: []
-},
+  },
 
-  mutation: {
+  mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
+      console.log('*** SET_ROUTERS addRouters:', state.addRouters)
       state.routers = constantRouterMap.concat(routers)
+      console.log('*** SET_ROUTERS routers:', state.routers)
     }
   },
 
-  action: {
+  actions: {
     generateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
         let accessedRouters
-        /* roles中有admin则加载全部asyncRouterMap 
+        /**
+         * roles中有admin则加载全部asyncRouterMap 
          * 否则调用filterAsyncRouter一个个解析roles里的元素
          */
-        if (roles.indexOf('admin' >= 0)) {
+        if (roles.indexOf('admin') >= 0) {
           accessedRouters = asyncRouterMap
         }
         else {
           accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
         }
         commit('SET_ROUTERS', accessedRouters)
+        console.log('*** generateRoutes is OK, accessedRouters: ', accessedRouters)
         resolve()
       })
     }
@@ -57,3 +61,5 @@ function accessPermission(roles, route) {
     return true
   }
 }
+
+export default permission

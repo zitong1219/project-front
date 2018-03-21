@@ -12,12 +12,18 @@ router.beforeEach((to, from, next) => {
   if (getToken()) {
     if (to.path === '/login') {
       next({ path: '/' })
+      NProgress.done() 
     } else {
       if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('GetInfo') // 拉取用户信息
           .then(res => {
-            console.log('*** Permission store.dispatch(GetInfo) then res: ', res)
-            next()
+            const roles = res.data.roles
+            store.dispatch('generateRoutes', { roles })
+              .then(() => {
+                router.addRoutes(store.getters.addRouters)
+                console.log('*** Permission store.dispatch(GetInfo) then res: ', res)
+                next({ ...to, replace: true })
+              })
           })
           .catch(() => {
             store.dispatch('FedLogOut')

@@ -9,10 +9,10 @@
       active-text-color="#409EFF"> 
       <!-- #304156 0593D3 unique-opened-->
 
-      <sidebar-item :routes="routes"></sidebar-item>
+      <sidebar-item :routes="permissionRouters"></sidebar-item>
       
     </el-menu>
-  </scroll-bar>
+  </scroll-bar> 
 </template>
 
 <script>
@@ -24,6 +24,7 @@ export default {
   components: { SidebarItem, ScrollBar },
   computed: {
     ...mapGetters([
+      'permissionRouters',
       'sidebar'
     ]),
     routes() {

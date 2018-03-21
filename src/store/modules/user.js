@@ -12,19 +12,19 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
-      console.log('token: ', token)
+      console.log('*** User token: ', token)
     },
     SET_NAME: (state, name) => {
       state.name = name
-      console.log('name: ', name)
+      console.log('*** User name: ', name)
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
-      console.log('avatar: ', avatar)
+      console.log('*** User avatar: ', avatar)
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
-      console.log('roles: ', roles)
+      console.log('*** User roles: ', roles)
     }
   },
 
