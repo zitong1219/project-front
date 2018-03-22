@@ -12,19 +12,19 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
-      console.log('*** User token: ', token)
+      console.log('*** store/user token: ', state.token)
     },
     SET_NAME: (state, name) => {
       state.name = name
-      console.log('*** User name: ', name)
+      console.log('*** store/user name: ', state.name)
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
-      console.log('*** User avatar: ', avatar)
+      console.log('*** store/user avatar: ', state.avatar)
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
-      console.log('*** User roles: ', roles)
+      console.log('*** store/user roles: ', state.roles)
     }
   },
 
@@ -38,6 +38,7 @@ const user = {
             const data = response.data
             setToken(data.token)
             commit('SET_TOKEN', data.token)
+            console.log('*** store/user Login is OK, response: ', response)
             resolve()
           })
           .catch(error => {
@@ -55,6 +56,7 @@ const user = {
             commit('SET_ROLES', data.roles)
             commit('SET_NAME', data.name)
             commit('SET_AVATAR', data.avatar)
+            console.log('*** store/user GetInfo is OK, response: ', response)
             resolve(response)
           })
           .catch(error => {

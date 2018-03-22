@@ -9,9 +9,9 @@ const permission = {
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
-      console.log('*** SET_ROUTERS addRouters:', state.addRouters)
+      // console.log('*** store/permission SET_ROUTERS addRouters:', state.addRouters)
       state.routers = constantRouterMap.concat(routers)
-      console.log('*** SET_ROUTERS routers:', state.routers)
+      console.log('*** store/permission SET_ROUTERS all routers:', state.routers)
     }
   },
 
@@ -31,7 +31,7 @@ const permission = {
           accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
         }
         commit('SET_ROUTERS', accessedRouters)
-        console.log('*** generateRoutes is OK, accessedRouters: ', accessedRouters)
+        console.log('*** store/permission generateRoutes is OK, accessedRouters: ', accessedRouters)
         resolve()
       })
     }

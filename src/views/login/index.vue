@@ -111,6 +111,7 @@ export default {
         this.pwdType = 'password'
       }
     },
+
     /* 登陆操作 */
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
@@ -124,7 +125,8 @@ export default {
             .catch(() => {
               this.loading = false
             })
-        } else {
+        }
+        else {
           console.log('error submit!!')
           return false
         }
