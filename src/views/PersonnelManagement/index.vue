@@ -121,6 +121,7 @@
 
 <script>
 import { getList } from '@/api/table'
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -129,6 +130,12 @@ export default {
       list: null,
       listLoading: true
     }
+  },
+
+  computed: {
+    ...mapGetters ([
+        'roles'
+      ])
   },
 
   filters: {
@@ -157,10 +164,19 @@ export default {
       })
     },
     handleEdit(index, row) {
-      console.log(index, row)
+      console.log('--- Edit: ' ,index, row)
     },
     handleDelete(index, row) {
-      console.log(index, row)
+      console.log('--- Deleted: ', index, row, this.roles)
+      if (this.roles.indexOf('superAdmin') >= 0) {
+        alert('--- superAdmin权限 允许删除 ---')
+      }
+      else if (this.roles.indexOf('admin') >= 0) {
+        alert('--- admin权限  可删除user ---')
+      }
+      else {
+        alert('--- 无删除权限 ---')
+      }
     }
   }
 }

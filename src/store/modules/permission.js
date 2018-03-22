@@ -24,7 +24,7 @@ const permission = {
          * roles中有admin则加载全部asyncRouterMap 
          * 否则调用filterAsyncRouter一个个解析roles里的元素
          */
-        if (roles.indexOf('admin') >= 0) {
+        if (roles.indexOf('superAdmin') >= 0) {
           accessedRouters = asyncRouterMap
         }
         else {

@@ -55,7 +55,7 @@ export const asyncRouterMap = [
     path: '/PersonnelManagement',
     component: Layout,
     redirect: '/PersonnelManagement/index',
-    meta: { roles: ['admin'] },
+    meta: { roles: ['superAdmin', 'admin'] },
     children: [
       {
         path: 'index',
@@ -64,7 +64,7 @@ export const asyncRouterMap = [
         meta: { 
           title: '人员管理', 
           icon: 'user',
-          roles: ['admin']
+          roles: ['superAdmin', 'admin']
         }
       }
     ]
@@ -97,19 +97,19 @@ export const asyncRouterMap = [
     component: Layout,
     // redirect: '/example/table',
     name: 'CommonSamples',
-    meta: { title: '常见样本', icon: 'tree' },
+    meta: { title: '常见样本', icon: 'tree', roles: ['superAdmin', 'admin', 'user'] },
     children: [
       {
         path: 'explosive',
         name: 'explosiveCommonSamples',
         component: _import('CommonSamples/explosive'),
-        meta: { title: '炸药与原材料', icon: 'table' }
+        meta: { title: '炸药与原材料', icon: 'table', roles: ['superAdmin', 'admin', 'user'] }
       },
       {
         path: 'device',
         name: 'deviceCommonSamples',
         component: _import('CommonSamples/device'),
-        meta: { title: '爆炸装置', icon: 'table' }
+        meta: { title: '爆炸装置', icon: 'table', roles: ['superAdmin', 'admin', 'user'] }
       }
     ]
   },
