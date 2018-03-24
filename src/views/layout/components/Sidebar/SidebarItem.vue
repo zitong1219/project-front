@@ -1,12 +1,14 @@
 <template>
   <div class="menu-wrapper">
+    <!-- :routes="permissionRouters",permissionRouters来自于Vuex 
+        item.hidden默认为false -->
     <template 
       v-for="item in routes" 
-      v-if="!item.hidden&&item.children">
+      v-if="!item.hidden && item.children">
 
       <!-- 仅一级菜单项 -->
       <router-link 
-        v-if="item.children.length===1 && !item.children[0].children && !item.alwaysShow" 
+        v-if="item.children.length === 1 && !item.children[0].children && !item.alwaysShow" 
         :to="item.path+'/'+item.children[0].path" 
         :key="item.children[0].name">
 
@@ -15,10 +17,10 @@
           :index="item.path+'/'+item.children[0].path" 
           :class="{'submenu-title-noDropdown':!isNest}">
           <svg-icon 
-            v-if="item.children[0].meta&&item.children[0].meta.icon" 
+            v-if="item.children[0].meta && item.children[0].meta.icon" 
             :icon-class="item.children[0].meta.icon">
           </svg-icon>
-          <span v-if="item.children[0].meta&&item.children[0].meta.title">
+          <span v-if="item.children[0].meta && item.children[0].meta.title">
             {{item.children[0].meta.title}}
           </span>
         </el-menu-item>
@@ -33,10 +35,10 @@
         <!-- 一级菜单标题 -->
         <template slot="title">
           <svg-icon 
-            v-if="item.meta&&item.meta.icon" 
+            v-if="item.meta && item.meta.icon" 
             :icon-class="item.meta.icon">
           </svg-icon>
-          <span v-if="item.meta&&item.meta.title">
+          <span v-if="item.meta && item.meta.title">
             {{item.meta.title}}
           </span>
         </template>

@@ -19,6 +19,7 @@ import Layout from '../views/layout/Layout'
 * redirect: noredirect           if `redirect:noredirect` will no redirct in the breadcrumb
 * name:'router-name'             the name is used by <keep-alive> (must set!!!)
 * meta : {
+    roles: ['admin','editor']     will control the page roles (you can set multiple roles)
     title: 'title'               the name show in submenu and breadcrumb (recommend set)
     icon: 'svg-name'             the icon show in the sidebar,
   }
@@ -31,6 +32,7 @@ export const constantRouterMap = [
     path: '',
     component: Layout,
     redirect: '/dashboard',
+    alwaysShow: true,
     hidden: true,
     children: [
       {
@@ -65,7 +67,25 @@ export const asyncRouterMap = [
           title: '人员管理', 
           icon: 'user',
           roles: ['superAdmin', 'admin']
-        }
+        },
+      }
+    ]
+  },
+
+  {
+    path: '/PersonnelManagement',
+    component: Layout,
+    meta: { roles: ['superAdmin', 'admin'] },
+    hidden: true,
+    children: [
+      {
+        path: 'index/form',
+        name: 'PersonnelManagement',
+        component: _import('PersonnelManagement/form'),
+        meta: { 
+          title: '增加人员', 
+          roles: ['superAdmin', 'admin']
+        },
       }
     ]
   },
