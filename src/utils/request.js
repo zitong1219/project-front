@@ -52,8 +52,7 @@ service.interceptors.response
         })
       }
       return Promise.reject('error')
-    } 
-    else {
+    } else {
       console.log('*** utils/request service.interceptors.response response: ', response)
       return response.data
     }

@@ -12,9 +12,8 @@ router.beforeEach((to, from, next) => {
   if (getToken()) {
     if (to.path === '/login') {
       next({ path: '/' })
-      NProgress.done() 
-    }
-    else {
+      NProgress.done()
+    } else {
       if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('GetInfo') // 拉取用户信息
           .then(res => {
@@ -33,8 +32,7 @@ router.beforeEach((to, from, next) => {
                 next({ path: '/login' })
               })
           })
-      }
-      else {
+      } else {
         next() // 当有用户权限的时候，说明所有可访问路由已生成 如访问没权限的全面会自动进入404页面
       }
     }

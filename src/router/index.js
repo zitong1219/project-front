@@ -42,7 +42,7 @@ export const constantRouterMap = [
         meta: { title: 'dashboard', icon: '' }
       }
     ]
-  },
+  }
 
 ]
 
@@ -63,11 +63,11 @@ export const asyncRouterMap = [
         path: 'index',
         name: 'PersonnelManagement',
         component: _import('PersonnelManagement/index'),
-        meta: { 
-          title: '人员管理', 
+        meta: {
+          title: '人员管理',
           icon: 'user',
           roles: ['superAdmin', 'admin']
-        },
+        }
       }
     ]
   },
@@ -82,10 +82,10 @@ export const asyncRouterMap = [
         path: 'index/form',
         name: 'PersonnelManagement',
         component: _import('PersonnelManagement/form'),
-        meta: { 
-          title: '增加人员', 
+        meta: {
+          title: '增加人员',
           roles: ['superAdmin', 'admin']
-        },
+        }
       }
     ]
   },

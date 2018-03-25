@@ -21,13 +21,12 @@ const permission = {
         const { roles } = data
         let accessedRouters
         /**
-         * roles中有admin则加载全部asyncRouterMap 
+         * roles中有admin则加载全部asyncRouterMap
          * 否则调用filterAsyncRouter一个个解析roles里的元素
          */
         if (roles.indexOf('superAdmin') >= 0) {
           accessedRouters = asyncRouterMap
-        }
-        else {
+        } else {
           accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
         }
         commit('SET_ROUTERS', accessedRouters)
@@ -45,8 +44,7 @@ function filterAsyncRouter(asyncRouterMap, roles) {
         route.children = filterAsyncRouter(route.children, roles)
       }
       return true
-    }
-    else {
+    } else {
       return false
     }
   })
@@ -56,8 +54,7 @@ function filterAsyncRouter(asyncRouterMap, roles) {
 function accessPermission(roles, route) {
   if (route.meta && route.meta.roles) {
     return roles.some(role => route.meta.roles.indexOf(role) >= 0)
-  }
-  else {
+  } else {
     return true
   }
 }
