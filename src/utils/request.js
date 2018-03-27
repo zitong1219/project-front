@@ -15,7 +15,7 @@ service.interceptors.request
     if (store.getters.token) {
       config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     }
-    console.log('*** utils/request service.interceptors.request config: ', config)
+    // console.log('*** utils/request service.interceptors.request config: ', config)
     return config
   },
   error => {
@@ -53,7 +53,7 @@ service.interceptors.response
       }
       return Promise.reject('error')
     } else {
-      console.log('*** utils/request service.interceptors.response response: ', response)
+      // console.log('*** utils/request service.interceptors.response response: ', response)
       return response.data
     }
   },

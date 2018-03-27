@@ -29,17 +29,31 @@ export const constantRouterMap = [
   { path: '/404', component: _import('errorPages/404'), hidden: true },
 
   {
-    path: '',
+    path: '/Dashboard',
     component: Layout,
-    redirect: '/dashboard',
-    alwaysShow: true,
+    // redirect: '/Dashboard',
+    // alwaysShow: true,
     hidden: true,
     children: [
       {
-        path: 'dashboard',
+        path: '',
+        name: 'Dashboard',
         component: _import('dashboard/index'),
-        name: 'dashboard',
-        meta: { title: 'dashboard', icon: '' }
+        meta: { title: 'Dashboard', icon: '' }
+      }
+    ]
+  },
+
+  {
+    path: '',
+    redirect: '/Handbook',
+    component: Layout,
+    children: [
+      {
+        path: 'Handbook',
+        name: 'System Handbook',
+        component: _import('handbook/index'),
+        meta:{title: '系统指南', icon: 'documentation'}
       }
     ]
   }
@@ -65,7 +79,7 @@ export const asyncRouterMap = [
         component: _import('PersonnelManagement/index'),
         meta: {
           title: '人员管理',
-          icon: 'user',
+          icon: 'peoples',
           roles: ['superAdmin', 'admin']
         }
       }
@@ -91,6 +105,46 @@ export const asyncRouterMap = [
   },
 
   {
+    path: '/CommonSamples',
+    component: Layout,
+    redirect: '/CommonSamples/explosive',
+    name: 'CommonSamples',
+    meta: { 
+      title: '常见样本', 
+      icon: 'clipboard', 
+    },
+    children: [
+      {
+        path: 'explosive',
+        name: 'explosiveCommonSamples',
+        component: _import('CommonSamples/explosive'),
+        meta: { title: '炸药与原材料', icon: 'table' }
+      },
+      {
+        path: '/CommonSamples/device',
+        name: 'deviceCommonSamples',
+        redirect: '/CommonSamples/device/CF',
+        component: _import('CommonSamples/device'),
+        meta: { 
+          title: '爆炸装置', 
+          icon: 'table', 
+        },
+        children: [
+            { path: 'CF',
+              name: 'CF',
+              component: _import('CommonSamples/CF'),
+              meta: { title: '爆炸装置-成分'}
+            },
+            { path: 'XT',
+              name: 'XT',
+              component: _import('CommonSamples/XT'),
+              meta: { title: '爆炸装置-形态' }
+            }
+        ]
+      }
+    ]
+  },
+  {
     path: '/CaseSamples',
     component: Layout,
     // redirect: '/example/table',
@@ -108,28 +162,6 @@ export const asyncRouterMap = [
         name: 'deviceCaseSamples',
         component: _import('CaseSamples/device'),
         meta: { title: '爆炸装置', icon: 'table' }
-      }
-    ]
-  },
-
-  {
-    path: '/CommonSamples',
-    component: Layout,
-    // redirect: '/example/table',
-    name: 'CommonSamples',
-    meta: { title: '常见样本', icon: 'tree', roles: ['superAdmin', 'admin', 'user'] },
-    children: [
-      {
-        path: 'explosive',
-        name: 'explosiveCommonSamples',
-        component: _import('CommonSamples/explosive'),
-        meta: { title: '炸药与原材料', icon: 'table', roles: ['superAdmin', 'admin', 'user'] }
-      },
-      {
-        path: 'device',
-        name: 'deviceCommonSamples',
-        component: _import('CommonSamples/device'),
-        meta: { title: '爆炸装置', icon: 'table', roles: ['superAdmin', 'admin', 'user'] }
       }
     ]
   },
