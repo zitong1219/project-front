@@ -1,8 +1,5 @@
 <template>
   <div class="app-container">
-    *********
-    <router-view></router-view>
-    *********
     <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
       <el-table-column align="center" label='ID' width="95">
         <template slot-scope="scope">

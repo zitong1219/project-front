@@ -125,8 +125,7 @@ export default {
             .catch(() => {
               this.loading = false
             })
-        }
-        else {
+        } else {
           console.log('error submit!!')
           return false
         }

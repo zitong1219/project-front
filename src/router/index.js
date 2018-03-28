@@ -53,7 +53,7 @@ export const constantRouterMap = [
         path: 'Handbook',
         name: 'System Handbook',
         component: _import('handbook/index'),
-        meta:{title: '系统指南', icon: 'documentation'}
+        meta: { title: '系统指南', icon: 'documentation' }
       }
     ]
   }
@@ -94,7 +94,7 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'index/form',
-        name: 'PersonnelManagement',
+        name: 'PersonnelManagementForm',
         component: _import('PersonnelManagement/form'),
         meta: {
           title: '增加人员',
@@ -109,9 +109,9 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/CommonSamples/explosive',
     name: 'CommonSamples',
-    meta: { 
-      title: '常见样本', 
-      icon: 'clipboard', 
+    meta: {
+      title: '常见样本',
+      icon: 'clipboard'
     },
     children: [
       {
@@ -125,21 +125,21 @@ export const asyncRouterMap = [
         name: 'deviceCommonSamples',
         redirect: '/CommonSamples/device/CF',
         component: _import('CommonSamples/device'),
-        meta: { 
-          title: '爆炸装置', 
-          icon: 'table', 
+        meta: {
+          title: '爆炸装置',
+          icon: 'table'
         },
         children: [
-            { path: 'CF',
-              name: 'CF',
-              component: _import('CommonSamples/CF'),
-              meta: { title: '爆炸装置-成分'}
-            },
-            { path: 'XT',
-              name: 'XT',
-              component: _import('CommonSamples/XT'),
-              meta: { title: '爆炸装置-形态' }
-            }
+          { path: 'CF',
+            name: 'CF',
+            component: _import('CommonSamples/CF'),
+            meta: { title: '爆炸装置-成分' }
+          },
+          { path: 'XT',
+            name: 'XT',
+            component: _import('CommonSamples/XT'),
+            meta: { title: '爆炸装置-形态' }
+          }
         ]
       }
     ]

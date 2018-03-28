@@ -18,7 +18,7 @@
 // import { mapGetters } from 'vuex'
 
 export default {
-  name: 'XT',
+  name: 'XT'
   // computed: {
   //   ...mapGetters([
   //     'name',

@@ -18,6 +18,9 @@
 
 export default {
   name: '',
+  mounted: function() {
+    
+  }
   // computed: {
   //   ...mapGetters([
   //     'name',

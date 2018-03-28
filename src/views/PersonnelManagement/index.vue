@@ -11,7 +11,8 @@
         class="input-with-select">
         <el-button 
           slot="append" 
-          icon="el-icon-search">
+          icon="el-icon-search"
+          @click = "handleSearch()" >
         </el-button>
       </el-input>
 
@@ -19,7 +20,7 @@
       <el-button 
         type="primary" 
         style="margin-left: 30px;" 
-        @click = "test()"
+        @click = "handleCreate()"
         round>
         新增人员
       </el-button>
@@ -28,6 +29,7 @@
       <el-button 
         type="primary" 
         style="margin-left: 20px;"
+        @click = "handleDownloadList()"
         round>
         数据导出
       </el-button>
@@ -122,7 +124,7 @@
     <el-dialog title="详细展示" :visible.sync="dialogShowVisible">
 
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogShowVisible = false">导出</el-button>
+        <el-button type="primary" @click="handleDownload()">导出</el-button>
         <el-button type="" @click="dialogShowVisible = false">返回</el-button>
       </div>
     </el-dialog>
@@ -283,8 +285,16 @@ export default {
       })
     },
 
-    test() {
+    handleSearch() {
+      alert('Search:  ' + this.searchInput)
+    },
+
+    handleCreate() {
       this.$router.push('/PersonnelManagement/index/form')
+    },
+
+    handleDownloadList() {
+      alert('已导出！')
     },
 
     handleEdit(index, row) {
@@ -301,7 +311,12 @@ export default {
       } else {
         alert('--- 无删除权限 ---')
       }
+    },
+
+    handleDownload() {
+      alert('已导出！')
     }
+
   }
 }
 </script>
