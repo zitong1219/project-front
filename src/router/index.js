@@ -123,21 +123,21 @@ export const asyncRouterMap = [
       {
         path: '/CommonSamples/device',
         name: 'deviceCommonSamples',
-        redirect: '/CommonSamples/device/CF',
+        redirect: '/CommonSamples/device/deviceIngredient',
         component: _import('CommonSamples/device'),
         meta: {
           title: '爆炸装置',
           icon: 'table'
         },
         children: [
-          { path: 'CF',
-            name: 'CF',
-            component: _import('CommonSamples/CF'),
+          { path: 'deviceIngredient',
+            name: 'deviceIngredient',
+            component: _import('CommonSamples/deviceIngredient'),
             meta: { title: '爆炸装置-成分' }
           },
-          { path: 'XT',
-            name: 'XT',
-            component: _import('CommonSamples/XT'),
+          { path: 'deviceShape',
+            name: 'deviceShape',
+            component: _import('CommonSamples/deviceShape'),
             meta: { title: '爆炸装置-形态' }
           }
         ]
