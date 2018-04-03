@@ -38,7 +38,7 @@
 
     <!-- 数据表格 -->
     <el-table 
-      :data="list" 
+      :data="currentList" 
       v-loading.body="listLoading" 
       element-loading-text="Loading" 
       style="width: 100%; margin-top: 20px;" 
@@ -50,7 +50,7 @@
         fixed="left" 
         width="100">
         <template slot-scope="scope">
-          {{scope.$index}}
+          {{scope.row.id}}
         </template>
       </el-table-column>
 
@@ -119,6 +119,16 @@
     </el-table-column>
 
     </el-table>
+
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage"
+      :page-sizes="[10, 20, 50]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="listLength">
+    </el-pagination>
 
     <!-- 弹出框 详细展示 -->
     <el-dialog title="详细展示" :visible.sync="dialogShowVisible">
@@ -209,9 +219,13 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      currentPage: 1,
+      pageSize: 10,
       searchInput: '',
-      list: null,
-      listLoading: true,
+      // list: null,
+      listLength: 0,
+      listLoading: false,
+      currentList: [],
       dialogFormVisible: false,
       dialogShowVisible: false,
       ruleForm: {
@@ -248,7 +262,289 @@ export default {
           { required: true, message: '请填写活动形式', trigger: 'blur' }
         ]
       },
-      formLabelWidth: '120px'
+      formLabelWidth: '120px',
+      list: [
+        {
+          author: "001",
+          display_time:"1978-01-27 09:20:30",
+          id:"001",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "002",
+          display_time:"1978-01-27 09:20:30",
+          id:"002",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "003",
+          display_time:"1978-01-27 09:20:30",
+          id:"003",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "4",
+          display_time:"1978-01-27 09:20:30",
+          id:"004",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "5",
+          display_time:"1978-01-27 09:20:30",
+          id:"005",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "6",
+          display_time:"1978-01-27 09:20:30",
+          id:"006",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "7",
+          display_time:"1978-01-27 09:20:30",
+          id:"007",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "8",
+          display_time:"1978-01-27 09:20:30",
+          id:"008",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "9",
+          display_time:"1978-01-27 09:20:30",
+          id:"009",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "10",
+          display_time:"1978-01-27 09:20:30",
+          id:"010",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "11",
+          display_time:"1978-01-27 09:20:30",
+          id:"011",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "12",
+          display_time:"1978-01-27 09:20:30",
+          id:"012",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "13",
+          display_time:"1978-01-27 09:20:30",
+          id:"013",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "14",
+          display_time:"1978-01-27 09:20:30",
+          id:"014",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "15",
+          display_time:"1978-01-27 09:20:30",
+          id:"015",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "16",
+          display_time:"1978-01-27 09:20:30",
+          id:"016",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "17",
+          display_time:"1978-01-27 09:20:30",
+          id:"017",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "18",
+          display_time:"1978-01-27 09:20:30",
+          id:"018",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "19",
+          display_time:"1978-01-27 09:20:30",
+          id:"019",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "20",
+          display_time:"1978-01-27 09:20:30",
+          id:"020",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "21",
+          display_time:"1978-01-27 09:20:30",
+          id:"021",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "22",
+          display_time:"1978-01-27 09:20:30",
+          id:"022",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "23",
+          display_time:"1978-01-27 09:20:30",
+          id:"023",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "24",
+          display_time:"1978-01-27 09:20:30",
+          id:"024",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "25",
+          display_time:"1978-01-27 09:20:30",
+          id:"025",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "26",
+          display_time:"1978-01-27 09:20:30",
+          id:"026",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "27",
+          display_time:"1978-01-27 09:20:30",
+          id:"027",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "28",
+          display_time:"1978-01-27 09:20:30",
+          id:"028",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "29",
+          display_time:"1978-01-27 09:20:30",
+          id:"029",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "30",
+          display_time:"1978-01-27 09:20:30",
+          id:"030",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "31",
+          display_time:"1978-01-27 09:20:30",
+          id:"031",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "32",
+          display_time:"1978-01-27 09:20:30",
+          id:"032",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "33",
+          display_time:"1978-01-27 09:20:30",
+          id:"033",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "34",
+          display_time:"1978-01-27 09:20:30",
+          id:"034",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        },
+        {
+          author: "35",
+          display_time:"1978-01-27 09:20:30",
+          id:"035",
+          pageviews:1681,
+          status:"draft",
+          title:"Nzlbbjeyb" 
+        }
+      ]
     }
   },
 
@@ -270,9 +566,14 @@ export default {
   },
 
   created() {
-    this.fetchData()
+    // this.fetchData()
     // console.log('--- PersonnelManagement this.$route: ', this.$route)
     // console.log('--- PersonnelManagement this.$router: ', this.$router)
+  },
+
+  mounted() {
+    this.handleCurrentChange(1)
+    console.log('--- HandlePages')
   },
 
   methods: {
@@ -280,6 +581,7 @@ export default {
       this.listLoading = true
       getList(this.listQuery).then(response => {
         this.list = response.data.items
+        this.listLength = this.list.length
         this.listLoading = false
         // console.log('--- PersonnelManagement List: ', this.list)
       })
@@ -315,8 +617,37 @@ export default {
 
     handleDownload() {
       alert('已导出！')
-    }
+    },
 
+    handleSizeChange(val) {
+      console.log('--- 每页个数： ', val)
+      this.pageSize = val
+      this.currentPage = 1
+      this.currentList = []
+      this.handleCurrentChange(1)
+      // let i = 0
+      // for(; i < val && i < this.list.length ; i++)
+      // {
+      //   this.currentList[i] = this.list[i]
+      // }
+      // console.log(this.currentList)
+    },
+
+    handleCurrentChange(val) {
+      console.log(`--- 当前页${val}`)
+      console.log('--- pageSize: ', this.pageSize)
+      this.currentList = []
+      this.listLength = this.list.length
+      let i = 0
+      let newFirstItem = (val-1)*this.pageSize
+      let nextItem = newFirstItem
+      for(; i < this.pageSize && i < this.list.length - newFirstItem; i++)
+      {
+        this.currentList[i] = this.list[nextItem]
+        nextItem++
+      }
+      console.log(this.currentList)
+    }
   }
 }
 </script>
