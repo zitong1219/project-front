@@ -67,6 +67,8 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
+  
+  /****** 人员管理模块路由 ******/
   {
     path: '/PersonnelManagement',
     component: Layout,
@@ -104,6 +106,7 @@ export const asyncRouterMap = [
     ]
   },
 
+  /****** 常见样本模块路由 ******/
   {
     path: '/CommonSamples',
     component: Layout,
@@ -144,12 +147,54 @@ export const asyncRouterMap = [
       }
     ]
   },
+
+  {
+    path: '/CommonSamples',
+    component: Layout,
+    meta: { roles:['superAdmin', 'admin'] },
+    hidden: true,
+    children: [
+      {
+        path: 'explosive/form',
+        name: 'CommonSamplesExplosiveForm',
+        component: _import('CommonSamples/form'),
+        meta: {
+          title: '增加常见炸药与原材料样本',
+          roles: ['superAdmin', 'admin']
+        }
+      },
+      {
+        path: 'device/deviceIngredient/form',
+        name: 'CommonSamplesDeviceIngredientForm',
+        component: _import('CommonSamples/form'),
+        meta: {
+          title: '增加常见爆炸装置成分样本',
+          roles: ['superAdmin', 'admin']
+        }
+      },
+      {
+        path: 'device/deviceShape/form',
+        nema: 'CommonSamplesDeviceShapeForm',
+        component: _import('CommonSamples/form'),
+        meta: {
+          title: '增加常见爆炸装置形态样本',
+          roles: ['superAdmin', 'admin']
+        }
+      }
+    ]
+
+  },
+
+  /****** 案件样本模块路由 ******/
   {
     path: '/CaseSamples',
     component: Layout,
-    // redirect: '/example/table',
+    redirect: '/CaseSamples/explosive',
     name: 'CaseSamples',
-    meta: { title: '案件样本', icon: 'tree' },
+    meta: { 
+      title: '案件样本', 
+      icon: 'tree' 
+    },
     children: [
       {
         path: 'explosive',
@@ -158,32 +203,108 @@ export const asyncRouterMap = [
         meta: { title: '炸药与原材料', icon: 'table' }
       },
       {
-        path: 'device',
+        path: '/CaseSamples/device',
         name: 'deviceCaseSamples',
+        redirect: '/CaseSamples/device/deviceIngredient',
         component: _import('CaseSamples/device'),
-        meta: { title: '爆炸装置', icon: 'table' }
+        meta: { 
+          title: '爆炸装置', 
+          icon: 'table' 
+        },
+        children: [
+          {
+            path: 'deviceIngredient',
+            name: 'deviceIngredient',
+            component: _import('CaseSamples/deviceIngredient'),
+            meta: { title: '爆炸装置-成分' }
+          },
+          {
+            path: 'deviceShape',
+            name: 'deviceShape',
+            component: _import('CaseSamples/deviceShape'),
+            meta: { title: '爆炸装置-形态' }
+          }
+        ]
       }
     ]
   },
 
   {
+    path: '/CaseSamples',
+    component: Layout,
+    hidden: true,
+    meta: { roles:['superAdmin', 'admin'] },
+    children: [
+      {
+        path: 'explosive/form',
+        name: 'CaseSamplesExplosiveForm',
+        component: _import('CaseSamples/form'),
+        meta: { 
+          title: '增加案件物证炸药与原材料样本',
+          roles: ['superAdmin', 'admin'] }
+      },
+      {
+        path: 'device/deviceIngredient/form',
+        name: 'CaseSamplesDeviceIngredientForm',
+        component: _import('CaseSamples/form'),
+        meta: { 
+          title: '增加案件物证爆炸装置成分样本',
+          roles: ['superAdmin', 'admin'] }
+      },
+      {
+        path: 'device/deviceIngredient/form',
+        name: 'CaseSamplesDeviceShapeForm',
+        component: _import('CaseSamples/form'),
+        meta: { 
+          title: '增加案件物证爆炸装置形态样本',
+          roles: ['superAdmin', 'admin'] }
+      }
+    ]
+  },
+
+  /****** 分析研判模块路由 ******/
+  {
     path: '/AnalysisAndJudgment',
     component: Layout,
-    // redirect: '/example/table',
+    redirect: '/AnalysisAndJudgment/explosive',
     name: 'AnalysisAndJudgment',
-    meta: { title: '分析研判', icon: 'example' },
+    meta: { 
+      title: '分析研判', 
+      icon: 'example' 
+    },
     children: [
       {
         path: 'explosive',
         name: 'explosiveAnalysisAndJudgment',
         component: _import('AnalysisAndJudgment/explosive'),
-        meta: { title: '炸药与原材料', icon: 'table' }
+        meta: { 
+          title: '炸药与原材料', 
+          icon: 'table' 
+        }
       },
       {
-        path: 'device',
+        path: '/AnalysisAndJudgment/device',
         name: 'deviceAnalysisAndJudgment',
+        redirect: '/AnalysisAndJudgment/device/deviceIngredient',
         component: _import('AnalysisAndJudgment/device'),
-        meta: { title: '爆炸装置', icon: 'table' }
+        meta: { 
+          title: '爆炸装置', 
+          icon: 'table' 
+        },
+        children: [
+          {
+            path: 'deviceIngredient',
+            name: 'deviceIngredient',
+            component: _import('AnalysisAndJudgment/deviceIngredient'),
+            meta: { title: '爆炸装置-成分' },
+          },
+          {
+            path: 'deviceShape',
+            name: 'deviceShape',
+            component: _import('AnalysisAndJudgment/deviceShape'),
+            meta: { title: '爆炸装置-形态' },
+          }
+        ]
       }
     ]
   },

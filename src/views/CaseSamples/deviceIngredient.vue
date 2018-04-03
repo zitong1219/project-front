@@ -287,11 +287,11 @@ export default {
     },
 
     handleSearch() {
-      alert('Search: ' + this.searchInput)
+      alert('Search:  ' + this.searchInput)
     },
 
     handleCreate() {
-      this.$router.push('/CaseSamples/explosive/form')
+      this.$router.push('/CaseSamples/device/deviceIngredient/form')
     },
 
     handleDownloadList() {

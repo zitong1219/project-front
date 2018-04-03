@@ -22,7 +22,7 @@
         style="margin-left: 30px;" 
         @click = "handleCreate()"
         round>
-        新增人员
+        新增样本
       </el-button>
 
       <!-- 下载按钮 -->
@@ -40,7 +40,7 @@
     <el-table 
       :data="list" 
       v-loading.body="listLoading" 
-      element-loading-text="Loading" 
+      element-loading-text="载入中..." 
       style="width: 100%; margin-top: 20px;" 
       border fit highlight-current-row stripe>
 
@@ -115,8 +115,8 @@
             @click="handleDelete(scope.$index, scope.row)">
             删除
           </el-button>
-      </template>
-    </el-table-column>
+        </template>
+      </el-table-column>
 
     </el-table>
 
@@ -127,6 +127,7 @@
         <el-button type="primary" @click="handleDownload()">导出</el-button>
         <el-button type="" @click="dialogShowVisible = false">返回</el-button>
       </div>
+
     </el-dialog>
 
     <!-- 弹出框 编辑功能 -->
@@ -286,11 +287,11 @@ export default {
     },
 
     handleSearch() {
-      alert('Search:  ' + this.searchInput)
+      alert('Search: ' + this.searchInput)
     },
 
     handleCreate() {
-      this.$router.push('/PersonnelManagement/index/form')
+      this.$router.push('/CommonSamples/device/deviceIngredient/form')
     },
 
     handleDownloadList() {
