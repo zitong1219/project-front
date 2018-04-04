@@ -120,6 +120,7 @@
 
     </el-table>
 
+    <!-- 分页 -->
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -127,7 +128,8 @@
       :page-sizes="[10, 20, 50]"
       :page-size="pageSize"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="listLength">
+      :total="listLength"
+      background>
     </el-pagination>
 
     <!-- 弹出框 详细展示 -->
@@ -265,284 +267,284 @@ export default {
       formLabelWidth: '120px',
       list: [
         {
-          author: "001",
-          display_time:"1978-01-27 09:20:30",
-          id:"001",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '001',
+          display_time: '1978-01-27 09:20:30',
+          id: '001',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "002",
-          display_time:"1978-01-27 09:20:30",
-          id:"002",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '002',
+          display_time: '1978-01-27 09:20:30',
+          id: '002',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "003",
-          display_time:"1978-01-27 09:20:30",
-          id:"003",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '003',
+          display_time: '1978-01-27 09:20:30',
+          id: '003',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "4",
-          display_time:"1978-01-27 09:20:30",
-          id:"004",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '4',
+          display_time: '1978-01-27 09:20:30',
+          id: '004',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "5",
-          display_time:"1978-01-27 09:20:30",
-          id:"005",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '5',
+          display_time: '1978-01-27 09:20:30',
+          id: '005',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "6",
-          display_time:"1978-01-27 09:20:30",
-          id:"006",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '6',
+          display_time: '1978-01-27 09:20:30',
+          id: '006',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "7",
-          display_time:"1978-01-27 09:20:30",
-          id:"007",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '7',
+          display_time: '1978-01-27 09:20:30',
+          id: '007',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "8",
-          display_time:"1978-01-27 09:20:30",
-          id:"008",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '8',
+          display_time: '1978-01-27 09:20:30',
+          id: '008',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "9",
-          display_time:"1978-01-27 09:20:30",
-          id:"009",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '9',
+          display_time: '1978-01-27 09:20:30',
+          id: '009',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "10",
-          display_time:"1978-01-27 09:20:30",
-          id:"010",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '10',
+          display_time: '1978-01-27 09:20:30',
+          id: '010',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "11",
-          display_time:"1978-01-27 09:20:30",
-          id:"011",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '11',
+          display_time: '1978-01-27 09:20:30',
+          id: '011',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "12",
-          display_time:"1978-01-27 09:20:30",
-          id:"012",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '12',
+          display_time: '1978-01-27 09:20:30',
+          id: '012',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "13",
-          display_time:"1978-01-27 09:20:30",
-          id:"013",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '13',
+          display_time: '1978-01-27 09:20:30',
+          id: '013',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "14",
-          display_time:"1978-01-27 09:20:30",
-          id:"014",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '14',
+          display_time: '1978-01-27 09:20:30',
+          id: '014',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "15",
-          display_time:"1978-01-27 09:20:30",
-          id:"015",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '15',
+          display_time: '1978-01-27 09:20:30',
+          id: '015',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "16",
-          display_time:"1978-01-27 09:20:30",
-          id:"016",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '16',
+          display_time: '1978-01-27 09:20:30',
+          id: '016',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "17",
-          display_time:"1978-01-27 09:20:30",
-          id:"017",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '17',
+          display_time: '1978-01-27 09:20:30',
+          id: '017',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "18",
-          display_time:"1978-01-27 09:20:30",
-          id:"018",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '18',
+          display_time: '1978-01-27 09:20:30',
+          id: '018',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "19",
-          display_time:"1978-01-27 09:20:30",
-          id:"019",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '19',
+          display_time: '1978-01-27 09:20:30',
+          id: '019',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "20",
-          display_time:"1978-01-27 09:20:30",
-          id:"020",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '20',
+          display_time: '1978-01-27 09:20:30',
+          id: '020',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "21",
-          display_time:"1978-01-27 09:20:30",
-          id:"021",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '21',
+          display_time: '1978-01-27 09:20:30',
+          id: '021',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "22",
-          display_time:"1978-01-27 09:20:30",
-          id:"022",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '22',
+          display_time: '1978-01-27 09:20:30',
+          id: '022',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "23",
-          display_time:"1978-01-27 09:20:30",
-          id:"023",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '23',
+          display_time: '1978-01-27 09:20:30',
+          id: '023',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "24",
-          display_time:"1978-01-27 09:20:30",
-          id:"024",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '24',
+          display_time: '1978-01-27 09:20:30',
+          id: '024',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "25",
-          display_time:"1978-01-27 09:20:30",
-          id:"025",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '25',
+          display_time: '1978-01-27 09:20:30',
+          id: '025',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "26",
-          display_time:"1978-01-27 09:20:30",
-          id:"026",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '26',
+          display_time: '1978-01-27 09:20:30',
+          id: '026',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "27",
-          display_time:"1978-01-27 09:20:30",
-          id:"027",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '27',
+          display_time: '1978-01-27 09:20:30',
+          id: '027',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "28",
-          display_time:"1978-01-27 09:20:30",
-          id:"028",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '28',
+          display_time: '1978-01-27 09:20:30',
+          id: '028',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "29",
-          display_time:"1978-01-27 09:20:30",
-          id:"029",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '29',
+          display_time: '1978-01-27 09:20:30',
+          id: '029',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "30",
-          display_time:"1978-01-27 09:20:30",
-          id:"030",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '30',
+          display_time: '1978-01-27 09:20:30',
+          id: '030',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "31",
-          display_time:"1978-01-27 09:20:30",
-          id:"031",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '31',
+          display_time: '1978-01-27 09:20:30',
+          id: '031',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "32",
-          display_time:"1978-01-27 09:20:30",
-          id:"032",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '32',
+          display_time: '1978-01-27 09:20:30',
+          id: '032',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "33",
-          display_time:"1978-01-27 09:20:30",
-          id:"033",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '33',
+          display_time: '1978-01-27 09:20:30',
+          id: '033',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "34",
-          display_time:"1978-01-27 09:20:30",
-          id:"034",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '34',
+          display_time: '1978-01-27 09:20:30',
+          id: '034',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         },
         {
-          author: "35",
-          display_time:"1978-01-27 09:20:30",
-          id:"035",
-          pageviews:1681,
-          status:"draft",
-          title:"Nzlbbjeyb" 
+          author: '35',
+          display_time: '1978-01-27 09:20:30',
+          id: '035',
+          pageviews: 1681,
+          status: 'draft',
+          title: 'Nzlbbjeyb'
         }
       ]
     }
@@ -573,7 +575,7 @@ export default {
 
   mounted() {
     this.handleCurrentChange(1)
-    console.log('--- HandlePages')
+    // console.log('--- mounted handleCurrentChange')
   },
 
   methods: {
@@ -620,33 +622,32 @@ export default {
     },
 
     handleSizeChange(val) {
-      console.log('--- 每页个数： ', val)
+      // console.log('--- handleSizeChange 每页个数： ', val)
       this.pageSize = val
-      this.currentPage = 1
-      this.currentList = []
-      this.handleCurrentChange(1)
-      // let i = 0
-      // for(; i < val && i < this.list.length ; i++)
-      // {
-      //   this.currentList[i] = this.list[i]
-      // }
-      // console.log(this.currentList)
+      /*
+       * 默认当前页为1,在第一页改变pageSize,不会触发@current-change="handleCurrentChange"
+       * 所以这里会对currentPage进行判断,若currentPage是1，则调用handleCurrentChange
+       */
+      if (this.currentPage === 1) {
+        this.handleCurrentChange(1)
+      } else {
+        this.currentPage = 1
+      }
     },
 
     handleCurrentChange(val) {
-      console.log(`--- 当前页${val}`)
-      console.log('--- pageSize: ', this.pageSize)
+      // console.log(`--- handleCurrentChange 当前页${val}`)
+      // console.log('--- pageSize: ', this.pageSize)
       this.currentList = []
       this.listLength = this.list.length
-      let i = 0
-      let newFirstItem = (val-1)*this.pageSize
-      let nextItem = newFirstItem
-      for(; i < this.pageSize && i < this.list.length - newFirstItem; i++)
-      {
-        this.currentList[i] = this.list[nextItem]
-        nextItem++
+
+      const residueItemNum = this.list.length - (val - 1) * this.pageSize
+      let newItemIndex = (val - 1) * this.pageSize
+      for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
+        this.currentList[i] = this.list[newItemIndex]
+        newItemIndex++
       }
-      console.log(this.currentList)
+      // console.log(this.currentList)
     }
   }
 }
