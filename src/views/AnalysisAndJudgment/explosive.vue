@@ -98,7 +98,7 @@
           <el-button
             size="mini"
             type="primary"
-            @click="">
+            @click="AnalysisFunction">
             分 析
           </el-button>
         </template>
@@ -206,28 +206,12 @@ export default {
       alert('Search:  ' + this.searchInput)
     },
 
-    handleCreate() {
-      this.$router.push('/PersonnelManagement/index/form')
+    AnalysisFunction() {
+      this.$router.push('/AnalysisAndJudgment/explosiveAnalysis')
     },
 
     handleDownloadList() {
       alert('已导出！')
-    },
-
-    handleEdit(index, row) {
-      console.log('--- Edit: ', index, row)
-      this.$router.push('/PersonnelManagement/index/form')
-    },
-
-    handleDelete(index, row) {
-      console.log('--- Deleted: ', index, row, this.roles)
-      if (this.roles.indexOf('superAdmin') >= 0) {
-        alert('--- superAdmin权限 允许删除 ---')
-      } else if (this.roles.indexOf('admin') >= 0) {
-        alert('--- admin权限  可删除user ---')
-      } else {
-        alert('--- 无删除权限 ---')
-      }
     },
 
     handleDownload() {

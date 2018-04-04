@@ -233,7 +233,7 @@ export const asyncRouterMap = [
     path: '/CaseSamples',
     component: Layout,
     hidden: true,
-    meta: { roles: ['superAdmin', 'admin'] },
+    meta: { title: '案件样本', roles: ['superAdmin', 'admin'] },
     children: [
       {
         path: 'explosive/form',
@@ -305,6 +305,26 @@ export const asyncRouterMap = [
             meta: { title: '爆炸装置-形态' }
           }
         ]
+      }
+    ]
+  },
+  {
+    path:'/AnalysisAndJudgment',
+    component: Layout,
+    hidden:true,
+    meta: { title: '分析研判', roles: ['superAdmin', 'admin']},
+    children: [
+      {
+        path: 'explosiveAnalysis',
+        name: 'explosiveAnalysis',
+        component: _import('AnalysisAndJudgment/explosiveAnalysis'),
+        meta: { title: '炸药与原材料分析' }
+      },
+      {
+        path: 'deviceIngredientAnalysis',
+        name: 'deviceIngredientAnalysis',
+        component: _import('AnalysisAndJudgment/deviceIngredientAnalysis'),
+        meta: { title: '爆炸装置成分分析' }
       }
     ]
   },
