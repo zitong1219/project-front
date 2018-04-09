@@ -1,11 +1,11 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <!-- 侧栏伸缩 -->
-    <!-- <hamburger 
+    <hamburger 
       class="hamburger-container" 
       :toggleClick="toggleSideBar" 
       :isActive="sidebar.opened">
-    </hamburger> -->
+    </hamburger>
 
     <!-- 面包屑路径 -->
     <breadcrumb></breadcrumb>
