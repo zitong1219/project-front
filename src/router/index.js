@@ -192,7 +192,7 @@ export const asyncRouterMap = [
     redirect: '/CaseSamples/explosive',
     name: 'CaseSamples',
     meta: {
-      title: '案件样本',
+      title: '案件物证',
       icon: 'tree'
     },
     children: [
@@ -233,7 +233,7 @@ export const asyncRouterMap = [
     path: '/CaseSamples',
     component: Layout,
     hidden: true,
-    meta: { title: '案件样本', roles: ['superAdmin', 'admin'] },
+    meta: { title: '案件物证', roles: ['superAdmin', 'admin'] },
     children: [
       {
         path: 'explosive/form',

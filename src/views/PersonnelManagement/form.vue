@@ -3,34 +3,56 @@
     <el-form 
       :model="peopleInfoForm" 
       :rules="rules" 
-      ref="peopleInfoForm" 
+      ref="peopleInfoComponent" 
       label-width="100px" 
       class="demo-peopleInfoForm">
 
-      <el-form-item label="人员编号" prop="userId">
-        <el-input v-model="peopleInfoForm.userId"></el-input>
+      <el-form-item label="人员编号" prop="userID">
+        <el-input v-model="peopleInfoForm.userID" clearable></el-input>
       </el-form-item>
 
       <el-form-item label="人员姓名" prop="name">
-        <el-input v-model="peopleInfoForm.name"></el-input>
+        <el-input v-model="peopleInfoForm.name" clearable></el-input>
       </el-form-item>
 
-      <el-form-item label="选择器" prop="isManager">
-        <el-select v-model="peopleInfoForm.isManager" placeholder="请选择活动区域">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
+      <el-form-item label="密码" prop="password">
+        <el-input  
+          v-model="peopleInfoForm.password" 
+          type="password" 
+          auto-complete="off" 
+          clearable>
+        </el-input>
       </el-form-item>
 
-      <el-form-item label="单选框" prop="gender">
+      <el-form-item label="确认密码" prop="checkPassword">
+        <el-input 
+          v-model="peopleInfoForm.checkPassword" 
+          type="password" 
+          auto-complete="off" 
+          clearable>
+        </el-input>
+      </el-form-item>
+
+      <el-form-item label="性别" prop="gender">
         <el-radio-group v-model="peopleInfoForm.gender">
-          <el-radio label="Left"></el-radio>
-          <el-radio label="Right"></el-radio>
+          <el-radio label="1">Man</el-radio>
+          <el-radio label="2">Woman</el-radio>
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="文本域" prop="desc">
-        <el-input type="textarea" v-model="peopleInfoForm.desc"></el-input>
+      <el-form-item label="电话" prop="phone">
+        <el-input v-model="peopleInfoForm.phone"></el-input>
+      </el-form-item>
+
+      <el-form-item label="权限" prop="role">
+        <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
+          <el-option label="Admin" value="1"></el-option>
+          <el-option label="User" value="2"></el-option>
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="备注" prop="note">
+        <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
       </el-form-item>
 
       <el-form-item>
@@ -55,38 +77,59 @@ export default {
   },
 
   data() {
+    let validatePassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      }
+      else {
+        if ( this.peopleInfoForm.checkPassword !== '' ) {
+          console.log('--- validatePassword this.$refs: ', this.$refs)
+          // console.log('--- validatePassword this.peopleInfoForm: ', this.peopleInfoForm)
+          this.$refs.peopleInfoComponent.validateField('checkPassword')
+        }
+        callback()
+      }
+    }
+
+    let validateCheckPassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      }
+      else if (value !== this.peopleInfoForm.password) {
+        callback(new Error('两次输入不一致'))
+      }
+      else {
+        callback()
+      }
+    }
+
     return {
       peopleInfoForm: {
-        userId: '',
+        userID: '',
         name: '',
         password: '',
-        isManager: '',
+        checkPassword: '',
         gender: '',
         phone: '',
-        desc: ''
+        role: '2',
+        note: ''
       },
       rules: {
+        userID: [
+          { required: true, message: '请输入人员编号', trigger: 'blur' }
+        ],
         name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { required: true, message: '请输入人员姓名', trigger: 'blur' },
+          { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'blur' }
         ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
+        password: [
+          { validator: validatePassword, trigger: 'blur' }
         ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+        checkPassword: [
+          { validator: validateCheckPassword, trigger: 'blur' }
         ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-        ],
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
+        gender: [
+          { required: true, message: '请选择性别', trigger: 'change' }
         ]
       }
     }
@@ -94,6 +137,7 @@ export default {
 
   methods: {
     submitForm(formName) {
+      // console.log(typeof(this.peopleInfoForm.gender)) 
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!')
