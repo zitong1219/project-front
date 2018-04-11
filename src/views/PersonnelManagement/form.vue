@@ -1,66 +1,69 @@
 <template>
   <div class="dashboard-container">
-    <el-form 
-      :model="peopleInfoForm" 
-      :rules="rules" 
-      ref="peopleInfoComponent" 
-      label-width="100px" 
-      class="demo-peopleInfoForm">
+    <div style="width: 500px;">
+      <el-form 
+        :model="peopleInfoForm" 
+        :rules="rules" 
+        ref="peopleInfoComponent" 
+        label-width="100px" 
+        class="demo-peopleInfoForm">
 
-      <el-form-item label="人员编号" prop="userID">
-        <el-input v-model="peopleInfoForm.userID" clearable></el-input>
-      </el-form-item>
+        <el-form-item label="人员编号" prop="userID">
+          <el-input v-model="peopleInfoForm.userID" clearable></el-input>
+        </el-form-item>
 
-      <el-form-item label="人员姓名" prop="name">
-        <el-input v-model="peopleInfoForm.name" clearable></el-input>
-      </el-form-item>
+        <el-form-item label="人员姓名" prop="name">
+          <el-input v-model="peopleInfoForm.name" clearable></el-input>
+        </el-form-item>
 
-      <el-form-item label="密码" prop="password">
-        <el-input  
-          v-model="peopleInfoForm.password" 
-          type="password" 
-          auto-complete="off" 
-          clearable>
-        </el-input>
-      </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input  
+            v-model="peopleInfoForm.password" 
+            type="password" 
+            auto-complete="off" 
+            clearable>
+          </el-input>
+        </el-form-item>
 
-      <el-form-item label="确认密码" prop="checkPassword">
-        <el-input 
-          v-model="peopleInfoForm.checkPassword" 
-          type="password" 
-          auto-complete="off" 
-          clearable>
-        </el-input>
-      </el-form-item>
+        <el-form-item label="确认密码" prop="checkPassword">
+          <el-input 
+            v-model="peopleInfoForm.checkPassword" 
+            type="password" 
+            auto-complete="off" 
+            clearable>
+          </el-input>
+        </el-form-item>
 
-      <el-form-item label="性别" prop="gender">
-        <el-radio-group v-model="peopleInfoForm.gender">
-          <el-radio label="1">Man</el-radio>
-          <el-radio label="2">Woman</el-radio>
-        </el-radio-group>
-      </el-form-item>
+        <el-form-item label="性别" prop="gender">
+          <el-radio-group v-model="peopleInfoForm.gender">
+            <el-radio label="1">Man</el-radio>
+            <el-radio label="2">Woman</el-radio>
+          </el-radio-group>
+        </el-form-item>
 
-      <el-form-item label="电话" prop="phone">
-        <el-input v-model="peopleInfoForm.phone"></el-input>
-      </el-form-item>
+        <el-form-item label="电话" prop="phone">
+          <el-input v-model="peopleInfoForm.phone"></el-input>
+        </el-form-item>
 
-      <el-form-item label="权限" prop="role">
-        <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
-          <el-option label="Admin" value="1"></el-option>
-          <el-option label="User" value="2"></el-option>
-        </el-select>
-      </el-form-item>
+        <el-form-item label="权限" prop="role">
+          <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
+            <el-option v-if = "superPermission" label="Admin" value="1"></el-option>
+            <el-option label="User" value="2"></el-option>
+          </el-select>
+        </el-form-item>
 
-      <el-form-item label="备注" prop="note">
-        <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
-      </el-form-item>
+        <el-form-item label="备注" prop="note">
+          <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
+        </el-form-item>
 
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('peopleInfoForm')">确定</el-button>
-        <el-button type="warning" @click="resetForm('peopleInfoForm')" >重置</el-button>
-        <el-button type="" @click="goBack()">取消</el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('peopleInfoComponent')">确定</el-button>
+          <el-button type="warning" @click="resetForm('peopleInfoComponent')" plain>重置</el-button>
+          <el-button type="" @click="goBack()">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+    
   </div>
 </template>
 
@@ -68,11 +71,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'test',
+  name: 'addPeople',
 
   computed: {
     ...mapGetters([
-      'name'
+      'roles'
     ])
   },
 
@@ -83,11 +86,11 @@ export default {
       }
       else {
         if ( this.peopleInfoForm.checkPassword !== '' ) {
-          console.log('--- validatePassword this.$refs: ', this.$refs)
+          // console.log('--- validatePassword this.$refs: ', this.$refs)
           // console.log('--- validatePassword this.peopleInfoForm: ', this.peopleInfoForm)
           this.$refs.peopleInfoComponent.validateField('checkPassword')
         }
-        callback()
+        callback(console.log('--- validatePassword is OK'))
       }
     }
 
@@ -99,11 +102,26 @@ export default {
         callback(new Error('两次输入不一致'))
       }
       else {
-        callback()
+        callback(console.log('--- validateCheckPassword is OK'))
+      }
+    }
+
+    let validateRole = (rule, value, callback) => {
+      if (value == "1" ) {
+        if (this.roles.indexOf('superAdmin') == -1){
+          callback(new Error('无权限设置此用户为管理员'))
+        }
+        else {
+          callback(console.log('--- validateRole is OK - 注意：此用户将被设置为管理员'))
+        }
+      }
+      else {
+        callback(console.log('--- validateRole is OK'))
       }
     }
 
     return {
+      superPermission: false,
       peopleInfoForm: {
         userID: '',
         name: '',
@@ -123,26 +141,35 @@ export default {
           { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'blur' }
         ],
         password: [
-          { validator: validatePassword, trigger: 'blur' }
+          { validator: validatePassword, required: true, trigger: 'blur' }
         ],
         checkPassword: [
-          { validator: validateCheckPassword, trigger: 'blur' }
+          { validator: validateCheckPassword, required: true, trigger: 'blur' }
         ],
         gender: [
           { required: true, message: '请选择性别', trigger: 'change' }
+        ],
+        role: [
+          { validator: validateRole, required: true, trigger: 'blur' }
         ]
       }
     }
   },
 
+  mounted() {
+    if ( this.roles.indexOf('superAdmin') >= 0 ) {
+      this.superPermission = true
+    }
+  },
+
   methods: {
     submitForm(formName) {
-      // console.log(typeof(this.peopleInfoForm.gender)) 
       this.$refs[formName].validate((valid) => {
+        console.log('--- peopleInfoForm: ', this.peopleInfoForm)
         if (valid) {
-          alert('submit!')
+          console.log('submit!')
         } else {
-          console.log('error submit! ')
+          console.log('error submit!')
           return false
         }
       })
