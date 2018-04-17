@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-container dashboard-text">
+  <div class="people-container people-text">
 
     <el-row :gutter="60">
 
@@ -14,59 +14,59 @@
             label-width="100px" 
             class="">
 
-              <el-form-item label="人员编号" prop="userID">
-                <el-input v-model="peopleInfoForm.userID" clearable></el-input>
-              </el-form-item>
+            <el-form-item label="人员编号" prop="userID">
+              <el-input v-model="peopleInfoForm.userID" clearable></el-input>
+            </el-form-item>
 
-              <el-form-item label="人员姓名" prop="name">
-                <el-input v-model="peopleInfoForm.name" clearable></el-input>
-              </el-form-item>
+            <el-form-item label="人员姓名" prop="name">
+              <el-input v-model="peopleInfoForm.name" clearable></el-input>
+            </el-form-item>
 
-              <el-form-item label="密码" prop="password">
+            <el-form-item label="密码" prop="password">
                 <el-input  
                   v-model="peopleInfoForm.password" 
                   type="password" 
                   auto-complete="off" 
                   clearable>
                 </el-input>
-              </el-form-item>
+            </el-form-item>
 
-              <el-form-item label="确认密码" prop="checkPassword">
+            <el-form-item label="确认密码" prop="checkPassword">
                 <el-input 
                   v-model="peopleInfoForm.checkPassword" 
                   type="password" 
                   auto-complete="off" 
                   clearable>
                 </el-input>
-              </el-form-item>
+            </el-form-item>
 
-              <el-form-item label="性别" prop="gender">
+            <el-form-item label="性别" prop="gender">
                 <el-radio-group v-model="peopleInfoForm.gender">
                   <el-radio label="1">Man</el-radio>
                   <el-radio label="2">Woman</el-radio>
                 </el-radio-group>
-              </el-form-item>
+            </el-form-item>
 
-              <el-form-item label="电话" prop="phone">
+            <el-form-item label="电话" prop="phone">
                 <el-input v-model="peopleInfoForm.phone"></el-input>
-              </el-form-item>
+            </el-form-item>
 
-              <el-form-item label="权限" prop="role">
+            <el-form-item label="权限" prop="role">
                 <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
-                  <el-option v-if = "superPermission" label="Admin" value="1"></el-option>
-                  <el-option label="User" value="2"></el-option>
+                  <el-option v-if = "superPermission" label="管理员" value="admin"></el-option>
+                  <el-option label="用户" value="user"></el-option>
                 </el-select>
-              </el-form-item>
+            </el-form-item>
 
-              <el-form-item label="备注" prop="note">
+            <el-form-item label="备注" prop="note">
                 <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
-              </el-form-item>
+            </el-form-item>
 
-              <el-form-item>
+            <el-form-item>
                 <el-button type="primary" @click="submitForm('peopleInfoComponent')">确定</el-button>
                 <el-button type="warning" @click="resetForm('peopleInfoComponent')" plain>重置</el-button>
                 <el-button type="" @click="goBack()">取消</el-button>
-              </el-form-item>
+            </el-form-item>
           </el-form>
 
         </div>
@@ -77,7 +77,7 @@
 
         <div>
 
-          <div class="dashboard-text">
+          <div class="people-text">
             照片上传
           </div>
 
@@ -159,7 +159,7 @@ export default {
         checkPassword: '',
         gender: '',
         phone: '',
-        role: '2',
+        role: 'user',
         note: ''
       },
       rules: {
@@ -222,7 +222,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-.dashboard {
+.people {
   &-container {
     margin: 30px;
   }
