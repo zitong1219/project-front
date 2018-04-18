@@ -2,6 +2,7 @@
   <div class="dashboard-container">
 
     <el-row :gutter="50">
+      <!-- 左栏-样本信息 -->
         <el-col :span="10">
           <div>
             <el-form
@@ -64,6 +65,17 @@
                 <el-input v-model="explosiveComSamplesForm.picDescrip" clearable></el-input>
               </el-form-item>
 
+              <el-form-item label="样本图片" prop="">
+                <el-upload 
+                  class=""
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :show-file-list="false"
+                  >
+                  <img v-if="explosiveComSamplesForm.picUrl" :src="explosiveComSamplesForm.picUrl" class="avatar">
+                  <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
+                </el-upload>
+              </el-form-item>
+
               <el-form-item label="备注" prop="note">
                 <el-input type="textarea" v-model="explosiveComSamplesForm.note" clearable></el-input>
               </el-form-item>
@@ -81,6 +93,7 @@
           </div>
         </el-col>
 
+      <!-- 右栏-文件信息 -->
         <el-col :span="10">
           <div v-for="fileItem in explosiveComSamplesFile" :key="fileItem.key">
 
@@ -88,6 +101,7 @@
               :model="fileItem"
               ref="fileItems"
               label-width="150px">
+
               <el-form-item label="检测设备名称及型号" prop="detectDevice">
                 <el-input v-model="fileItem.detectDevice" clearable></el-input>
               </el-form-item>
@@ -114,11 +128,25 @@
                 </el-select>
               </el-form-item>
 
+              <el-form-item label="上传文件" prop="">
+                <el-upload
+                  class=""
+                  action=""
+                  :limit="1"
+                  :file-list="explosiveComSamplesFile.docUrl"
+                  >
+                  <el-button size="small" type="primary">点击上传</el-button>
+                </el-upload>
+              </el-form-item>
+
               <el-form-item>
                 <el-button type="warning" @click="resetFile(fileItem.key)" plain>重置此文件</el-button>
-                <el-button type="" @click="removeFile(fileItem)">删除此文件</el-button>
+                <el-button type="danger" @click="removeFile(fileItem)" plain>删除此文件</el-button>
               </el-form-item>
+              
             </el-form>
+
+            <hr>
 
           </div>
           <el-button type="primary" @click="addFile">新增文件</el-button>
@@ -175,16 +203,9 @@ export default {
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
-        ],
         inputDate: [
           { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
+        ]
       }
     }
   },
@@ -212,7 +233,7 @@ export default {
       })
     },
     resetForm(formName) {
-      // console.log(this.$refs)
+      console.log(this.$refs)
       this.$refs[formName].resetFields()
     },
     goBack() {
@@ -262,4 +283,41 @@ export default {
     line-height: 46px;
   }
 }
+
+.people {
+  &-container {
+    margin: 30px;
+  }
+  &-text {
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
+  .avatar-uploader {
+    border: 2px dashed #e9e9e9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .avatar-uploader:hover {
+    border-color: #409EFF;
+  }
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
 </style>

@@ -87,6 +87,7 @@
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
+            :on-change="showAvatar"
             >
             <img v-if="imageUrl" :src="imageUrl" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
@@ -194,10 +195,19 @@ export default {
 
   methods: {
     handleAvatarSuccess(res, file) {
-
+      console.log('--- handleAvatarSuccess', res, file)
+      // this.imageUrl = window.URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
-
+      // this.imageUrl = window.URL.createObjectURL(file.raw);
+      console.log('--- beforeAvatarUpload', file)
+      // return true
+    },
+    showAvatar(file, fileList) {
+      console.log('--- showAvatar', file, fileList)
+      window.URL = window.URL || window.webkitURL;
+      this.imageUrl = window.URL.createObjectURL(file.raw)
+      console.log('--- this.imageUrl: ', this.imageUrl)
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
