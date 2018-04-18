@@ -10,19 +10,19 @@
               ref="explosiveComSamplesComponent"
               label-width="100px" >
 
-              <el-form-item label="样品名称" prop="">
+              <el-form-item label="样品名称" prop="sname">
                 <el-input v-model="explosiveComSamplesForm.sname" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="样本编号" prop="">
+              <el-form-item label="样本编号" prop="sampleID">
                 <el-input v-model="explosiveComSamplesForm.sampleID" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="处理人员编号" prop="">
+              <el-form-item label="处理人员编号" prop="user_id">
                 <el-input v-model="explosiveComSamplesForm.user_id" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="录入时间" prop="">
+              <el-form-item label="录入时间" prop="inputDate">
                 <el-date-picker 
                   v-model="explosiveComSamplesForm.inputDate"
                   type="datetime"
@@ -32,39 +32,39 @@
                 <!-- {{ explosiveComSamplesForm.inputDate }} -->
               </el-form-item>
 
-              <el-form-item label="样品状态" prop="">
+              <el-form-item label="样品状态" prop="sampleState">
                 <el-input v-model="explosiveComSamplesForm.sampleState" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="样品产地" prop="">
+              <el-form-item label="样品产地" prop="sampleOrigin">
                 <el-input v-model="explosiveComSamplesForm.sampleOrigin" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="样品种类" prop="">
+              <el-form-item label="样品种类" prop="sampleType">
                 <el-input v-model="explosiveComSamplesForm.sampleType" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="样品制备方法" prop="">
+              <el-form-item label="样品制备方法" prop="sampleMake">
                 <el-input v-model="explosiveComSamplesForm.sampleMake" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="样品提取方法" prop="">
+              <el-form-item label="样品提取方法" prop="sampleDraw">
                 <el-input v-model="explosiveComSamplesForm.sampleDraw" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="样品分析方法" prop="">
+              <el-form-item label="样品分析方法" prop="sampleAnalyse">
                 <el-input v-model="explosiveComSamplesForm.sampleAnalyse" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="分析条件" prop="">
+              <el-form-item label="分析条件" prop="analyseCondition">
                 <el-input v-model="explosiveComSamplesForm.analyseCondition" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="图片描述" prop="">
+              <el-form-item label="图片描述" prop="picDescrip">
                 <el-input v-model="explosiveComSamplesForm.picDescrip" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="备注" prop="">
+              <el-form-item label="备注" prop="note">
                 <el-input type="textarea" v-model="explosiveComSamplesForm.note" clearable></el-input>
               </el-form-item>
 
@@ -84,16 +84,19 @@
         <el-col :span="10">
           <div v-for="fileItem in explosiveComSamplesFile" :key="fileItem.key">
 
-            <el-form label-width="150px">
-              <el-form-item label="检测设备名称及型号" prop="">
+            <el-form 
+              :model="fileItem"
+              ref="fileItems"
+              label-width="150px">
+              <el-form-item label="检测设备名称及型号" prop="detectDevice">
                 <el-input v-model="fileItem.detectDevice" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="仪器厂家" prop="">
+              <el-form-item label="仪器厂家" prop="detectMrfs">
                 <el-input v-model="fileItem.detectMrfs" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="检测数据类型">
+              <el-form-item label="检测数据类型" prop="detectType">
                 <el-select v-model="fileItem.detectType" placeholder="请选择数据类型">
                   <el-option label="FTIR" value="1"></el-option>
                   <el-option label="Raman" value="2"></el-option>
@@ -103,7 +106,7 @@
                 </el-select>
               </el-form-item>
 
-              <el-form-item label="录入文档格式">
+              <el-form-item label="录入文档格式" prop="docType">
                 <el-select v-model="fileItem.docType" placeholder="请选择文档格式类型">
                   <el-option label="TXT" value="1"></el-option>
                   <el-option label="Excel" value="2"></el-option>
@@ -112,8 +115,8 @@
               </el-form-item>
 
               <el-form-item>
-                <el-button type="warning" @click="" plain>重置此文件</el-button>
-                <el-button type="" @click="removeFile">删除此文件</el-button>
+                <el-button type="warning" @click="resetFile(fileItem.key)" plain>重置此文件</el-button>
+                <el-button type="" @click="removeFile(fileItem)">删除此文件</el-button>
               </el-form-item>
             </el-form>
 
@@ -163,7 +166,8 @@ export default {
           detectMrfs: '',
           detectType: null,
           docType: null,
-          docUrl: null
+          docUrl: null,
+          key: Date.now()
         }
       ],
       explosiveComSamplesRules: {
@@ -185,6 +189,12 @@ export default {
     }
   },
 
+  watch: {
+    explosiveComSamplesFile: function() {
+      // console.log(this.explosiveComSamplesFile)
+    }
+  },
+
   mounted() {
     this.explosiveComSamplesForm.inputDate = new Date();
     this.explosiveComSamplesForm.user_id = this.name;
@@ -202,6 +212,7 @@ export default {
       })
     },
     resetForm(formName) {
+      // console.log(this.$refs)
       this.$refs[formName].resetFields()
     },
     goBack() {
@@ -222,9 +233,19 @@ export default {
         }
       )
     },
-
-    removeFile() {
-
+    resetFile(fileKey) {
+      // console.log(fileKey, this.$refs)
+      for(let fileIndex in this.$refs.fileItems) {
+        if(this.$refs.fileItems[fileIndex].model.key === fileKey) {
+          this.$refs.fileItems[fileIndex].resetFields()
+          break
+        }
+      }
+      
+    },
+    removeFile(fileItem) {
+      let fileIndex = this.explosiveComSamplesFile.indexOf(fileItem)
+      this.explosiveComSamplesFile.splice(fileIndex, 1)
     }
   }
 
