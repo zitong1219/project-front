@@ -243,6 +243,7 @@ export default {
 
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
+      window.URL = window.URL || window.webkitURL;
       this.explosiveComSamplesForm.picUrl = window.URL.createObjectURL(file)
     },
 

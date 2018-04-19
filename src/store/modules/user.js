@@ -68,11 +68,12 @@ const user = {
     /* 登出 */
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        logout(state.token)
-          .then(() => {
+        logout()
+          .then((response) => {
             commit('SET_TOKEN', '')
             commit('SET_ROLES', [])
             removeToken()
+            console.log('*** store/user LogOut is OK, response: ', response)
             resolve()
           })
           .catch(error => {
@@ -82,13 +83,13 @@ const user = {
     },
 
     /* 前端 登出 */
-    FedLogOut({ commit }) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', '')
-        removeToken()
-        resolve()
-      })
-    }
+    // FedLogOut({ commit }) {
+    //   return new Promise(resolve => {
+    //     commit('SET_TOKEN', '')
+    //     removeToken()
+    //     resolve()
+    //   })
+    // }
   }
 }
 
