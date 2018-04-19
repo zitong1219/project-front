@@ -65,11 +65,12 @@
                 <el-input v-model="explosiveComSamplesForm.picDescrip" clearable></el-input>
               </el-form-item>
 
-              <el-form-item label="样本图片" prop="">
+              <el-form-item label="样本图片" prop="picUrl">
                 <el-upload 
                   class=""
                   action="https://jsonplaceholder.typicode.com/posts/"
                   :show-file-list="false"
+                  :before-upload="beforeAvatarUpload"
                   >
                   <img v-if="explosiveComSamplesForm.picUrl" :src="explosiveComSamplesForm.picUrl" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
@@ -240,6 +241,11 @@ export default {
       this.$router.go(-1)
     },
 
+    beforeAvatarUpload(file) {
+      console.log('--- beforeAvatarUpload', file)
+      this.explosiveComSamplesForm.picUrl = window.URL.createObjectURL(file)
+    },
+
     addFile() {
       this.explosiveComSamplesFile.push(
         {
@@ -316,7 +322,7 @@ export default {
   }
 
   .avatar {
-    width: 200px;
+    width: 300px;
     height: 200px;
     display: block;
   }

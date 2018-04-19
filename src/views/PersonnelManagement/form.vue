@@ -1,18 +1,19 @@
 <template>
   <div class="people-container people-text">
 
-    <el-row :gutter="60">
+    <el-form 
+      :model="peopleInfoForm" 
+      :rules="rules" 
+      ref="peopleInfoComponent" 
+      label-width="100px" 
+      class="">
 
-      <el-col :span="12">
+      <el-row :gutter="60">
 
-        <div style="">
+        <el-col :span="12">
 
-          <el-form 
-            :model="peopleInfoForm" 
-            :rules="rules" 
-            ref="peopleInfoComponent" 
-            label-width="100px" 
-            class="">
+          <!-- 表单左栏 -->
+          <div>
 
             <el-form-item label="人员编号" prop="userID">
               <el-input v-model="peopleInfoForm.userID" clearable></el-input>
@@ -67,37 +68,41 @@
                 <el-button type="warning" @click="resetForm('peopleInfoComponent')" plain>重置</el-button>
                 <el-button type="" @click="goBack()">取消</el-button>
             </el-form-item>
-          </el-form>
 
-        </div>
-
-      </el-col>
-
-      <el-col :span="12">
-
-        <div>
-
-          <div class="people-text">
-            照片上传
           </div>
 
-          <el-upload 
-            class=""
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-            :on-change="showAvatar"
-            >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
-          </el-upload>
+        </el-col>
 
-        </div>
+        <el-col :span="12">
 
-      </el-col>
+          <!-- 表单右栏 -->
+          <div>
 
-    </el-row>
+            <div class="people-text">
+              照片上传
+            </div>
+
+            <el-form-item prop="picUrl">
+              <el-upload 
+                class=""
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload"
+                :on-change="showAvatar"
+                >
+                <img v-if="peopleInfoForm.picUrl" :src="peopleInfoForm.picUrl" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
+              </el-upload>
+            </el-form-item>
+
+          </div>
+
+        </el-col>
+
+      </el-row>
+
+    </el-form>
 
   </div>
 </template>
@@ -161,6 +166,7 @@ export default {
         gender: '',
         phone: '',
         role: 'user',
+        picUrl: null,
         note: ''
       },
       rules: {
@@ -196,18 +202,15 @@ export default {
   methods: {
     handleAvatarSuccess(res, file) {
       console.log('--- handleAvatarSuccess', res, file)
-      // this.imageUrl = window.URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
-      // this.imageUrl = window.URL.createObjectURL(file.raw);
       console.log('--- beforeAvatarUpload', file)
-      // return true
+      window.URL = window.URL || window.webkitURL;
+      this.peopleInfoForm.picUrl = window.URL.createObjectURL(file)
+      console.log('--- this.picUrl: ', this.peopleInfoForm.picUrl)
     },
     showAvatar(file, fileList) {
       console.log('--- showAvatar', file, fileList)
-      window.URL = window.URL || window.webkitURL;
-      this.imageUrl = window.URL.createObjectURL(file.raw)
-      console.log('--- this.imageUrl: ', this.imageUrl)
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
