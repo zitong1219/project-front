@@ -40,7 +40,7 @@
     <el-table 
       :data="currentList" 
       v-loading.body="listLoading" 
-      element-loading-text="Loading" 
+      element-loading-text="Loading......" 
       style="width: 100%; margin-top: 20px;" 
       border fit highlight-current-row stripe>
 
@@ -50,45 +50,56 @@
         fixed="left" 
         width="100">
         <template slot-scope="scope">
-          {{scope.row.id}}
+          {{scope.row.userID}}
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        prop="created_at" 
-        label="Display_time" 
-        width="250">
+        label="name" 
+        width="200">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
-          <span>{{scope.row.display_time}}</span>
+          <span>{{scope.row.name}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        label="Author" 
-        width="150">
+        label="gender" 
+        width="100">
         <template slot-scope="scope">
-          <span>{{scope.row.author}}</span>
+          <span>{{scope.row.gender == "0" ? "Man" : "Woman"}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        label="Infomation">
+        label="phone">
         <template slot-scope="scope">
-          <span>{{scope.row.title}}</span>
+          <span>{{scope.row.phone}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="role">
+        <template slot-scope="scope">
+          <span>{{scope.row.role}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center"
         class-name="status-col" 
-        label="Status" 
+        label="isDelete" 
         width="150" >
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
+          <el-tag
+            :type="scope.row.isDelete === 0 ? 'success' : 'danger'"
+            close-transition>
+            {{scope.row.isDelete === 0 ? "inservice " : "Dimission"}}
+          </el-tag>
         </template>
       </el-table-column>
 
@@ -218,7 +229,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getPeopleList } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -227,7 +238,7 @@ export default {
       currentPage: 1,
       pageSize: 10,
       searchInput: '',
-      // list: null,
+      list: [],
       listLength: 0,
       listLoading: false,
       currentList: [],
@@ -267,289 +278,7 @@ export default {
           { required: true, message: '请填写活动形式', trigger: 'blur' }
         ]
       },
-      formLabelWidth: '120px',
-      list: [
-        {
-          author: '001',
-          display_time: '1978-01-27 09:20:30',
-          id: '001',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '002',
-          display_time: '1978-01-27 09:20:30',
-          id: '002',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '003',
-          display_time: '1978-01-27 09:20:30',
-          id: '003',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '4',
-          display_time: '1978-01-27 09:20:30',
-          id: '004',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '5',
-          display_time: '1978-01-27 09:20:30',
-          id: '005',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '6',
-          display_time: '1978-01-27 09:20:30',
-          id: '006',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '7',
-          display_time: '1978-01-27 09:20:30',
-          id: '007',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '8',
-          display_time: '1978-01-27 09:20:30',
-          id: '008',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '9',
-          display_time: '1978-01-27 09:20:30',
-          id: '009',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '10',
-          display_time: '1978-01-27 09:20:30',
-          id: '010',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '11',
-          display_time: '1978-01-27 09:20:30',
-          id: '011',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '12',
-          display_time: '1978-01-27 09:20:30',
-          id: '012',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '13',
-          display_time: '1978-01-27 09:20:30',
-          id: '013',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '14',
-          display_time: '1978-01-27 09:20:30',
-          id: '014',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '15',
-          display_time: '1978-01-27 09:20:30',
-          id: '015',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '16',
-          display_time: '1978-01-27 09:20:30',
-          id: '016',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '17',
-          display_time: '1978-01-27 09:20:30',
-          id: '017',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '18',
-          display_time: '1978-01-27 09:20:30',
-          id: '018',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '19',
-          display_time: '1978-01-27 09:20:30',
-          id: '019',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '20',
-          display_time: '1978-01-27 09:20:30',
-          id: '020',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '21',
-          display_time: '1978-01-27 09:20:30',
-          id: '021',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '22',
-          display_time: '1978-01-27 09:20:30',
-          id: '022',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '23',
-          display_time: '1978-01-27 09:20:30',
-          id: '023',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '24',
-          display_time: '1978-01-27 09:20:30',
-          id: '024',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '25',
-          display_time: '1978-01-27 09:20:30',
-          id: '025',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '26',
-          display_time: '1978-01-27 09:20:30',
-          id: '026',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '27',
-          display_time: '1978-01-27 09:20:30',
-          id: '027',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '28',
-          display_time: '1978-01-27 09:20:30',
-          id: '028',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '29',
-          display_time: '1978-01-27 09:20:30',
-          id: '029',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '30',
-          display_time: '1978-01-27 09:20:30',
-          id: '030',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '31',
-          display_time: '1978-01-27 09:20:30',
-          id: '031',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '32',
-          display_time: '1978-01-27 09:20:30',
-          id: '032',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '33',
-          display_time: '1978-01-27 09:20:30',
-          id: '033',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '34',
-          display_time: '1978-01-27 09:20:30',
-          id: '034',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        },
-        {
-          author: '35',
-          display_time: '1978-01-27 09:20:30',
-          id: '035',
-          pageviews: 1681,
-          status: 'draft',
-          title: 'Nzlbbjeyb'
-        }
-      ]
+      formLabelWidth: '120px'
     }
   },
 
@@ -571,24 +300,27 @@ export default {
   },
 
   created() {
-    // this.fetchData()
+    this.fetchData()
+    console.log('--- created fetchData')
     // console.log('--- PersonnelManagement this.$route: ', this.$route)
     // console.log('--- PersonnelManagement this.$router: ', this.$router)
+
   },
 
   mounted() {
     this.handleCurrentChange(1)
-    // console.log('--- mounted handleCurrentChange')
+    console.log('--- mounted handleCurrentChange')
   },
 
   methods: {
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      getPeopleList( ).then(response => {
         this.list = response.data.items
         this.listLength = this.list.length
         this.listLoading = false
-        // console.log('--- PersonnelManagement List: ', this.list)
+        console.log('--- PersonnelManagement fetchData List: ', this.list.length)
+        this.handleCurrentChange(1)
       })
     },
 
@@ -639,8 +371,8 @@ export default {
     },
 
     handleCurrentChange(val) {
-      // console.log(`--- handleCurrentChange 当前页${val}`)
-      // console.log('--- pageSize: ', this.pageSize)
+      console.log(`--- handleCurrentChange 当前页${val}`)
+      console.log('--- pageSize: ', this.pageSize)
       this.currentList = []
       this.listLength = this.list.length
 
@@ -650,7 +382,7 @@ export default {
         this.currentList[i] = this.list[newItemIndex]
         newItemIndex++
       }
-      // console.log(this.currentList)
+      console.log('--- handleCurrentChange currentList: ', this.currentList)
     }
   }
 }

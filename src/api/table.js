@@ -1,9 +1,10 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getPeopleList(params) {
   return request({
-    url: '/table/list',
+    url: '/table/peoplelist',
     method: 'get',
     params
   })
 }
+
