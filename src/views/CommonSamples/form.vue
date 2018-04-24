@@ -218,8 +218,8 @@ export default {
   },
 
   mounted() {
-    this.explosiveComSamplesForm.inputDate = new Date();
-    this.explosiveComSamplesForm.user_id = this.name;
+    this.explosiveComSamplesForm.inputDate = new Date()
+    this.explosiveComSamplesForm.user_id = this.name
   },
 
   methods: {
@@ -243,7 +243,7 @@ export default {
 
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
-      window.URL = window.URL || window.webkitURL;
+      window.URL = window.URL || window.webkitURL
       this.explosiveComSamplesForm.picUrl = window.URL.createObjectURL(file)
     },
 
@@ -263,16 +263,15 @@ export default {
     },
     resetFile(fileKey) {
       // console.log(fileKey, this.$refs)
-      for(let fileIndex in this.$refs.fileItems) {
-        if(this.$refs.fileItems[fileIndex].model.key === fileKey) {
+      for (const fileIndex in this.$refs.fileItems) {
+        if (this.$refs.fileItems[fileIndex].model.key === fileKey) {
           this.$refs.fileItems[fileIndex].resetFields()
           break
         }
       }
-      
     },
     removeFile(fileItem) {
-      let fileIndex = this.explosiveComSamplesFile.indexOf(fileItem)
+      const fileIndex = this.explosiveComSamplesFile.indexOf(fileItem)
       this.explosiveComSamplesFile.splice(fileIndex, 1)
     }
   }

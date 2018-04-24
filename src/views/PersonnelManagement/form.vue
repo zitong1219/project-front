@@ -205,7 +205,7 @@ export default {
     },
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
-      window.URL = window.URL || window.webkitURL;
+      window.URL = window.URL || window.webkitURL
       this.peopleInfoForm.picUrl = window.URL.createObjectURL(file)
       console.log('--- this.picUrl: ', this.peopleInfoForm.picUrl)
     },

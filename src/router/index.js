@@ -309,10 +309,10 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path:'/AnalysisAndJudgment',
+    path: '/AnalysisAndJudgment',
     component: Layout,
-    hidden:true,
-    meta: { title: '分析研判', roles: ['superAdmin', 'admin']},
+    hidden: true,
+    meta: { title: '分析研判', roles: ['superAdmin', 'admin'] },
     children: [
       {
         path: 'explosiveAnalysis',

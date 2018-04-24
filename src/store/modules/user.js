@@ -80,7 +80,7 @@ const user = {
             reject(error)
           })
       })
-    },
+    }
 
     /* 前端 登出 */
     // FedLogOut({ commit }) {

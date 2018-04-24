@@ -304,18 +304,17 @@ export default {
     console.log('--- created fetchData')
     // console.log('--- PersonnelManagement this.$route: ', this.$route)
     // console.log('--- PersonnelManagement this.$router: ', this.$router)
-
   },
 
   mounted() {
-    this.handleCurrentChange(1)
-    console.log('--- mounted handleCurrentChange')
+    // this.handleCurrentChange(1)
+    // console.log('--- mounted handleCurrentChange')
   },
 
   methods: {
     fetchData() {
       this.listLoading = true
-      getPeopleList( ).then(response => {
+      getPeopleList().then(response => {
         this.list = response.data.items
         this.listLength = this.list.length
         this.listLoading = false
