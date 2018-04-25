@@ -95,7 +95,7 @@ export const asyncRouterMap = [
     hidden: true,
     children: [
       {
-        path: 'index/form',
+        path: 'form',
         name: 'PersonnelManagementForm',
         component: _import('PersonnelManagement/form'),
         meta: {
@@ -155,27 +155,27 @@ export const asyncRouterMap = [
     hidden: true,
     children: [
       {
-        path: 'explosive/form',
+        path: 'addExplosive',
         name: 'CommonSamplesExplosiveForm',
-        component: _import('CommonSamples/form'),
+        component: _import('CommonSamples/addExplosive'),
         meta: {
           title: '增加常见炸药与原材料样本',
           roles: ['superAdmin', 'admin']
         }
       },
       {
-        path: 'device/deviceIngredient/form',
+        path: 'addDeviceIngredient',
         name: 'CommonSamplesDeviceIngredientForm',
-        component: _import('CommonSamples/form'),
+        component: _import('CommonSamples/addDeviceIngredient'),
         meta: {
           title: '增加常见爆炸装置成分样本',
           roles: ['superAdmin', 'admin']
         }
       },
       {
-        path: 'device/deviceShape/form',
+        path: 'device/deviceShape/addDeviceIngredient',
         nema: 'CommonSamplesDeviceShapeForm',
-        component: _import('CommonSamples/form'),
+        component: _import('CommonSamples/addDeviceIngredient'),
         meta: {
           title: '增加常见爆炸装置形态样本',
           roles: ['superAdmin', 'admin']

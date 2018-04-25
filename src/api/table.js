@@ -8,3 +8,11 @@ export function getPeopleList(params) {
   })
 }
 
+export function getDataList(params) {
+  return request({
+    url: '/table/explosiveList',
+    method: 'get',
+    params
+  })
+}
+

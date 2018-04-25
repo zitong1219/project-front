@@ -44,10 +44,28 @@
       style="width: 100%; margin-top: 20px;" 
       border fit highlight-current-row stripe>
 
-      <el-table-column 
+      <!-- <el-table-column 
         align="center" 
         label='ID' 
         fixed="left" 
+        width="50">
+        <template slot-scope="scope">
+          {{scope.$index + 1}}
+        </template>
+      </el-table-column> -->
+
+      <el-table-column
+        align="center"
+        type="index"
+        :index="currentIndex"
+        fixed="left"
+        width="50">
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label='userID' 
+        fixed="left"
         width="100">
         <template slot-scope="scope">
           {{scope.row.userID}}
@@ -241,6 +259,7 @@ export default {
       list: [],
       listLength: 0,
       listLoading: false,
+      currentIndex: 1,
       currentList: [],
       dialogFormVisible: false,
       dialogShowVisible: false,
@@ -328,7 +347,7 @@ export default {
     },
 
     handleCreate() {
-      this.$router.push('/PersonnelManagement/index/form')
+      this.$router.push('/PersonnelManagement/form')
     },
 
     handleDownloadList() {
@@ -337,7 +356,7 @@ export default {
 
     handleEdit(index, row) {
       console.log('--- Edit: ', index, row)
-      this.$router.push('/PersonnelManagement/index/form')
+      this.$router.push('/PersonnelManagement/form')
     },
 
     handleDelete(index, row) {
@@ -375,13 +394,17 @@ export default {
       this.currentList = []
       this.listLength = this.list.length
 
-      const residueItemNum = this.list.length - (val - 1) * this.pageSize
-      let newItemIndex = (val - 1) * this.pageSize
+      const residueItemNum = this.list.length - (val - 1) * this.pageSize  // 剩余数据量
+      let newItemIndex = (val - 1) * this.pageSize  // 当前数据列表的起始数据在原数据列表中的下标号
+      this.currentIndex = newItemIndex + 1  // 当前数据列表的起始数据的序号
+
+      /* 对当前数据列表赋值 */
       for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
         this.currentList[i] = this.list[newItemIndex]
         newItemIndex++
       }
-      console.log('--- handleCurrentChange currentList: ', this.currentList)
+
+      console.log('--- handleCurrentChange currentList: ', this.currentIndex, this.currentList)
     }
   }
 }
