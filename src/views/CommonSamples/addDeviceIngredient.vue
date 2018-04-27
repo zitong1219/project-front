@@ -161,7 +161,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'addExplosiveComSamples',
+  name: 'addDeviceIngredient',
 
   computed: {
     ...mapGetters([

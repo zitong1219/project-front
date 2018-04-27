@@ -173,9 +173,9 @@ export const asyncRouterMap = [
         }
       },
       {
-        path: 'device/deviceShape/addDeviceIngredient',
-        nema: 'CommonSamplesDeviceShapeForm',
-        component: _import('CommonSamples/addDeviceIngredient'),
+        path: 'addDeviceShape',
+        name: 'CommonSamplesDeviceShapeForm',
+        component: _import('CommonSamples/addDeviceShape'),
         meta: {
           title: '增加常见爆炸装置形态样本',
           roles: ['superAdmin', 'admin']

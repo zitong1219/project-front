@@ -16,3 +16,10 @@ export function getDataList(params) {
   })
 }
 
+export function getShapeDataList(params) {
+  return request({
+  	url: '/table/deviceShapeList',
+  	method: 'get',
+  	params
+  })
+}

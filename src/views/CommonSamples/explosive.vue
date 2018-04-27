@@ -27,7 +27,7 @@
 
       <!-- 下载按钮 -->
       <el-button 
-        type="primary" 
+        type="" 
         style="margin-left: 20px;"
         @click = "handleDownloadList()"
         round>
@@ -66,7 +66,7 @@
         align="center" 
         label="sampleID" 
         fixed="left"
-        width="150">
+        width="100">
         <template slot-scope="scope">
           <span>{{scope.row.sampleID}}</span>
         </template>
@@ -158,7 +158,7 @@
         align="center"
         fixed="right"
         label="操作"
-        width="300">
+        width="250">
         <template slot-scope="scope">
           <el-button
             size="mini"

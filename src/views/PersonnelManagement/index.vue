@@ -27,7 +27,7 @@
 
       <!-- 下载按钮 -->
       <el-button 
-        type="primary" 
+        type="" 
         style="margin-left: 20px;"
         @click = "handleDownloadList()"
         round>
@@ -75,7 +75,7 @@
       <el-table-column 
         align="center" 
         label="name" 
-        width="200">
+        width="150">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
           <span>{{scope.row.name}}</span>
@@ -87,7 +87,10 @@
         label="gender" 
         width="100">
         <template slot-scope="scope">
-          <span>{{scope.row.gender == "0" ? "Man" : "Woman"}}</span>
+          <el-tag 
+            :type="scope.row.gender == '0' ? '' : 'success'">
+            <span>{{scope.row.gender == "0" ? "Man" : "Woman"}}</span>
+          </el-tag>
         </template>
       </el-table-column>
 
@@ -144,8 +147,8 @@
             @click="handleDelete(scope.$index, scope.row)">
             删除
           </el-button>
-      </template>
-    </el-table-column>
+        </template>
+      </el-table-column>
 
     </el-table>
 
@@ -157,8 +160,8 @@
         :current-page.sync="currentPage"
         :page-sizes="[10, 20, 50]"
         :page-size="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
         :total="listLength"
+        layout="total, sizes, prev, pager, next, jumper"
         background>
       </el-pagination>
     </div>
@@ -378,8 +381,10 @@ export default {
       // console.log('--- handleSizeChange 每页个数： ', val)
       this.pageSize = val
       /*
+       * 修改pageSize的值会跳转至第一页
        * 默认当前页为1,在第一页改变pageSize,不会触发@current-change="handleCurrentChange"
-       * 所以这里会对currentPage进行判断,若currentPage是1，则调用handleCurrentChange
+       * 所以这里会对currentPage进行判断,若currentPage是1，则调用handleCurrentChange,
+       * 否则直接设置currentPage为1，自动触发handleCurrentChange
        */
       if (this.currentPage === 1) {
         this.handleCurrentChange(1)
