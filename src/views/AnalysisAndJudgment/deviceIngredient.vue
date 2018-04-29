@@ -16,9 +16,18 @@
         </el-button>
       </el-input>
 
-      <!-- 下载按钮 -->
+      <!-- 新增按钮 -->
       <el-button 
         type="primary" 
+        style="margin-left: 30px;" 
+        @click = "handleCreate()"
+        round>
+        新增样本
+      </el-button>
+
+      <!-- 下载按钮 -->
+      <el-button 
+        type="" 
         style="margin-left: 20px;"
         @click = "handleDownloadList()"
         round>
@@ -35,7 +44,7 @@
       style="width: 100%; margin-top: 20px;" 
       border fit highlight-current-row stripe>
 
-      <el-table-column 
+      <!-- <el-table-column 
         align="center" 
         label='ID' 
         fixed="left" 
@@ -43,43 +52,105 @@
         <template slot-scope="scope">
           {{scope.$index}}
         </template>
+      </el-table-column> -->
+
+      <el-table-column
+        align="center"
+        type="index"
+        :index="1"
+        fixed="left"
+        width="50">
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        prop="created_at" 
-        label="Display_time" 
-        width="250">
+        label="sampleID" 
+        fixed="left"
+        width="100">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span>{{scope.row.display_time}}</span>
+          <span>{{scope.row.sampleID}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        label="Author" 
+        label="sname" 
         width="150">
         <template slot-scope="scope">
-          <span>{{scope.row.author}}</span>
+          <span>{{scope.row.sname}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        label="Infomation">
+        label="inputDate" 
+        width="150">
         <template slot-scope="scope">
-          <span>{{scope.row.title}}</span>
+          <i class="el-icon-time"></i>
+          <span>{{scope.row.inputDate}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
-        align="center"
-        class-name="status-col" 
-        label="Status" 
-        width="150" >
+        align="center" 
+        label="sampleState" 
+        width="150">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
+          <span>{{scope.row.sampleState}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleOrigin" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleOrigin}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleType" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleType}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleMake" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleMake}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleDraw" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleDraw}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleAnalyse" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleAnalyse}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="analyseCondition" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.analyseCondition}}</span>
         </template>
       </el-table-column>
 
@@ -87,7 +158,7 @@
         align="center"
         fixed="right"
         label="操作"
-        width="300">
+        width="250">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -97,9 +168,14 @@
           </el-button>
           <el-button
             size="mini"
-            type="primary"
-            @click="AnalysisFunction">
-            分 析
+            @click="dialogFormVisible = true">
+            编 辑
+          </el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -116,18 +192,88 @@
 
     </el-dialog>
 
+    <!-- 弹出框 编辑功能 -->
+    <el-dialog title="编辑表单" :visible.sync="dialogFormVisible">
+
+      <el-form 
+        :model="ruleForm" 
+        :rules="rules" 
+        ref="ruleForm" 
+        label-width="100px" 
+        class="demo-ruleForm">
+
+        <el-form-item label="输入框" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+
+        <el-form-item label="选择器" prop="region">
+          <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="日期与时间" required>
+          <el-col :span="10">
+           <el-form-item prop="date1">
+            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+           </el-form-item>
+          </el-col>
+
+          <el-col class="line" :span="1">|</el-col>
+
+          <el-col :span="10">
+            <el-form-item prop="date2">
+              <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+            </el-form-item>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item label="开关" prop="delivery">
+          <el-switch v-model="ruleForm.delivery"></el-switch>
+        </el-form-item>
+
+        <el-form-item label="多选框" prop="type">
+          <el-checkbox-group v-model="ruleForm.type">
+            <el-checkbox label="A" name="type"></el-checkbox>
+            <el-checkbox label="B" name="type"></el-checkbox>
+            <el-checkbox label="C" name="type"></el-checkbox>
+            <el-checkbox label="D" name="type"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+
+        <el-form-item label="单选框" prop="resource">
+          <el-radio-group v-model="ruleForm.resource">
+            <el-radio label="Left"></el-radio>
+            <el-radio label="Right"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+
+        <el-form-item label="文本域" prop="desc">
+          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
+        <el-button type="warning" @click="resetForm('ruleForm')" >重置</el-button>
+        <el-button type="" @click="dialogFormVisible = false">取消</el-button>
+      </div>
+
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getDataList } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
   data() {
     return {
       searchInput: '',
-      list: null,
+      list: [],
       listLoading: true,
       dialogFormVisible: false,
       dialogShowVisible: false,
@@ -195,7 +341,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      getDataList(this.listQuery).then(response => {
         this.list = response.data.items
         this.listLoading = false
         // console.log('--- PersonnelManagement List: ', this.list)
@@ -203,15 +349,31 @@ export default {
     },
 
     handleSearch() {
-      alert('Search:  ' + this.searchInput)
+      alert('Search: ' + this.searchInput)
     },
 
-    AnalysisFunction() {
-      this.$router.push('/AnalysisAndJudgment/deviceIngredientAnalysis')
+    handleCreate() {
+      this.$router.push('/CommonSamples/addDeviceIngredient')
     },
 
     handleDownloadList() {
       alert('已导出！')
+    },
+
+    handleEdit(index, row) {
+      console.log('--- Edit: ', index, row)
+      this.$router.push('/PersonnelManagement/index/form')
+    },
+
+    handleDelete(index, row) {
+      console.log('--- Deleted: ', index, row, this.roles)
+      if (this.roles.indexOf('superAdmin') >= 0) {
+        alert('--- superAdmin权限 允许删除 ---')
+      } else if (this.roles.indexOf('admin') >= 0) {
+        alert('--- admin权限  可删除user ---')
+      } else {
+        alert('--- 无删除权限 ---')
+      }
     },
 
     handleDownload() {
