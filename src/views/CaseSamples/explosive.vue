@@ -27,7 +27,7 @@
 
       <!-- 下载按钮 -->
       <el-button 
-        type="primary" 
+        type="" 
         style="margin-left: 20px;"
         @click = "handleDownloadList()"
         round>
@@ -44,51 +44,113 @@
       style="width: 100%; margin-top: 20px;" 
       border fit highlight-current-row stripe>
 
-      <el-table-column 
+      <!-- <el-table-column 
         align="center" 
         label='ID' 
         fixed="left" 
-        width="100">
+        width="50">
         <template slot-scope="scope">
           {{scope.$index}}
         </template>
+      </el-table-column> -->
+
+      <el-table-column
+        align="center"
+        type="index"
+        :index="1"
+        fixed="left"
+        width="50">
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        prop="created_at" 
-        label="Display_time" 
-        width="250">
+        label="sampleID" 
+        fixed="left"
+        width="100">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span>{{scope.row.display_time}}</span>
+          <span>{{scope.row.sampleID}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        label="Author" 
+        label="sname" 
         width="150">
         <template slot-scope="scope">
-          <span>{{scope.row.author}}</span>
+          <span>{{scope.row.sname}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
         align="center" 
-        label="Infomation">
+        label="inputDate" 
+        width="150">
         <template slot-scope="scope">
-          <span>{{scope.row.title}}</span>
+          <i class="el-icon-time"></i>
+          <span>{{scope.row.inputDate}}</span>
         </template>
       </el-table-column>
 
       <el-table-column 
-        align="center"
-        class-name="status-col" 
-        label="Status" 
-        width="150" >
+        align="center" 
+        label="sampleState" 
+        width="150">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status}}</el-tag>
+          <span>{{scope.row.sampleState}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleOrigin" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleOrigin}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleType" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleType}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleMake" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleMake}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleDraw" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleDraw}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="sampleAnalyse" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.sampleAnalyse}}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column 
+        align="center" 
+        label="analyseCondition" 
+        width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.analyseCondition}}</span>
         </template>
       </el-table-column>
 
@@ -96,7 +158,7 @@
         align="center"
         fixed="right"
         label="操作"
-        width="300">
+        width="250">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -204,7 +266,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getDataList } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -279,7 +341,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      getDataList(this.listQuery).then(response => {
         this.list = response.data.items
         this.listLoading = false
         // console.log('--- PersonnelManagement List: ', this.list)
@@ -291,7 +353,7 @@ export default {
     },
 
     handleCreate() {
-      this.$router.push('/CaseSamples/explosive/form')
+      this.$router.push('/CaseSamples/addExplosive')
     },
 
     handleDownloadList() {

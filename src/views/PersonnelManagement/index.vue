@@ -57,7 +57,7 @@
       <el-table-column
         align="center"
         type="index"
-        :index="currentIndex"
+        :index="startIndex"
         fixed="left"
         width="50">
       </el-table-column>
@@ -77,7 +77,6 @@
         label="name" 
         width="150">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
           <span>{{scope.row.name}}</span>
         </template>
       </el-table-column>
@@ -262,7 +261,7 @@ export default {
       list: [],
       listLength: 0,
       listLoading: false,
-      currentIndex: 1,
+      startIndex: 1,
       currentList: [],
       dialogFormVisible: false,
       dialogShowVisible: false,
@@ -401,7 +400,7 @@ export default {
 
       const residueItemNum = this.list.length - (val - 1) * this.pageSize  // 剩余数据量
       let newItemIndex = (val - 1) * this.pageSize  // 当前数据列表的起始数据在原数据列表中的下标号
-      this.currentIndex = newItemIndex + 1  // 当前数据列表的起始数据的序号
+      this.startIndex = newItemIndex + 1  // 当前数据列表的起始数据的序号
 
       /* 对当前数据列表赋值 */
       for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
@@ -409,7 +408,7 @@ export default {
         newItemIndex++
       }
 
-      console.log('--- handleCurrentChange currentList: ', this.currentIndex, this.currentList)
+      console.log('--- handleCurrentChange currentList: ', this.startIndex, this.currentList)
     }
   }
 }

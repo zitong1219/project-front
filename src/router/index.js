@@ -185,7 +185,7 @@ export const asyncRouterMap = [
 
   },
 
-  /** **** 案件样本模块路由 ******/
+  /** **** 案件物证模块路由 ******/
   {
     path: '/CaseSamples',
     component: Layout,
@@ -236,25 +236,25 @@ export const asyncRouterMap = [
     meta: { title: '案件物证', roles: ['superAdmin', 'admin'] },
     children: [
       {
-        path: 'explosive/form',
+        path: 'addExplosive',
         name: 'CaseSamplesExplosiveForm',
-        component: _import('CaseSamples/form'),
+        component: _import('CaseSamples/addExplosive'),
         meta: {
           title: '增加案件物证炸药与原材料样本',
           roles: ['superAdmin', 'admin'] }
       },
       {
-        path: 'device/deviceIngredient/form',
+        path: 'addDeviceIngredient',
         name: 'CaseSamplesDeviceIngredientForm',
-        component: _import('CaseSamples/form'),
+        component: _import('CaseSamples/addDeviceIngredient'),
         meta: {
           title: '增加案件物证爆炸装置成分样本',
           roles: ['superAdmin', 'admin'] }
       },
       {
-        path: 'device/deviceIngredient/form',
+        path: 'addDeviceShape',
         name: 'CaseSamplesDeviceShapeForm',
-        component: _import('CaseSamples/form'),
+        component: _import('CaseSamples/addDeviceShape'),
         meta: {
           title: '增加案件物证爆炸装置形态样本',
           roles: ['superAdmin', 'admin'] }
