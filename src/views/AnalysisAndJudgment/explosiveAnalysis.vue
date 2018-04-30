@@ -1,12 +1,54 @@
 <template>
   <div class="app-container">
-    <div>explosiveAnalysis</div>
-    <el-button @click="goBack">返回</el-button>
+    <!-- <div>explosiveAnalysis</div> -->
+
+    <div>
+      <el-table
+        :data="matchDataItems"
+        border fit highlight-current-row stripe
+        style="width: 601px; margin-top: 0px;">
+
+        <el-table-column
+          prop="exploEvi_id"
+          label="exploEvi_id"
+          align="center"
+          width="150">
+        </el-table-column>
+
+        <el-table-column
+          prop="exploSample_id"
+          label="exploSample_id"
+          align="center"
+          width="150">
+        </el-table-column>
+
+        <el-table-column
+          prop="matchType"
+          label="matchType"
+          align="center"
+          width="150">
+        </el-table-column>
+
+        <el-table-column
+          prop="matchDegree"
+          label="matchDegree"
+          align="center"
+          width="150">
+        </el-table-column>
+      </el-table>
+    </div>
+
+    <el-button 
+      style="margin-top:30px;"
+      @click="goBack">
+      返回
+    </el-button>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { getExlpoMatch } from '@/api/table'
 
 export default {
   name: 'explosiveAnalysis',
@@ -17,24 +59,21 @@ export default {
 
   data() {
     return {
-      
+      matchDataItems: []
     }
   },
 
+  created() {
+    this.fetchData()
+  },
+
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
+    fetchData() {
+      getExlpoMatch().then(response=> {
+        this.matchDataItems = response.data.items
       })
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
-    },
+
     goBack() {
       this.$router.go(-1)
     }

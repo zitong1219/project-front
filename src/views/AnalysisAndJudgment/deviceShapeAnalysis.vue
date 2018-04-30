@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div>deviceIngredientAnalysis</div>
+    <div>deviceShapeAnalysis</div>
     <el-button @click="goBack">返回</el-button>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'deviceIngredientAnalysis',
+  name: 'deviceShapeAnalysis',
 
   computed: {
     ...mapGetters([])

@@ -23,3 +23,11 @@ export function getShapeDataList(params) {
   	params
   })
 }
+
+export function getExlpoMatch(params) {
+  return request({
+    url: '/table/exlpoMatch ',
+    method: 'get',
+    params
+  })
+}

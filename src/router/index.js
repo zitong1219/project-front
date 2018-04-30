@@ -233,7 +233,7 @@ export const asyncRouterMap = [
     path: '/CaseSamples',
     component: Layout,
     hidden: true,
-    meta: { title: '案件物证', roles: ['superAdmin', 'admin'] },
+    meta: { title: '案件物证', roles: ['superAdmin', 'admin', 'user'] },
     children: [
       {
         path: 'addExplosive',
@@ -241,7 +241,7 @@ export const asyncRouterMap = [
         component: _import('CaseSamples/addExplosive'),
         meta: {
           title: '增加案件物证炸药与原材料样本',
-          roles: ['superAdmin', 'admin'] }
+          roles: ['superAdmin', 'admin', 'user'] }
       },
       {
         path: 'addDeviceIngredient',
@@ -249,7 +249,7 @@ export const asyncRouterMap = [
         component: _import('CaseSamples/addDeviceIngredient'),
         meta: {
           title: '增加案件物证爆炸装置成分样本',
-          roles: ['superAdmin', 'admin'] }
+          roles: ['superAdmin', 'admin', 'user'] }
       },
       {
         path: 'addDeviceShape',
@@ -257,7 +257,7 @@ export const asyncRouterMap = [
         component: _import('CaseSamples/addDeviceShape'),
         meta: {
           title: '增加案件物证爆炸装置形态样本',
-          roles: ['superAdmin', 'admin'] }
+          roles: ['superAdmin', 'admin', 'user'] }
       }
     ]
   },
@@ -312,7 +312,7 @@ export const asyncRouterMap = [
     path: '/AnalysisAndJudgment',
     component: Layout,
     hidden: true,
-    meta: { title: '分析研判', roles: ['superAdmin', 'admin'] },
+    meta: { title: '分析研判', roles: ['superAdmin', 'admin', 'user'] },
     children: [
       {
         path: 'explosiveAnalysis',
@@ -325,6 +325,12 @@ export const asyncRouterMap = [
         name: 'deviceIngredientAnalysis',
         component: _import('AnalysisAndJudgment/deviceIngredientAnalysis'),
         meta: { title: '爆炸装置成分分析' }
+      },
+      {
+        path: 'deviceShapeAnalysis',
+        name: 'deviceShapeAnalysis',
+        component: _import('AnalysisAndJudgment/deviceShapeAnalysis'),
+        meta: { title: '爆炸装置成心态分析' }
       }
     ]
   },

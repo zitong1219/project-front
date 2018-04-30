@@ -16,15 +16,6 @@
         </el-button>
       </el-input>
 
-      <!-- 新增按钮 -->
-      <el-button
-        type="primary"
-        style="margin-left:30px;"
-        @click="handleCreate"
-        round>
-        NEW
-      </el-button>
-
       <!-- 下载按钮 -->
       <el-button
         style="margin-left:20px"
@@ -155,18 +146,14 @@
             size="mini"
             @click="dialogShowVisible = true">
             <!-- @click="handleEdit(scope.$index, scope.row)" -->
-            详 细
+            最新分析结果
           </el-button>
+
           <el-button
             size="mini"
-            @click="dialogFormVisible = true">
-            编 辑
-          </el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)">
-            删除
+            type="primary"
+            @click="analysis(scope.$index, scope.row)">
+            分析处理
           </el-button>
         </template>
       </el-table-column>
@@ -240,12 +227,9 @@ export default {
       })
     },
 
-    handleCreate() {
-      this.$router.push('/CommonSamples/addDeviceShape')
-    },
-
-    handleDelete(index, row) {
-      console.log(' --- handleDelete: ', index, row)
+    analysis(index, row) {
+      console.log(' --- analysis: ', index, row)
+      this.$router.push('/AnalysisAndJudgment/deviceShapeAnalysis')
     },
 
     handleSizeChange(newPageSize) {
