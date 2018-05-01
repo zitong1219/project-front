@@ -31,3 +31,11 @@ export function getExlpoMatch(params) {
     params
   })
 }
+
+export function getDevCompMatch(params) {
+  return request({
+    url: '/table/devCompMatch',
+    method: 'get',
+    params
+  })
+}

@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
-    <!-- <div>explosiveAnalysis</div> -->
+    <div>炸药与原材料分析匹配结果</div>
 
     <div>
       <el-table
         :data="matchDataItems"
         border fit highlight-current-row stripe
-        style="width: 601px; margin-top: 0px;">
+        style="width: 601px; margin-top: 20px;">
 
         <el-table-column
           prop="exploEvi_id"
