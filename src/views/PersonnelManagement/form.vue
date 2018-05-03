@@ -43,8 +43,8 @@
 
             <el-form-item label="性别" prop="gender">
                 <el-radio-group v-model="peopleInfoForm.gender">
+                  <el-radio label="0">Woman</el-radio>
                   <el-radio label="1">Man</el-radio>
-                  <el-radio label="2">Woman</el-radio>
                 </el-radio-group>
             </el-form-item>
 
@@ -156,7 +156,6 @@ export default {
     }
 
     return {
-      imageUrl: '',
       superPermission: false,
       peopleInfoForm: {
         userID: '',
@@ -216,7 +215,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         console.log('--- peopleInfoForm: ', this.peopleInfoForm)
         if (valid) {
-          console.log('submit!')
+          console.log('submit! valid: ', valid)
         } else {
           console.log('error submit!')
           return false

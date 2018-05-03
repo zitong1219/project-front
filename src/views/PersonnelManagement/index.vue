@@ -87,8 +87,8 @@
         width="100">
         <template slot-scope="scope">
           <el-tag 
-            :type="scope.row.gender == '0' ? '' : 'success'">
-            <span>{{scope.row.gender == "0" ? "Man" : "Woman"}}</span>
+            :type="scope.row.gender == '0' ? 'success' : ''">
+            <span>{{scope.row.gender == "0" ? "Woman" : "Man"}}</span>
           </el-tag>
         </template>
       </el-table-column>
@@ -137,7 +137,7 @@
           </el-button>
           <el-button
             size="mini"
-            @click="dialogFormVisible = true">
+            @click="handleEdit(scope.$index, scope.row)">
             编 辑
           </el-button>
           <el-button
@@ -179,67 +179,83 @@
     <el-dialog title="编辑表单" :visible.sync="dialogFormVisible">
 
       <el-form 
-        :model="ruleForm" 
+        :model="peopleInfoForm" 
         :rules="rules" 
-        ref="ruleForm" 
+        ref="peopleInfoComponent" 
         label-width="100px" 
-        class="demo-ruleForm">
+        class="">
 
-        <el-form-item label="输入框" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
-        </el-form-item>
+              <el-form-item label="照片上传" prop="picUrl">
+                <el-upload 
+                  class=""
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                  :before-upload="beforeAvatarUpload"
+                  >
+                  <!-- :on-change="showAvatar" -->
+                  <img v-if="peopleInfoForm.picUrl" :src="peopleInfoForm.picUrl" class="avatar">
+                  <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
+                </el-upload>
+              </el-form-item>
 
-        <el-form-item label="选择器" prop="region">
-          <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
+              <el-form-item label="人员编号" prop="userID">
+                <el-input v-model="peopleInfoForm.userID" clearable></el-input>
+              </el-form-item>
 
-        <el-form-item label="日期与时间" required>
-          <el-col :span="10">
-           <el-form-item prop="date1">
-            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-           </el-form-item>
-          </el-col>
+              <el-form-item label="人员姓名" prop="name">
+                <el-input v-model="peopleInfoForm.name" clearable></el-input>
+              </el-form-item>
 
-          <el-col class="line" :span="1">|</el-col>
+              <el-form-item label="密码" prop="password">
+                  <el-input  
+                    v-model="peopleInfoForm.password" 
+                    type="password" 
+                    auto-complete="on" 
+                    clearable>
+                  </el-input>
+              </el-form-item>
 
-          <el-col :span="10">
-            <el-form-item prop="date2">
-              <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-            </el-form-item>
-          </el-col>
-        </el-form-item>
+              <el-form-item label="确认密码" prop="checkPassword">
+                  <el-input 
+                    v-model="peopleInfoForm.checkPassword" 
+                    type="password" 
+                    auto-complete="on" 
+                    clearable>
+                  </el-input>
+              </el-form-item>
 
-        <el-form-item label="开关" prop="delivery">
-          <el-switch v-model="ruleForm.delivery"></el-switch>
-        </el-form-item>
+              <el-form-item label="性别" prop="gender">
+                  <el-radio-group v-model="peopleInfoForm.gender">
+                    <el-radio label="0">Woman</el-radio>
+                    <el-radio label="1">Man</el-radio>
+                  </el-radio-group>
+              </el-form-item>
 
-        <el-form-item label="多选框" prop="type">
-          <el-checkbox-group v-model="ruleForm.type">
-            <el-checkbox label="A" name="type"></el-checkbox>
-            <el-checkbox label="B" name="type"></el-checkbox>
-            <el-checkbox label="C" name="type"></el-checkbox>
-            <el-checkbox label="D" name="type"></el-checkbox>
-          </el-checkbox-group>
-        </el-form-item>
+              <el-form-item label="电话" prop="phone">
+                  <el-input v-model="peopleInfoForm.phone"></el-input>
+              </el-form-item>
 
-        <el-form-item label="单选框" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
-            <el-radio label="Left"></el-radio>
-            <el-radio label="Right"></el-radio>
-          </el-radio-group>
-        </el-form-item>
+              <el-form-item label="权限" prop="role">
+                  <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
+                    <el-option v-if = "superPermission" label="管理员" value="admin"></el-option>
+                    <el-option label="用户" value="user"></el-option>
+                  </el-select>
+              </el-form-item>
 
-        <el-form-item label="文本域" prop="desc">
-          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-        </el-form-item>
+              <el-form-item label="备注" prop="note">
+                  <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
+              </el-form-item>
+
+              <el-form-item>
+                <el-button type="primary" @click="submitForm('peopleInfoComponent')">提交</el-button>
+                <el-button type="warning" @click="resetForm('peopleInfoComponent')" plain>重置</el-button>
+              </el-form-item>
+
       </el-form>
 
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
-        <el-button type="warning" @click="resetForm('ruleForm')" >重置</el-button>
         <el-button type="" @click="dialogFormVisible = false">取消</el-button>
       </div>
 
@@ -254,6 +270,41 @@ import { mapGetters } from 'vuex'
 
 export default {
   data() {
+    const validatePassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else {
+        if (this.peopleInfoForm.checkPassword !== '') {
+          // console.log('--- validatePassword this.$refs: ', this.$refs)
+          // console.log('--- validatePassword this.peopleInfoForm: ', this.peopleInfoForm)
+          this.$refs.peopleInfoComponent.validateField('checkPassword')
+        }
+        callback(console.log('--- validatePassword is OK'))
+      }
+    }
+
+    const validateCheckPassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.peopleInfoForm.password) {
+        callback(new Error('两次输入不一致'))
+      } else {
+        callback(console.log('--- validateCheckPassword is OK'))
+      }
+    }
+
+    const validateRole = (rule, value, callback) => {
+      if (value === '1') {
+        if (this.roles.indexOf('superAdmin') === -1) {
+          callback(new Error('无权限设置此用户为管理员'))
+        } else {
+          callback(console.log('--- validateRole is OK - 注意：此用户将被设置为管理员'))
+        }
+      } else {
+        callback(console.log('--- validateRole is OK'))
+      }
+    }
+
     return {
       currentPage: 1,
       pageSize: 10,
@@ -265,38 +316,39 @@ export default {
       currentList: [],
       dialogFormVisible: false,
       dialogShowVisible: false,
-      ruleForm: {
+
+      superPermission: false,
+
+      peopleInfoForm: { 
+        userID: '',
         name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        password: '',
+        checkPassword: '',
+        gender: '',
+        phone: '',
+        role: 'user',
+        picUrl: null,
+        note: ''
       },
       rules: {
+        userID: [
+          { required: true, message: '请输入人员编号', trigger: 'blur' }
+        ],
         name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { required: true, message: '请输入人员姓名', trigger: 'blur' },
+          { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'blur' }
         ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
+        password: [
+          { validator: validatePassword, required: true, trigger: 'blur' }
         ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+        checkPassword: [
+          { validator: validateCheckPassword, required: true, trigger: 'blur' }
         ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+        gender: [
+          { required: true, message: '请选择性别', trigger: 'change' }
         ],
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
+        role: [
+          { validator: validateRole, required: true, trigger: 'blur' }
         ]
       },
       formLabelWidth: '120px'
@@ -358,7 +410,8 @@ export default {
 
     handleEdit(index, row) {
       console.log('--- Edit: ', index, row)
-      this.$router.push('/PersonnelManagement/form')
+      this.dialogFormVisible = true
+      this.peopleInfoForm = row
     },
 
     handleDelete(index, row) {
@@ -372,10 +425,39 @@ export default {
       }
     },
 
+    /* 弹出框 编辑功能 */
     handleDownload() {
       alert('已导出！')
     },
 
+    handleAvatarSuccess(res, file) {
+      console.log('--- handleAvatarSuccess', res, file)
+    },
+    beforeAvatarUpload(file) {
+      console.log('--- beforeAvatarUpload', file)
+      window.URL = window.URL || window.webkitURL
+      this.peopleInfoForm.picUrl = window.URL.createObjectURL(file)
+      console.log('--- this.picUrl: ', this.peopleInfoForm.picUrl)
+    },
+    // showAvatar(file, fileList) {
+    //   console.log('--- showAvatar', file, fileList)
+    // },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        console.log('--- peopleInfoForm: ', this.peopleInfoForm)
+        if (valid) {
+          console.log('submit!')
+        } else {
+          console.log('error submit!')
+          return false
+        }
+      })
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields()
+    },
+
+    /* 分页 */
     handleSizeChange(val) {
       // console.log('--- handleSizeChange 每页个数： ', val)
       this.pageSize = val
@@ -413,3 +495,34 @@ export default {
   }
 }
 </script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
+
+  .avatar-uploader {
+    border: 2px dashed #e9e9e9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .avatar-uploader:hover {
+    border-color: #409EFF;
+  }
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
+
+</style>
