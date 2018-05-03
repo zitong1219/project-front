@@ -6,7 +6,7 @@
       <el-table
         :data="matchDataItems"
         border fit highlight-current-row stripe
-        style="width: 601px; margin-top: 20px;">
+        style="width: 801px; margin-top: 20px;">
 
         <el-table-column
           prop="exploEvi_id"
@@ -35,7 +35,29 @@
           align="center"
           width="150">
         </el-table-column>
+
+        <el-table-column
+          align="center"
+          fixed="right"
+          label="操作"
+          width="200">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="primary"
+              @click="drawChart(scope.$index, scope.row)">
+              绘图
+            </el-button>
+          </template>
+        </el-table-column>
       </el-table>
+    </div>
+
+    <div 
+      id="highChart" 
+      v-if="drawChartFlag" 
+      style="width: 800px; height: 600px; background: #EFEFEF; margin-top: 50px">
+      {{ drawExploSampleID }}
     </div>
 
     <el-button 
@@ -59,7 +81,9 @@ export default {
 
   data() {
     return {
-      matchDataItems: []
+      matchDataItems: [],
+      drawChartFlag: false,
+      drawExploSampleID: null
     }
   },
 
@@ -69,9 +93,15 @@ export default {
 
   methods: {
     fetchData() {
-      getExlpoMatch().then(response=> {
+      getExlpoMatch().then(response => {
         this.matchDataItems = response.data.items
       })
+    },
+
+    drawChart(index, row) {
+      console.log('--- drawChart: ', index, row)
+      this.drawChartFlag = true,
+      this.drawExploSampleID = row.exploSample_id
     },
 
     goBack() {
