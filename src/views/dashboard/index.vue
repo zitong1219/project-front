@@ -3,7 +3,7 @@
   <div class="dashboard-container">
 
     <div class="avatar-wrapper">
-      <img class="user-avatar" :src="avatar+'?imageView2/1/w/200/h/200'">
+      <img class="user-avatar" src="file:///D:/Code/Git/FrontendForProject4/static/avatar.jpg">
         <!-- :src="avatar+'?imageView2/1/w/80/h/80'" -->
     </div>
 

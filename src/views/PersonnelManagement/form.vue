@@ -89,8 +89,8 @@
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload"
-                :on-change="showAvatar"
                 >
+                <!-- :on-change="showAvatar" -->
                 <img v-if="peopleInfoForm.picUrl" :src="peopleInfoForm.picUrl" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
               </el-upload>
@@ -209,9 +209,9 @@ export default {
       this.peopleInfoForm.picUrl = window.URL.createObjectURL(file)
       console.log('--- this.picUrl: ', this.peopleInfoForm.picUrl)
     },
-    showAvatar(file, fileList) {
-      console.log('--- showAvatar', file, fileList)
-    },
+    // showAvatar(file, fileList) {
+    //   console.log('--- showAvatar', file, fileList)
+    // },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         console.log('--- peopleInfoForm: ', this.peopleInfoForm)

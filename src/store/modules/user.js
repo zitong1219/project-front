@@ -80,16 +80,17 @@ const user = {
             reject(error)
           })
       })
-    }
+    },
 
     /* 前端 登出 */
-    // FedLogOut({ commit }) {
-    //   return new Promise(resolve => {
-    //     commit('SET_TOKEN', '')
-    //     removeToken()
-    //     resolve()
-    //   })
-    // }
+    FedLogOut({ commit }) {
+      return new Promise(resolve => {
+        commit('SET_TOKEN', '')
+        removeToken()
+        console.log('*** store/user FedLogOut is OK, response: ', resolve)
+        resolve()
+      })
+    }
   }
 }
 
