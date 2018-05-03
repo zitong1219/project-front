@@ -71,6 +71,7 @@
                   action="https://jsonplaceholder.typicode.com/posts/"
                   :show-file-list="false"
                   :before-upload="beforeAvatarUpload"
+                  :on-success="handleAvatarSuccess"
                   >
                   <img v-if="explosiveComSamplesForm.picUrl" :src="explosiveComSamplesForm.picUrl" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
@@ -245,6 +246,9 @@ export default {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
       this.explosiveComSamplesForm.picUrl = window.URL.createObjectURL(file)
+    },
+    handleAvatarSuccess(res, file) {
+      console.log('--- handleAvatarSuccess', res, file)
     },
 
     addFile() {

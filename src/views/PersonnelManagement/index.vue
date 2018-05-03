@@ -254,10 +254,10 @@
 
       </el-form>
 
-      <div slot="footer" class="dialog-footer">
+      <!-- <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
         <el-button type="" @click="dialogFormVisible = false">取消</el-button>
-      </div>
+      </div> -->
 
     </el-dialog>
 
@@ -425,19 +425,19 @@ export default {
       }
     },
 
-    /* 弹出框 编辑功能 */
     handleDownload() {
       alert('已导出！')
     },
 
-    handleAvatarSuccess(res, file) {
-      console.log('--- handleAvatarSuccess', res, file)
-    },
+    /* 弹出框 编辑功能 */
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
       this.peopleInfoForm.picUrl = window.URL.createObjectURL(file)
       console.log('--- this.picUrl: ', this.peopleInfoForm.picUrl)
+    },
+    handleAvatarSuccess(res, file) {
+      console.log('--- handleAvatarSuccess', res, file)
     },
     // showAvatar(file, fileList) {
     //   console.log('--- showAvatar', file, fileList)

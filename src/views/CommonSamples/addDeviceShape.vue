@@ -59,6 +59,7 @@
                   action="https://jsonplaceholder.typicode.com/posts/"
                   :show-file-list="false"
                   :before-upload="beforeAvatarUpload"
+                  :on-success="handleAvatarSuccess"
                   >
                   <img v-if="deviceShapeForm.originalUrl" :src="deviceShapeForm.originalUrl" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
@@ -148,6 +149,10 @@ export default {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
       this.deviceShapeForm.originalUrl = window.URL.createObjectURL(file)
+      console.log('--- beforeAvatarUpload URL: ', this.deviceShapeForm.originalUrl)
+    },
+    handleAvatarSuccess(res, file) {
+      console.log('--- handleAvatarSuccess', res, file)
     },
   }
 
@@ -162,16 +167,6 @@ export default {
   &-text {
     font-size: 30px;
     line-height: 46px;
-  }
-}
-
-.people {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 18px;
-    line-height: 20px;
   }
 }
 
