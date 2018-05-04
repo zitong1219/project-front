@@ -295,6 +295,8 @@ import { getDataList } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'deviceIngredientTable',
+
   data() {
     return {
       searchInput: '',

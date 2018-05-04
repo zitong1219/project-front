@@ -180,6 +180,15 @@ export const asyncRouterMap = [
           title: '增加常见爆炸装置形态样本',
           roles: ['superAdmin', 'admin']
         }
+      },
+      {
+        path: 'deviceShapeOperation',
+        name: 'CommonSamplesDeviceShapeOperation',
+        component: _import('CommonSamples/deviceShapeOperation'),
+        meta: {
+          title: '常见爆炸装置形态图像处理',
+          roles: ['superAdmin', 'admin']
+        }
       }
     ]
 
@@ -330,7 +339,7 @@ export const asyncRouterMap = [
         path: 'deviceShapeAnalysis',
         name: 'deviceShapeAnalysis',
         component: _import('AnalysisAndJudgment/deviceShapeAnalysis'),
-        meta: { title: '爆炸装置成心态分析' }
+        meta: { title: '爆炸装置成形态分析' }
       }
     ]
   },

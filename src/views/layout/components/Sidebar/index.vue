@@ -27,10 +27,10 @@ export default {
       'permissionRouters',
       'sidebar'
     ]),
-    routes() {
-      console.log('*** Sidebar $router.options.routes: ', this.$router.options.routes)
-      return this.$router.options.routes
-    },
+    // routes() {
+    //   console.log('*** Sidebar $router.options.routes: ', this.$router.options.routes)
+    //   return this.$router.options.routes
+    // },
     isCollapse() {
       return !this.sidebar.opened
     }

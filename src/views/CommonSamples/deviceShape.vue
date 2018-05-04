@@ -149,8 +149,14 @@
         align="center"
         fixed="right"
         label="操作"
-        width="250">
+        width="350">
         <template slot-scope="scope">
+          <el-button
+            type="primary"
+            size="mini"
+            @click="handlePic(scope.$index, scope.row)">
+            图像处理
+          </el-button>
           <el-button
             size="mini"
             @click="dialogShowVisible = true">
@@ -268,6 +274,8 @@ import { getShapeDataList } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'deviceShapeTable',
+
   data() {
     return {
       currentPage: 1,
@@ -333,6 +341,11 @@ export default {
 
     handleDownloadList() {
       alert('已导出！')
+    },
+
+    handlePic(index, row) {
+      console.log('--- handlePic: ', index, row)
+      this.$router.push('/CommonSamples/deviceShapeOperation')
     },
 
     handleEdit(index, row) {

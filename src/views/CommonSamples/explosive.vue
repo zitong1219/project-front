@@ -293,6 +293,8 @@ import { getDataList } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'explosiveTable',
+
   data() {
     return {
       searchInput: '',
