@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
   	deviceShapeOperation
 
   	<div id="OperationArea">

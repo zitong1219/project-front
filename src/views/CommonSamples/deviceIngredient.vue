@@ -12,7 +12,7 @@
         <el-button 
           slot="append" 
           icon="el-icon-search"
-          @click = "handleSearch()" >
+          @click="handleSearch()" >
         </el-button>
       </el-input>
 
@@ -20,7 +20,7 @@
       <el-button 
         type="primary" 
         style="margin-left: 30px;" 
-        @click = "handleCreate()"
+        @click="handleCreate()"
         round>
         新增样本
       </el-button>
@@ -29,7 +29,7 @@
       <el-button 
         type="" 
         style="margin-left: 20px;"
-        @click = "handleDownloadList()"
+        @click="handleDownloadList()"
         round>
         数据导出
       </el-button>
@@ -43,16 +43,6 @@
       element-loading-text="载入中..." 
       style="width: 100%; margin-top: 20px;" 
       border fit highlight-current-row stripe>
-
-      <!-- <el-table-column 
-        align="center" 
-        label='ID' 
-        fixed="left" 
-        width="100">
-        <template slot-scope="scope">
-          {{scope.$index}}
-        </template>
-      </el-table-column> -->
 
       <el-table-column
         align="center"
@@ -196,94 +186,88 @@
     <el-dialog title="编辑表单" :visible.sync="dialogFormVisible">
 
       <el-form
-              :model="explosiveComSamplesForm"
-              :rules="explosiveComSamplesRules"
-              ref="explosiveComSamplesComponent"
-              label-width="100px" >
+        :model="deviceIngredientForm"
+        :rules="explosiveComSamplesRules"
+        ref="deviceIngredientComponent"
+        label-width="100px" >
 
-              <el-form-item label="样品名称" prop="sname">
-                <el-input v-model="explosiveComSamplesForm.sname" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样品名称" prop="sname">
+          <el-input v-model="deviceIngredientForm.sname" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样本编号" prop="sampleID">
-                <el-input v-model="explosiveComSamplesForm.sampleID" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样本编号" prop="sampleID">
+          <el-input v-model="deviceIngredientForm.sampleID" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="处理人员编号" prop="user_id">
-                <el-input v-model="explosiveComSamplesForm.user_id" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="处理人员编号" prop="user_id">
+          <el-input v-model="deviceIngredientForm.user_id" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="录入时间" prop="inputDate">
-                <el-date-picker 
-                  v-model="explosiveComSamplesForm.inputDate"
-                  type="datetime"
-                  placeholder="请输入录入时间"
-                  style="width: 100%;">
-                </el-date-picker>
-                <!-- {{ explosiveComSamplesForm.inputDate }} -->
-              </el-form-item>
+        <el-form-item label="录入时间" prop="inputDate">
+          <el-date-picker 
+            v-model="deviceIngredientForm.inputDate"
+            type="datetime"
+            placeholder="请输入录入时间"
+            style="width: 100%;">
+          </el-date-picker>
+          <!-- {{ deviceIngredientForm.inputDate }} -->
+        </el-form-item>
 
-              <el-form-item label="样品状态" prop="sampleState">
-                <el-input v-model="explosiveComSamplesForm.sampleState" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样品状态" prop="sampleState">
+          <el-input v-model="deviceIngredientForm.sampleState" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样品产地" prop="sampleOrigin">
-                <el-input v-model="explosiveComSamplesForm.sampleOrigin" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样品产地" prop="sampleOrigin">
+          <el-input v-model="deviceIngredientForm.sampleOrigin" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样品种类" prop="sampleType">
-                <el-input v-model="explosiveComSamplesForm.sampleType" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样品种类" prop="sampleType">
+          <el-input v-model="deviceIngredientForm.sampleType" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样品制备方法" prop="sampleMake">
-                <el-input v-model="explosiveComSamplesForm.sampleMake" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样品制备方法" prop="sampleMake">
+          <el-input v-model="deviceIngredientForm.sampleMake" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样品提取方法" prop="sampleDraw">
-                <el-input v-model="explosiveComSamplesForm.sampleDraw" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样品提取方法" prop="sampleDraw">
+          <el-input v-model="deviceIngredientForm.sampleDraw" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样品分析方法" prop="sampleAnalyse">
-                <el-input v-model="explosiveComSamplesForm.sampleAnalyse" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="样品分析方法" prop="sampleAnalyse">
+          <el-input v-model="deviceIngredientForm.sampleAnalyse" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="分析条件" prop="analyseCondition">
-                <el-input v-model="explosiveComSamplesForm.analyseCondition" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="分析条件" prop="analyseCondition">
+          <el-input v-model="deviceIngredientForm.analyseCondition" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="图片描述" prop="picDescrip">
-                <el-input v-model="explosiveComSamplesForm.picDescrip" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="图片描述" prop="picDescrip">
+          <el-input v-model="deviceIngredientForm.picDescrip" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样本图片" prop="picUrl">
-                <el-upload 
-                  class=""
-                  action="https://jsonplaceholder.typicode.com/posts/"
-                  :show-file-list="false"
-                  :before-upload="beforeAvatarUpload"
-                  :on-success="handleAvatarSuccess"
-                  >
-                  <img v-if="explosiveComSamplesForm.picUrl" :src="explosiveComSamplesForm.picUrl" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
-                </el-upload>
-              </el-form-item>
+        <el-form-item label="样本图片" prop="picUrl">
+          <el-upload 
+            class=""
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :before-upload="beforeAvatarUpload"
+            :on-success="handleAvatarSuccess"
+            >
+            <img v-if="deviceIngredientForm.picUrl" :src="deviceIngredientForm.picUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
+          </el-upload>
+        </el-form-item>
 
-              <el-form-item label="备注" prop="note">
-                <el-input type="textarea" v-model="explosiveComSamplesForm.note" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="备注" prop="note">
+          <el-input type="textarea" v-model="deviceIngredientForm.note" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item>
-                <el-button type="primary" @click="submitForm('explosiveComSamplesComponent')">提交</el-button>
-                <el-button type="warning" @click="resetForm('explosiveComSamplesComponent')" plain>重置</el-button>
-              </el-form-item>
+      </el-form>
 
-            </el-form>
-
-      <!-- <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
-        <el-button type="warning" @click="resetForm('ruleForm')" >重置</el-button>
-        <el-button type="" @click="dialogFormVisible = false">取消</el-button>
-      </div> -->
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="updateEdit">提交</el-button>
+        <el-button type="" @click="dialogFormVisible = true" plain>取消</el-button>
+      </div>
 
     </el-dialog>
 
@@ -291,7 +275,7 @@
 </template>
 
 <script>
-import { getDataList } from '@/api/table'
+import { getDataList, updateData } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -304,7 +288,8 @@ export default {
       listLoading: true,
       dialogFormVisible: false,
       dialogShowVisible: false,
-      explosiveComSamplesForm: {
+      deviceIngredientForm: {
+        id: undefined,
         sname: '',
         sampleID: '',
         user_id: '',
@@ -325,9 +310,9 @@ export default {
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        inputDate: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ]
+        // inputDate: [
+        //   { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+        // ]
       },
       formLabelWidth: '120px'
     }
@@ -380,8 +365,31 @@ export default {
 
     handleEdit(index, row) {
       console.log('--- Edit: ', index, row)
+      this.deviceIngredientForm = Object.assign({}, row)
       this.dialogFormVisible = true
-      this.explosiveComSamplesForm = row
+      this.$nextTick(() => {
+        this.$refs['deviceIngredientComponent'].clearValidate()
+      })
+    },
+
+    updateEdit() {
+      this.$refs['deviceIngredientComponent'].validate((valid) => {
+        if(valid) {
+          const tempData = Object.assign({}, this.deviceIngredientForm)
+
+          updateData(tempData).then(() => {
+            /* for...of循环 ES6新引入特性 */
+            for(const v of this.list) {
+              if(v.id === tempData.id) {
+                const index = this.list.indexOf(v)
+                this.list.splice(index, 1, tempData)
+                break
+              }
+            }
+          })
+          this.dialogFormVisible = false
+        }
+      })
     },
 
     handleDelete(index, row) {
@@ -418,8 +426,8 @@ export default {
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
-      this.explosiveComSamplesForm.picUrl = window.URL.createObjectURL(file)
-      console.log('--- beforeAvatarUpload URL: ', this.explosiveComSamplesForm.picUrl)
+      this.deviceIngredientForm.picUrl = window.URL.createObjectURL(file)
+      console.log('--- beforeAvatarUpload URL: ', this.deviceIngredientForm.picUrl)
     },
     handleAvatarSuccess(res, file) {
       console.log('--- handleAvatarSuccess', res, file)
@@ -430,7 +438,6 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-
 
   .avatar-uploader {
     border: 2px dashed #e9e9e9;

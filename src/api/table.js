@@ -47,3 +47,11 @@ export function updateData(data) {
     data
   })
 }
+
+export function updateDeviceShapeData(data) {
+  return request({
+    url: '/table/deviceShapeListUpdate',
+    method: 'post',
+    data
+  })
+}

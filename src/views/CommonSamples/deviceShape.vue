@@ -195,82 +195,82 @@
     <el-dialog></el-dialog>
 
     <el-dialog title="编辑表单" :visible.sync="dialogFormVisible">
-            <el-form
-              :model="deviceShapeForm"
-              ref="explosiveComSamplesComponent"
-              label-width="100px" >
+      <el-form
+        :model="deviceShapeForm"
+        ref="deviceShapeComponent"
+        label-width="100px" >
 
-              <el-form-item label="装置名称" prop="sname">
-                <el-input v-model="deviceShapeForm.sname" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="装置名称" prop="sname">
+          <el-input v-model="deviceShapeForm.sname" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="装置编号" prop="sampleID">
-                <el-input v-model="deviceShapeForm.sampleID" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="装置编号" prop="sampleID">
+          <el-input v-model="deviceShapeForm.sampleID" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="处理人员编号" prop="user_id">
-                <el-input v-model="deviceShapeForm.user_id" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="处理人员编号" prop="user_id">
+          <el-input v-model="deviceShapeForm.user_id" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="录入时间" prop="inputDate">
-                <el-date-picker 
-                  v-model="deviceShapeForm.inputDate"
-                  type="datetime"
-                  placeholder="请输入录入时间"
-                  style="width: 100%;">
-                </el-date-picker>
-              </el-form-item>
+        <el-form-item label="录入时间" prop="inputDate">
+          <el-date-picker 
+            v-model="deviceShapeForm.inputDate"
+            type="datetime"
+            placeholder="请输入录入时间"
+            style="width: 100%;">
+          </el-date-picker>
+        </el-form-item>
 
-              <el-form-item label="厂家" prop="mrfs">
-                <el-input v-model="deviceShapeForm.mrfs" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="厂家" prop="mrfs">
+          <el-input v-model="deviceShapeForm.mrfs" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="型号" prop="model">
-                <el-input v-model="deviceShapeForm.model" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="型号" prop="model">
+          <el-input v-model="deviceShapeForm.model" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="商标" prop="trademark">
-                <el-input v-model="deviceShapeForm.trademark" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="商标" prop="trademark">
+          <el-input v-model="deviceShapeForm.trademark" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="功能" prop="function">
-                <el-input v-model="deviceShapeForm.function" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="功能" prop="function">
+          <el-input v-model="deviceShapeForm.function" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="所属装置" prop="belongTo">
-                <el-input v-model="deviceShapeForm.belongTo" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="所属装置" prop="belongTo">
+          <el-input v-model="deviceShapeForm.belongTo" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="样本图片" prop="originalUrl">
-                <el-upload 
-                  class=""
-                  action="https://jsonplaceholder.typicode.com/posts/"
-                  :show-file-list="false"
-                  :before-upload="beforeAvatarUpload"
-                  :on-success="handleAvatarSuccess"
-                  >
-                  <img v-if="deviceShapeForm.originalUrl" :src="deviceShapeForm.originalUrl" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
-                </el-upload>
-              </el-form-item>
+        <el-form-item label="样本图片" prop="originalUrl">
+          <el-upload 
+            class=""
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :before-upload="beforeAvatarUpload"
+            :on-success="handleAvatarSuccess"
+            >
+            <img v-if="deviceShapeForm.originalUrl" :src="deviceShapeForm.originalUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
+          </el-upload>
+        </el-form-item>
 
-              <el-form-item label="备注" prop="note">
-                <el-input type="textarea" v-model="deviceShapeForm.note" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="备注" prop="note">
+          <el-input type="textarea" v-model="deviceShapeForm.note" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item>
-                <el-button type="primary" @click="submitForm('explosiveComSamplesComponent')">提交</el-button>
-                <el-button type="warning" @click="resetForm('explosiveComSamplesComponent')" plain>重置</el-button>
-              </el-form-item>
+      </el-form>
 
-            </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="updateEdit">提交</el-button>
+        <el-button type="" @click="dialogFormVisible = true" plain>取消</el-button>
+      </div>
     </el-dialog>
     
   </div>
 </template>
 
 <script>
-import { getShapeDataList } from '@/api/table'
+import { getShapeDataList, updateDeviceShapeData } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -289,6 +289,7 @@ export default {
       dialogShowVisible: false,
       dialogFormVisible: false,
       deviceShapeForm: {
+        id: undefined,
         sname: '',
         sampleID: '',
         isCircuit: null,
@@ -350,8 +351,31 @@ export default {
 
     handleEdit(index, row) {
       console.log('--- Edit: ', index, row)
+      this.deviceShapeForm = Object.assign({}, row)
       this.dialogFormVisible = true
-      this.deviceShapeForm = row
+      this.$nextTick(() => {
+        this.$refs['deviceShapeComponent'].clearValidate()
+      })
+    },
+
+    updateEdit() {
+      this.$refs['deviceShapeComponent'].validate((valid) => {
+        if(valid) {
+          const tempData = Object.assign({}, this.deviceShapeForm)
+          updateDeviceShapeData(tempData).then(() => {
+            for(const v of this.list) {
+              if(v.id === tempData.id) {
+                const index = this.list.indexOf(v)
+                this.list.splice(index, 1, tempData)
+                this.handleCurrentChange(this.currentPage)
+                break
+              }
+            }
+          })
+
+          this.dialogFormVisible = false
+        }
+      })
     },
 
     handleDelete(index, row) {
