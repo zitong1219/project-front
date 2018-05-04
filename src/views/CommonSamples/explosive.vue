@@ -272,16 +272,12 @@
                 <el-input type="textarea" v-model="explosiveComSamplesForm.note" clearable></el-input>
               </el-form-item>
 
-              <el-form-item>
-                <el-button type="primary" @click="submitForm('explosiveComSamplesComponent')">提交</el-button>
-                <el-button type="warning" @click="resetForm('explosiveComSamplesComponent')" plain>重置</el-button>
-              </el-form-item>
-
             </el-form>
 
-      <!-- <div slot="footer" class="dialog-footer">
-        <el-button type="" @click="dialogFormVisible = false">取消</el-button>
-      </div> -->
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="updateEdit">提交</el-button>
+        <el-button type="" @click="dialogFormVisible = false" plain>取消</el-button>
+      </div>
 
     </el-dialog>
 
@@ -289,7 +285,7 @@
 </template>
 
 <script>
-import { getDataList } from '@/api/table'
+import { getDataList, updateData } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -304,6 +300,7 @@ export default {
       dialogShowVisible: false,
 
       explosiveComSamplesForm: {
+        id: undefined,
         sname: '',
         sampleID: '',
         user_id: '',
@@ -376,8 +373,37 @@ export default {
 
     handleEdit(index, row) {
       console.log('--- Edit: ', index, row)
+      this.explosiveComSamplesForm = Object.assign({}, row)
       this.dialogFormVisible = true
-      this.explosiveComSamplesForm = row
+      this.$nextTick(() => {
+        this.$refs['explosiveComSamplesComponent'].clearValidate()
+      })
+    },
+
+    updateEdit() {
+      this.$refs['explosiveComSamplesComponent'].validate((valid) => {
+        if (valid) {
+          const tempData = Object.assign({}, this.explosiveComSamplesForm)
+
+          updateData(tempData).then(() => {
+            for (const v of this.list) {
+              if (v.id === this.explosiveComSamplesForm.id) {
+                const index = this.list.indexOf(v)
+                this.list.splice(index, 1, this.explosiveComSamplesForm)
+                break
+              }
+            }
+            console.log('--- updateData:', tempData)
+            this.dialogFormVisible = false
+            // this.$notify({
+            //   title: '成功',
+            //   message: '更新成功',
+            //   type: 'success',
+            //   duration: 2000
+            // })
+          })
+        }
+      })
     },
 
     handleDelete(index, row) {
@@ -385,7 +411,7 @@ export default {
       if (this.roles.indexOf('superAdmin') >= 0) {
         alert('--- superAdmin权限 允许删除 ---')
       } else if (this.roles.indexOf('admin') >= 0) {
-        alert('--- admin权限  可删除user ---')
+        alert('--- admin权限  允许删除 ---')
       } else {
         alert('--- 无删除权限 ---')
       }
@@ -396,20 +422,20 @@ export default {
     },
 
     /* 弹出框 编辑功能 */
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
-    resetForm(formName) {
-      console.log(this.$refs)
-      this.$refs[formName].resetFields()
-    },
+    // submitForm(formName) {
+    //   this.$refs[formName].validate((valid) => {
+    //     if (valid) {
+    //       alert('submit!')
+    //     } else {
+    //       console.log('error submit!!')
+    //       return false
+    //     }
+    //   })
+    // },
+    // resetForm(formName) {
+    //   console.log('--- resetForm this.$refs:', this.$refs)
+    //   this.$refs[formName].resetFields()
+    // },
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL

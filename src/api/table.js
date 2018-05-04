@@ -39,3 +39,11 @@ export function getDevCompMatch(params) {
     params
   })
 }
+
+export function updateData(data) {
+  return request({
+    url: '/table/explosiveListUpdate',
+    method: 'post',
+    data
+  })
+}
