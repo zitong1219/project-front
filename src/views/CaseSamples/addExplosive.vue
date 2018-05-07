@@ -6,63 +6,63 @@
         <el-col :span="10">
           <div>
             <el-form
-              :model="explosiveComSamplesForm"
+              :model="explosiveCaseSamplesForm"
               :rules="explosiveComSamplesRules"
-              ref="explosiveComSamplesComponent"
+              ref="explosiveCaseSamplesComponent"
               label-width="100px" >
 
               <el-form-item label="样品名称" prop="sname">
-                <el-input v-model="explosiveComSamplesForm.sname" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sname" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="样本编号" prop="sampleID">
-                <el-input v-model="explosiveComSamplesForm.sampleID" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sampleID" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="处理人员编号" prop="user_id">
-                <el-input v-model="explosiveComSamplesForm.user_id" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.user_id" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="录入时间" prop="inputDate">
                 <el-date-picker 
-                  v-model="explosiveComSamplesForm.inputDate"
+                  v-model="explosiveCaseSamplesForm.inputDate"
                   type="datetime"
                   placeholder="请输入录入时间"
                   style="width: 100%;">
                 </el-date-picker>
-                <!-- {{ explosiveComSamplesForm.inputDate }} -->
+                <!-- {{ explosiveCaseSamplesForm.inputDate }} -->
               </el-form-item>
 
               <el-form-item label="样品状态" prop="sampleState">
-                <el-input v-model="explosiveComSamplesForm.sampleState" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sampleState" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="样品产地" prop="sampleOrigin">
-                <el-input v-model="explosiveComSamplesForm.sampleOrigin" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sampleOrigin" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="样品种类" prop="sampleType">
-                <el-input v-model="explosiveComSamplesForm.sampleType" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sampleType" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="样品制备方法" prop="sampleMake">
-                <el-input v-model="explosiveComSamplesForm.sampleMake" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sampleMake" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="样品提取方法" prop="sampleDraw">
-                <el-input v-model="explosiveComSamplesForm.sampleDraw" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sampleDraw" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="样品分析方法" prop="sampleAnalyse">
-                <el-input v-model="explosiveComSamplesForm.sampleAnalyse" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.sampleAnalyse" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="分析条件" prop="analyseCondition">
-                <el-input v-model="explosiveComSamplesForm.analyseCondition" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.analyseCondition" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="图片描述" prop="picDescrip">
-                <el-input v-model="explosiveComSamplesForm.picDescrip" clearable></el-input>
+                <el-input v-model="explosiveCaseSamplesForm.picDescrip" clearable></el-input>
               </el-form-item>
 
               <el-form-item label="样本图片" prop="picUrl">
@@ -72,21 +72,21 @@
                   :show-file-list="false"
                   :before-upload="beforeAvatarUpload"
                   >
-                  <img v-if="explosiveComSamplesForm.picUrl" :src="explosiveComSamplesForm.picUrl" class="avatar">
+                  <img v-if="explosiveCaseSamplesForm.picUrl" :src="explosiveCaseSamplesForm.picUrl" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
                 </el-upload>
               </el-form-item>
 
               <el-form-item label="备注" prop="note">
-                <el-input type="textarea" v-model="explosiveComSamplesForm.note" clearable></el-input>
+                <el-input type="textarea" v-model="explosiveCaseSamplesForm.note" clearable></el-input>
               </el-form-item>
 
               <el-form-item>
-                <el-button type="warning" @click="resetForm('explosiveComSamplesComponent')" plain>重置样本信息</el-button>
+                <el-button type="warning" @click="resetForm('explosiveCaseSamplesComponent')" plain>重置样本信息</el-button>
               </el-form-item>
 
               <el-form-item>
-                <el-button type="primary" @click="submitForm('explosiveComSamplesComponent')">全部提交</el-button>
+                <el-button type="primary" @click="submitForm('explosiveCaseSamplesComponent')">全部提交</el-button>
                 <el-button type="" @click="goBack()">取消</el-button>
               </el-form-item>
 
@@ -171,7 +171,7 @@ export default {
 
   data() {
     return {
-      explosiveComSamplesForm: {
+      explosiveCaseSamplesForm: {
         sname: '',
         sampleID: '',
         user_id: '',
@@ -218,8 +218,8 @@ export default {
   },
 
   mounted() {
-    this.explosiveComSamplesForm.inputDate = new Date()
-    this.explosiveComSamplesForm.user_id = this.name
+    this.explosiveCaseSamplesForm.inputDate = new Date()
+    this.explosiveCaseSamplesForm.user_id = this.name
   },
 
   methods: {
@@ -244,7 +244,7 @@ export default {
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
-      this.explosiveComSamplesForm.picUrl = window.URL.createObjectURL(file)
+      this.explosiveCaseSamplesForm.picUrl = window.URL.createObjectURL(file)
     },
 
     addFile() {

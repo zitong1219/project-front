@@ -185,72 +185,72 @@
         label-width="100px" 
         class="">
 
-              <el-form-item label="照片上传" prop="picUrl">
-                <el-upload 
-                  class=""
-                  action="https://jsonplaceholder.typicode.com/posts/"
-                  :show-file-list="false"
-                  :on-success="handleAvatarSuccess"
-                  :before-upload="beforeAvatarUpload"
-                  >
-                  <!-- :on-change="showAvatar" -->
-                  <img v-if="peopleInfoForm.picUrl" :src="peopleInfoForm.picUrl" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
-                </el-upload>
-              </el-form-item>
+        <el-form-item label="照片上传" prop="picUrl">
+          <el-upload 
+            class=""
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload"
+            >
+            <!-- :on-change="showAvatar" -->
+            <img v-if="peopleInfoForm.picUrl" :src="peopleInfoForm.picUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
+          </el-upload>
+        </el-form-item>
 
-              <el-form-item label="人员编号" prop="userID">
-                <el-input v-model="peopleInfoForm.userID" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="人员编号" prop="userID">
+          <el-input v-model="peopleInfoForm.userID" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="人员姓名" prop="name">
-                <el-input v-model="peopleInfoForm.name" clearable></el-input>
-              </el-form-item>
+        <el-form-item label="人员姓名" prop="name">
+          <el-input v-model="peopleInfoForm.name" clearable></el-input>
+        </el-form-item>
 
-              <el-form-item label="密码" prop="password">
-                  <el-input  
-                    v-model="peopleInfoForm.password" 
-                    type="password" 
-                    auto-complete="on" 
-                    clearable>
-                  </el-input>
-              </el-form-item>
+        <el-form-item label="密码" prop="password">
+            <el-input  
+              v-model="peopleInfoForm.password" 
+              type="password" 
+              auto-complete="on" 
+              clearable>
+            </el-input>
+        </el-form-item>
 
-              <el-form-item label="确认密码" prop="checkPassword">
-                  <el-input 
-                    v-model="peopleInfoForm.checkPassword" 
-                    type="password" 
-                    auto-complete="on" 
-                    clearable>
-                  </el-input>
-              </el-form-item>
+        <el-form-item label="确认密码" prop="checkPassword">
+            <el-input 
+              v-model="peopleInfoForm.checkPassword" 
+              type="password" 
+              auto-complete="on" 
+              clearable>
+            </el-input>
+        </el-form-item>
 
-              <el-form-item label="性别" prop="gender">
-                  <el-radio-group v-model="peopleInfoForm.gender">
-                    <el-radio label="0">Woman</el-radio>
-                    <el-radio label="1">Man</el-radio>
-                  </el-radio-group>
-              </el-form-item>
+        <el-form-item label="性别" prop="gender">
+            <el-radio-group v-model="peopleInfoForm.gender">
+              <el-radio label="0">Woman</el-radio>
+              <el-radio label="1">Man</el-radio>
+            </el-radio-group>
+        </el-form-item>
 
-              <el-form-item label="电话" prop="phone">
-                  <el-input v-model="peopleInfoForm.phone"></el-input>
-              </el-form-item>
+        <el-form-item label="电话" prop="phone">
+            <el-input v-model="peopleInfoForm.phone"></el-input>
+        </el-form-item>
 
-              <el-form-item label="权限" prop="role">
-                  <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
-                    <el-option v-if = "superPermission" label="管理员" value="admin"></el-option>
-                    <el-option label="用户" value="user"></el-option>
-                  </el-select>
-              </el-form-item>
+        <el-form-item label="权限" prop="role">
+            <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
+              <el-option v-if = "superPermission" label="管理员" value="admin"></el-option>
+              <el-option label="用户" value="user"></el-option>
+            </el-select>
+        </el-form-item>
 
-              <el-form-item label="备注" prop="note">
-                  <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
-              </el-form-item>
+        <el-form-item label="备注" prop="note">
+            <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
+        </el-form-item>
 
-              <el-form-item>
-                <el-button type="primary" @click="submitForm('peopleInfoComponent')">提交</el-button>
-                <el-button type="warning" @click="resetForm('peopleInfoComponent')" plain>重置</el-button>
-              </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('peopleInfoComponent')">提交</el-button>
+          <el-button type="warning" @click="resetForm('peopleInfoComponent')" plain>重置</el-button>
+        </el-form-item>
 
       </el-form>
 
@@ -269,6 +269,8 @@ import { getPeopleList } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'peopleTable',
+
   data() {
     const validatePassword = (rule, value, callback) => {
       if (value === '') {

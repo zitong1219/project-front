@@ -44,16 +44,6 @@
       style="width: 100%; margin-top: 20px;" 
       border fit highlight-current-row stripe>
 
-      <!-- <el-table-column 
-        align="center" 
-        label='ID' 
-        fixed="left" 
-        width="100">
-        <template slot-scope="scope">
-          {{scope.$index}}
-        </template>
-      </el-table-column> -->
-
       <el-table-column
         align="center"
         type="index"
@@ -168,7 +158,7 @@
           </el-button>
           <el-button
             size="mini"
-            @click="dialogFormVisible = true">
+            @click="handleEdit(scope.$index, scope.row)">
             编 辑
           </el-button>
           <el-button
@@ -195,68 +185,86 @@
     <!-- 弹出框 编辑功能 -->
     <el-dialog title="编辑表单" :visible.sync="dialogFormVisible">
 
-      <el-form 
-        :model="ruleForm" 
-        :rules="rules" 
-        ref="ruleForm" 
-        label-width="100px" 
-        class="demo-ruleForm">
+      <el-form
+        :model="deviceIngredientForm"
+        :rules="explosiveComSamplesRules"
+        ref="deviceIngredientComponent"
+        label-width="100px" >
 
-        <el-form-item label="输入框" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+        <el-form-item label="样品名称" prop="sname">
+          <el-input v-model="deviceIngredientForm.sname" clearable></el-input>
         </el-form-item>
 
-        <el-form-item label="选择器" prop="region">
-          <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
+        <el-form-item label="样本编号" prop="sampleID">
+          <el-input v-model="deviceIngredientForm.sampleID" clearable></el-input>
         </el-form-item>
 
-        <el-form-item label="日期与时间" required>
-          <el-col :span="10">
-           <el-form-item prop="date1">
-            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-           </el-form-item>
-          </el-col>
-
-          <el-col class="line" :span="1">|</el-col>
-
-          <el-col :span="10">
-            <el-form-item prop="date2">
-              <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-            </el-form-item>
-          </el-col>
+        <el-form-item label="处理人员编号" prop="user_id">
+          <el-input v-model="deviceIngredientForm.user_id" clearable></el-input>
         </el-form-item>
 
-        <el-form-item label="开关" prop="delivery">
-          <el-switch v-model="ruleForm.delivery"></el-switch>
+        <el-form-item label="录入时间" prop="inputDate">
+          <el-date-picker 
+            v-model="deviceIngredientForm.inputDate"
+            type="datetime"
+            placeholder="请输入录入时间"
+            style="width: 100%;">
+          </el-date-picker>
+          <!-- {{ deviceIngredientForm.inputDate }} -->
         </el-form-item>
 
-        <el-form-item label="多选框" prop="type">
-          <el-checkbox-group v-model="ruleForm.type">
-            <el-checkbox label="A" name="type"></el-checkbox>
-            <el-checkbox label="B" name="type"></el-checkbox>
-            <el-checkbox label="C" name="type"></el-checkbox>
-            <el-checkbox label="D" name="type"></el-checkbox>
-          </el-checkbox-group>
+        <el-form-item label="样品状态" prop="sampleState">
+          <el-input v-model="deviceIngredientForm.sampleState" clearable></el-input>
         </el-form-item>
 
-        <el-form-item label="单选框" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
-            <el-radio label="Left"></el-radio>
-            <el-radio label="Right"></el-radio>
-          </el-radio-group>
+        <el-form-item label="样品产地" prop="sampleOrigin">
+          <el-input v-model="deviceIngredientForm.sampleOrigin" clearable></el-input>
         </el-form-item>
 
-        <el-form-item label="文本域" prop="desc">
-          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+        <el-form-item label="样品种类" prop="sampleType">
+          <el-input v-model="deviceIngredientForm.sampleType" clearable></el-input>
         </el-form-item>
+
+        <el-form-item label="样品制备方法" prop="sampleMake">
+          <el-input v-model="deviceIngredientForm.sampleMake" clearable></el-input>
+        </el-form-item>
+
+        <el-form-item label="样品提取方法" prop="sampleDraw">
+          <el-input v-model="deviceIngredientForm.sampleDraw" clearable></el-input>
+        </el-form-item>
+
+        <el-form-item label="样品分析方法" prop="sampleAnalyse">
+          <el-input v-model="deviceIngredientForm.sampleAnalyse" clearable></el-input>
+        </el-form-item>
+
+        <el-form-item label="分析条件" prop="analyseCondition">
+          <el-input v-model="deviceIngredientForm.analyseCondition" clearable></el-input>
+        </el-form-item>
+
+        <el-form-item label="图片描述" prop="picDescrip">
+          <el-input v-model="deviceIngredientForm.picDescrip" clearable></el-input>
+        </el-form-item>
+
+        <el-form-item label="样本图片" prop="picUrl">
+          <el-upload 
+            class=""
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
+            :before-upload="beforeAvatarUpload"
+            >
+            <img v-if="deviceIngredientForm.picUrl" :src="deviceIngredientForm.picUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon avatar-uploader"></i>
+          </el-upload>
+        </el-form-item>
+
+        <el-form-item label="备注" prop="note">
+          <el-input type="textarea" v-model="deviceIngredientForm.note" clearable></el-input>
+        </el-form-item>
+
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
-        <el-button type="warning" @click="resetForm('ruleForm')" >重置</el-button>
+        <el-button type="primary" @click="updateEdit">确定</el-button>
         <el-button type="" @click="dialogFormVisible = false">取消</el-button>
       </div>
 
@@ -266,10 +274,12 @@
 </template>
 
 <script>
-import { getDataList } from '@/api/table'
+import { getDataList,updateData } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'deviceIngredientCaseSamplesTable',
+
   data() {
     return {
       searchInput: '',
@@ -277,38 +287,43 @@ export default {
       listLoading: true,
       dialogFormVisible: false,
       dialogShowVisible: false,
-      ruleForm: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+
+      deviceIngredientForm: {
+        id: null,
+        sname: '',
+        sampleID: '',
+        user_id: '',
+        inputDate: null,
+        sampleState: '',
+        sampleOrigin: '',
+        sampleType: '',
+        sampleMake: '',
+        sampleDraw: '',
+        sampleAnalyse: '',
+        analyseCondition: '',
+        picUrl: null,
+        picDescrip: '',
+        note: ''
       },
-      rules: {
-        name: [
+      explosiveComSamplesFile: [
+        {
+          user_id: '',
+          inputDate: null,
+          detectDevice: '',
+          detectMrfs: '',
+          detectType: null,
+          docType: null,
+          docUrl: null,
+          key: Date.now()
+        }
+      ],
+      explosiveComSamplesRules: {
+        sname: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
-        ],
-        date1: [
+        inputDate: [
           { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-        ],
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
         ]
       },
       formLabelWidth: '120px'
@@ -361,8 +376,31 @@ export default {
     },
 
     handleEdit(index, row) {
-      console.log('--- Edit: ', index, row)
-      this.$router.push('/PersonnelManagement/index/form')
+      this.deviceIngredientForm = Object.assign({}, row)
+      this.deviceIngredientForm.inputDate = new Date(row.inputDate)
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['deviceIngredientComponent'].clearValidate()
+      })
+    },
+
+    updateEdit() {
+      this.$refs['deviceIngredientComponent'].validate((valid) => {
+        if(valid) {
+          const tempdata = Object.assign({}, this.deviceIngredientForm)
+
+          updateData(tempdata).then(() => {
+            for(const v of this.list) {
+              if(v.id === tempdata.id) {
+                const index = this.list.indexOf(v)
+                this.list.splice(index, 1, tempdata)
+                break
+              }
+            }
+          })
+          this.dialogFormVisible = false
+        }
+      })
     },
 
     handleDelete(index, row) {
@@ -370,7 +408,7 @@ export default {
       if (this.roles.indexOf('superAdmin') >= 0) {
         alert('--- superAdmin权限 允许删除 ---')
       } else if (this.roles.indexOf('admin') >= 0) {
-        alert('--- admin权限  可删除user ---')
+        alert('--- admin权限  可删除 ---')
       } else {
         alert('--- 无删除权限 ---')
       }
@@ -378,7 +416,13 @@ export default {
 
     handleDownload() {
       alert('已导出！')
-    }
+    },
+
+    beforeAvatarUpload(file) {
+      console.log('--- beforeAvatarUpload', file)
+      window.URL = window.URL || window.webkitURL
+      this.deviceIngredientForm.picUrl = window.URL.createObjectURL(file)
+    },
 
   }
 }

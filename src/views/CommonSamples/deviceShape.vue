@@ -274,7 +274,7 @@ import { getShapeDataList, updateDeviceShapeData } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'deviceShapeTable',
+  name: 'deviceShapeCommonSamplesTable',
 
   data() {
     return {
@@ -406,20 +406,20 @@ export default {
     },
 
     /* 弹出框 编辑功能 */
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
-    resetForm(formName) {
-      console.log(this.$refs)
-      this.$refs[formName].resetFields()
-    },
+    // submitForm(formName) {
+    //   this.$refs[formName].validate((valid) => {
+    //     if (valid) {
+    //       alert('submit!')
+    //     } else {
+    //       console.log('error submit!!')
+    //       return false
+    //     }
+    //   })
+    // },
+    // resetForm(formName) {
+    //   console.log(this.$refs)
+    //   this.$refs[formName].resetFields()
+    // },
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL

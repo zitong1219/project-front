@@ -279,7 +279,7 @@ import { getDataList, updateData } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'deviceIngredientTable',
+  name: 'deviceIngredientCommonSamplesTable',
 
   data() {
     return {

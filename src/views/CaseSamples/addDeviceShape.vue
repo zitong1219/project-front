@@ -8,8 +8,7 @@
           <div>
             <el-form
               :model="deviceShapeForm"
-              
-              ref="explosiveComSamplesComponent"
+              ref="deviceShapeComponent"
               label-width="100px" >
 
               <el-form-item label="装置名称" prop="sname">
@@ -70,11 +69,11 @@
               </el-form-item>
 
               <el-form-item>
-                <el-button type="warning" @click="resetForm('explosiveComSamplesComponent')" plain>重置样本信息</el-button>
+                <el-button type="warning" @click="resetForm('deviceShapeComponent')" plain>重置样本信息</el-button>
               </el-form-item>
 
               <el-form-item>
-                <el-button type="primary" @click="submitForm('explosiveComSamplesComponent')">全部提交</el-button>
+                <el-button type="primary" @click="submitForm('deviceShapeComponent')">全部提交</el-button>
                 <el-button type="" @click="goBack()">取消</el-button>
               </el-form-item>
 
@@ -101,6 +100,7 @@ export default {
   data() {
     return {
       deviceShapeForm: {
+        id: null,
         sname: '',
         sampleID: '',
         isCircuit: null,
