@@ -278,16 +278,17 @@ export default {
 
   data() {
     return {
-      currentPage: 1,
-      pageSize: 10,
       searchInput: '',
       list: [],
       listLength: 0,
       listLoading: false,
-      startIndex: 1,
       currentList: [],
+      currentPage: 1,
+      pageSize: 10,
+      startIndex: 1,
       dialogShowVisible: false,
       dialogFormVisible: false,
+
       deviceShapeForm: {
         id: undefined,
         sname: '',
@@ -405,27 +406,14 @@ export default {
       }
     },
 
-    /* 弹出框 编辑功能 */
-    // submitForm(formName) {
-    //   this.$refs[formName].validate((valid) => {
-    //     if (valid) {
-    //       alert('submit!')
-    //     } else {
-    //       console.log('error submit!!')
-    //       return false
-    //     }
-    //   })
-    // },
-    // resetForm(formName) {
-    //   console.log(this.$refs)
-    //   this.$refs[formName].resetFields()
-    // },
+    /* 弹出框 */
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
       this.deviceShapeForm.originalUrl = window.URL.createObjectURL(file)
       console.log('--- beforeAvatarUpload URL: ', this.deviceShapeForm.originalUrl)
     },
+
     handleAvatarSuccess(res, file) {
       console.log('--- handleAvatarSuccess', res, file)
     },

@@ -400,4 +400,31 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 
+  .avatar-uploader {
+    border: 2px dashed #e9e9e9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .avatar-uploader:hover {
+    border-color: #409EFF;
+  }
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
+
 </style>

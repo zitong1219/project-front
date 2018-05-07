@@ -38,7 +38,7 @@
 
     <!-- 数据表格 -->
     <el-table 
-      :data="list" 
+      :data="currentList" 
       v-loading.body="listLoading" 
       element-loading-text="载入中..." 
       style="width: 100%; margin-top: 20px;" 
@@ -47,7 +47,7 @@
       <el-table-column
         align="center"
         type="index"
-        :index="1"
+        :index="startIndex"
         fixed="left"
         width="50">
       </el-table-column>
@@ -172,6 +172,20 @@
 
     </el-table>
 
+    <!-- 分页 -->
+    <div class="pagination-container">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 50]"
+        :page-size="pageSize"
+        :total="listLength"
+        layout="total, sizes, prev, pager, next, jumper"
+        background>
+      </el-pagination>
+    </div>
+
     <!-- 弹出框 详细展示 -->
     <el-dialog title="详细展示" :visible.sync="dialogShowVisible">
 
@@ -285,7 +299,12 @@ export default {
     return {
       searchInput: '',
       list: [],
-      listLoading: true,
+      listLength: 0,
+      listLoading: false,
+      currentList: [],
+      currentPage: 1,
+      pageSize: 10,
+      startIndex: 1,
       dialogFormVisible: false,
       dialogShowVisible: false,
       deviceIngredientForm: {
@@ -348,6 +367,7 @@ export default {
         this.list = response.data.items
         this.listLoading = false
         // console.log('--- PersonnelManagement List: ', this.list)
+        this.handleCurrentChange(1)
       })
     },
 
@@ -383,6 +403,7 @@ export default {
               if(v.id === tempData.id) {
                 const index = this.list.indexOf(v)
                 this.list.splice(index, 1, tempData)
+                this.handleCurrentChange(this.currentPage)
                 break
               }
             }
@@ -407,22 +428,30 @@ export default {
       alert('已导出！')
     },
 
-    /* 弹出框 编辑功能 */
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
-    resetForm(formName) {
-      console.log(this.$refs)
-      this.$refs[formName].resetFields()
+    handleSizeChange(newPageSize) {
+      this.pageSize = newPageSize
+      if (this.currentPage === 1) {
+        this.handleCurrentChange(1)
+      }
+      else {
+        this.currentPage = 1
+      }
     },
 
+    handleCurrentChange(currentPageNum) {
+      this.currentList = []
+      this.listLength = this.list.length
+
+      let residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
+      let newItemIndex = (currentPageNum -1) * this.pageSize
+      this.startIndex = newItemIndex + 1
+      for(let i = 0; i < this.pageSize && i < residueItemNum; i++) {
+        this.currentList[i] = this.list[newItemIndex]
+        newItemIndex++
+      }
+    },
+
+    /* 弹出框 */
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL

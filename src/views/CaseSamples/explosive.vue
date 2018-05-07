@@ -38,7 +38,7 @@
 
     <!-- 数据表格 -->
     <el-table 
-      :data="list" 
+      :data="currentList" 
       v-loading.body="listLoading" 
       element-loading-text="载入中..." 
       style="width: 100%; margin-top: 20px;" 
@@ -47,7 +47,7 @@
       <el-table-column
         align="center"
         type="index"
-        :index="1"
+        :index="startIndex"
         fixed="left"
         width="50">
       </el-table-column>
@@ -172,6 +172,20 @@
 
     </el-table>
 
+    <!-- 分页 -->
+    <div class="pagination-container">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 50]"
+        :page-size="pageSize"
+        :total="listLength"
+        layout="total, sizes, prev, pager, next, jumper"
+        background>
+      </el-pagination>
+    </div>
+
     <!-- 弹出框 详细展示 -->
     <el-dialog title="详细展示" :visible.sync="dialogShowVisible">
 
@@ -284,7 +298,12 @@ export default {
     return {
       searchInput: '',
       list: null,
-      listLoading: true,
+      listLength: 0,
+      listLoading: false,
+      startIndex: 1,
+      currentList: [],
+      currentPage: 1,
+      pageSize: 10,
       dialogFormVisible: false,
       dialogShowVisible: false,
 
@@ -360,6 +379,7 @@ export default {
       getDataList(this.listQuery).then(response => {
         this.list = response.data.items
         this.listLoading = false
+        this.handleCurrentChange(1)
         // console.log('--- PersonnelManagement List: ', this.list)
       })
     },
@@ -395,6 +415,7 @@ export default {
               if(v.id === tempData.id) {
                 const index = this.list.indexOf(v)
                 this.list.splice(index, 1, tempData)
+                this.handleCurrentChange(this.currentPage)
                 break
               }
             }
@@ -418,6 +439,29 @@ export default {
 
     handleDownload() {
       alert('已导出！')
+    },
+
+    handleSizeChange(newPageSize) {
+      this.pageSize = newPageSize
+      if (this.currentPage === 1) {
+        this.handleCurrentChange(1)
+      }
+      else {
+        this.currentPage = 1
+      }
+    },
+
+    handleCurrentChange(currentPageNum) {
+      this.currentList = []
+      this.listLength = this.list.length
+
+      let residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
+      let newItemIndex = (currentPageNum -1) * this.pageSize
+      this.startIndex = newItemIndex + 1
+      for(let i = 0; i < this.pageSize && i < residueItemNum; i++) {
+        this.currentList[i] = this.list[newItemIndex]
+        newItemIndex++
+      }
     },
 
     beforeAvatarUpload(file) {
