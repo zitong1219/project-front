@@ -29,17 +29,16 @@ export const constantRouterMap = [
   { path: '/404', component: _import('errorPages/404'), hidden: true },
 
   {
-    path: '/Dashboard',
+    path: '/Home',
     component: Layout,
-    // redirect: '/Dashboard',
     // alwaysShow: true,
-    hidden: true,
+    hidden: false,
     children: [
       {
         path: '',
-        name: 'Dashboard',
-        component: _import('dashboard/index'),
-        meta: { title: 'Dashboard', icon: '' }
+        name: 'Home',
+        component: _import('Home/index'),
+        meta: { title: '用户主页', icon: 'user' }
       }
     ]
   },
@@ -134,12 +133,12 @@ export const asyncRouterMap = [
         },
         children: [
           { path: 'deviceIngredient',
-            name: 'deviceIngredient',
+            name: 'deviceIngredientCommonSamples',
             component: _import('CommonSamples/deviceIngredient'),
             meta: { title: '爆炸装置-成分' }
           },
           { path: 'deviceShape',
-            name: 'deviceShape',
+            name: 'deviceShapeCommonSamples',
             component: _import('CommonSamples/deviceShape'),
             meta: { title: '爆炸装置-形态' }
           }
@@ -202,7 +201,7 @@ export const asyncRouterMap = [
     name: 'CaseSamples',
     meta: {
       title: '案件物证',
-      icon: 'tree'
+      icon: 'tab'
     },
     children: [
       {
@@ -223,13 +222,13 @@ export const asyncRouterMap = [
         children: [
           {
             path: 'deviceIngredient',
-            name: 'deviceIngredient',
+            name: 'deviceIngredientCaseSamples',
             component: _import('CaseSamples/deviceIngredient'),
             meta: { title: '爆炸装置-成分' }
           },
           {
             path: 'deviceShape',
-            name: 'deviceShape',
+            name: 'deviceShapeCaseSamples',
             component: _import('CaseSamples/deviceShape'),
             meta: { title: '爆炸装置-形态' }
           }
@@ -303,13 +302,13 @@ export const asyncRouterMap = [
         children: [
           {
             path: 'deviceIngredient',
-            name: 'deviceIngredient',
+            name: 'deviceIngredientAnalysisAndJudgment',
             component: _import('AnalysisAndJudgment/deviceIngredient'),
             meta: { title: '爆炸装置-成分' }
           },
           {
             path: 'deviceShape',
-            name: 'deviceShape',
+            name: 'deviceShapeAnalysisAndJudgment',
             component: _import('AnalysisAndJudgment/deviceShape'),
             meta: { title: '爆炸装置-形态' }
           }

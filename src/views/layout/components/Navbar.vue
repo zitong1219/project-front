@@ -26,16 +26,16 @@
         slot="dropdown">
         <router-link 
           class="inlineBlock" 
-          to="/Dashboard">
+          to="/Home">
           <el-dropdown-item>
-            个人信息
+            用户主页
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
           <span 
             @click="logout" 
             style="display:block;">
-            LogOut 登出
+            登出
           </span>
         </el-dropdown-item>
       </el-dropdown-menu>
