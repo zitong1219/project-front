@@ -441,6 +441,7 @@ export default {
       alert('已导出！')
     },
 
+    /* 分页 */
     handleSizeChange(newPageSize) {
       this.pageSize = newPageSize
       if (this.currentPage === 1) {
@@ -464,6 +465,7 @@ export default {
       }
     },
 
+    /* 弹出框 */
     beforeAvatarUpload(file) {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL

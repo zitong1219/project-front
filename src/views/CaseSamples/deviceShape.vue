@@ -271,16 +271,18 @@ export default {
   name: 'deviceShapeCaseSamplesTable',
   data() {
     return {
-      currentPage: 1,
-      pageSize: 10,
+      
       searchInput: '',
       list: [],
       listLength: 0,
       listLoading: false,
       startIndex: 1,
       currentList: [],
+      currentPage: 1,
+      pageSize: 10,
       dialogShowVisible: false,
       dialogFormVisible: false,
+      
       deviceShapeForm: {
         id: null,
         sname: '',
