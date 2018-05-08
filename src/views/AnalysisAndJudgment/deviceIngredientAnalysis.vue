@@ -67,10 +67,9 @@ export default {
     this.fetchData()
   },
 
-
   methods: {
     fetchData() {
-      getExlpoMatch().then(response=> {
+      getExlpoMatch().then(response => {
         this.matchDataItems = response.data.items
       })
     },

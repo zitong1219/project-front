@@ -206,7 +206,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         colors: ['#fef4ac', '#0018ba', '#ffc200', '#f32f15', '#aaaaaa', '#5ab639'],
         brushs: [{
@@ -236,10 +236,10 @@
         }
       }
     },
-    created () {
+    created() {
       this.$emit('setNav', '在线涂鸦画板')
     },
-    mounted () {
+    mounted() {
       const canvas = document.querySelector('#canvas')
       this.context = canvas.getContext('2d')
       this.initDraw()
@@ -247,12 +247,12 @@
       document.querySelector('#footer').classList.add('hide-footer')
       document.querySelector('body').classList.add('fix-body')
     },
-    destroyed () {
+    destroyed() {
       document.querySelector('#footer').classList.remove('hide-footer')
       document.querySelector('body').classList.remove('fix-body')
     },
     computed: {
-      controls () {
+      controls() {
         return [{
           title: '上一步',
           action: 'prev',
@@ -269,7 +269,7 @@
       }
     },
     methods: {
-      isPc () {
+      isPc() {
         const userAgentInfo = navigator.userAgent
         const Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod']
         let flag = true
@@ -281,15 +281,15 @@
         }
         return flag
       },
-      removeImg (src) {
+      removeImg(src) {
         this.imgUrl = this.imgUrl.filter(item => item !== src)
       },
-      initDraw () {
+      initDraw() {
         const preData = this.context.getImageData(0, 0, 600, 400)
         // 空绘图表面进栈
         this.middleAry.push(preData)
       },
-      canvasMove (e) {
+      canvasMove(e) {
         if (this.canvasMoveUse) {
           console.log('canvasMove')
           const t = e.target
@@ -306,7 +306,7 @@
           this.context.stroke()
         }
       },
-      beginPath (e) {
+      beginPath(e) {
         const canvas = document.querySelector('#canvas')
         if (e.target !== canvas) {
           console.log('beginPath')
@@ -314,7 +314,7 @@
         }
       },
       // mouseup
-      canvasUp (e) {
+      canvasUp(e) {
         console.log('canvasUp')
         const preData = this.context.getImageData(0, 0, 600, 400)
         if (!this.nextDrawAry.length) {
@@ -329,7 +329,7 @@
         this.canvasMoveUse = false
       },
       // mousedown
-      canvasDown (e) {
+      canvasDown(e) {
         console.log('canvasDown')
         this.canvasMoveUse = true
         // client是基于整个页面的坐标
@@ -347,15 +347,15 @@
         this.preDrawAry.push(preData)
       },
       // 设置颜色
-      setColor (color) {
+      setColor(color) {
         this.config.lineColor = color
       },
       // 设置笔刷大小
-      setBrush (type) {
+      setBrush(type) {
         this.config.lineWidth = type
       },
       // 操作
-      controlCanvas (action) {
+      controlCanvas(action) {
         switch (action) {
           case 'prev':
             if (this.preDrawAry.length) {
@@ -382,7 +382,7 @@
         }
       },
       // 生成图片
-      getImage () {
+      getImage() {
         const canvas = document.querySelector('#canvas')
         const src = canvas.toDataURL('image/png')
         this.imgUrl.push(src)
@@ -392,7 +392,7 @@
         }
       },
       // 设置绘画配置
-      setCanvasStyle () {
+      setCanvasStyle() {
         this.context.lineWidth = this.config.lineWidth
         this.context.shadowBlur = this.config.shadowBlur
         this.context.shadowColor = this.config.lineColor

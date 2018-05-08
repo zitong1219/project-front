@@ -329,7 +329,7 @@ export default {
         sname: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
+        ]
       },
       formLabelWidth: '120px'
     }
@@ -397,7 +397,7 @@ export default {
 
           updateData(tempData).then(() => {
             /* for...in循环 对Array的循环得到的是String而不是Numbe */
-            for (let v in this.list) {
+            for (const v in this.list) {
               if (this.list[v].id === tempData.id) {
                 const index = v
                 this.list.splice(index, 1, tempData)
@@ -436,8 +436,7 @@ export default {
       this.pageSize = newPageSize
       if (this.currentPage === 1) {
         this.handleCurrentChange(1)
-      }
-      else {
+      } else {
         this.currentPage = 1
       }
     },
@@ -446,10 +445,10 @@ export default {
       this.currentList = []
       this.listLength = this.list.length
 
-      let residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
-      let newItemIndex = (currentPageNum -1) * this.pageSize
+      const residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
+      let newItemIndex = (currentPageNum - 1) * this.pageSize
       this.startIndex = newItemIndex + 1
-      for(let i = 0; i < this.pageSize && i < residueItemNum; i++) {
+      for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
         this.currentList[i] = this.list[newItemIndex]
         newItemIndex++
       }
@@ -461,11 +460,10 @@ export default {
       window.URL = window.URL || window.webkitURL
       this.explosiveComSamplesForm.picUrl = window.URL.createObjectURL(file)
       console.log('--- beforeAvatarUpload URL: ', this.explosiveComSamplesForm.picUrl)
-
     },
     handleAvatarSuccess(res, file) {
       console.log('--- handleAvatarSuccess', res, file)
-    },
+    }
 
   }
 }

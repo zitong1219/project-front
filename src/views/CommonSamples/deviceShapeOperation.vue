@@ -17,12 +17,12 @@
 <script>
 
 export default {
-  name:'deviceShapeOperation',
+  name: 'deviceShapeOperation',
 
   methods: {
-  	goBack() {
-  	  this.$router.go(-1)
-  	}
+    goBack() {
+      this.$router.go(-1)
+    }
   }
 
 }

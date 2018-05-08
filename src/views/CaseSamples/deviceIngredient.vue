@@ -288,7 +288,7 @@
 </template>
 
 <script>
-import { getDataList,updateData } from '@/api/table'
+import { getDataList, updateData } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -406,12 +406,12 @@ export default {
 
     updateEdit() {
       this.$refs['deviceIngredientComponent'].validate((valid) => {
-        if(valid) {
+        if (valid) {
           const tempdata = Object.assign({}, this.deviceIngredientForm)
 
           updateData(tempdata).then(() => {
-            for(const v of this.list) {
-              if(v.id === tempdata.id) {
+            for (const v of this.list) {
+              if (v.id === tempdata.id) {
                 const index = this.list.indexOf(v)
                 this.list.splice(index, 1, tempdata)
                 this.handleCurrentChange(this.currentPage)
@@ -444,8 +444,7 @@ export default {
       this.pageSize = newPageSize
       if (this.currentPage === 1) {
         this.handleCurrentChange(1)
-      }
-      else {
+      } else {
         this.currentPage = 1
       }
     },
@@ -454,10 +453,10 @@ export default {
       this.currentList = []
       this.listLength = this.list.length
 
-      let residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
-      let newItemIndex = (currentPageNum -1) * this.pageSize
+      const residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
+      let newItemIndex = (currentPageNum - 1) * this.pageSize
       this.startIndex = newItemIndex + 1
-      for(let i = 0; i < this.pageSize && i < residueItemNum; i++) {
+      for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
         this.currentList[i] = this.list[newItemIndex]
         newItemIndex++
       }
@@ -468,7 +467,7 @@ export default {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
       this.deviceIngredientForm.picUrl = window.URL.createObjectURL(file)
-    },
+    }
 
   }
 }

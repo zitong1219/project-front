@@ -328,7 +328,7 @@ export default {
         sname: [
           { required: true, message: '请输入活动名称', trigger: 'blur' },
           { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
+        ]
         // inputDate: [
         //   { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
         // ]
@@ -394,13 +394,13 @@ export default {
 
     updateEdit() {
       this.$refs['deviceIngredientComponent'].validate((valid) => {
-        if(valid) {
+        if (valid) {
           const tempData = Object.assign({}, this.deviceIngredientForm)
 
           updateData(tempData).then(() => {
             /* for...of循环 ES6新引入特性 */
-            for(const v of this.list) {
-              if(v.id === tempData.id) {
+            for (const v of this.list) {
+              if (v.id === tempData.id) {
                 const index = this.list.indexOf(v)
                 this.list.splice(index, 1, tempData)
                 this.handleCurrentChange(this.currentPage)
@@ -432,8 +432,7 @@ export default {
       this.pageSize = newPageSize
       if (this.currentPage === 1) {
         this.handleCurrentChange(1)
-      }
-      else {
+      } else {
         this.currentPage = 1
       }
     },
@@ -442,10 +441,10 @@ export default {
       this.currentList = []
       this.listLength = this.list.length
 
-      let residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
-      let newItemIndex = (currentPageNum -1) * this.pageSize
+      const residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
+      let newItemIndex = (currentPageNum - 1) * this.pageSize
       this.startIndex = newItemIndex + 1
-      for(let i = 0; i < this.pageSize && i < residueItemNum; i++) {
+      for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
         this.currentList[i] = this.list[newItemIndex]
         newItemIndex++
       }
@@ -460,7 +459,7 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       console.log('--- handleAvatarSuccess', res, file)
-    },
+    }
 
   }
 }

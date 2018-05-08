@@ -153,7 +153,7 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       console.log('--- handleAvatarSuccess', res, file)
-    },
+    }
   }
 
 }

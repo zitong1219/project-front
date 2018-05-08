@@ -148,7 +148,7 @@ export default {
       console.log('--- beforeAvatarUpload', file)
       window.URL = window.URL || window.webkitURL
       this.deviceShapeForm.originalUrl = window.URL.createObjectURL(file)
-    },
+    }
   }
 
 }

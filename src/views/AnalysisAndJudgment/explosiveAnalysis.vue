@@ -100,7 +100,7 @@ export default {
 
     drawChart(index, row) {
       console.log('--- drawChart: ', index, row)
-      this.drawChartFlag = true,
+      this.drawChartFlag = true
       this.drawExploSampleID = row.exploSample_id
     },
 

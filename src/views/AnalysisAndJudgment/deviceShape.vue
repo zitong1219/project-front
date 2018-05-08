@@ -236,8 +236,7 @@ export default {
       this.pageSize = newPageSize
       if (this.currentPage === 1) {
         this.handleCurrentChange(1)
-      }
-      else {
+      } else {
         this.currentPage = 1
       }
     },
@@ -246,10 +245,10 @@ export default {
       this.currentList = []
       this.listLength = this.list.length
 
-      let residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
-      let newItemIndex = (currentPageNum -1) * this.pageSize
+      const residueItemNum = this.listLength - (currentPageNum - 1) * this.pageSize
+      let newItemIndex = (currentPageNum - 1) * this.pageSize
       this.startIndex = newItemIndex + 1
-      for(let i = 0; i < this.pageSize && i < residueItemNum; i++) {
+      for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
         this.currentList[i] = this.list[newItemIndex]
         newItemIndex++
       }

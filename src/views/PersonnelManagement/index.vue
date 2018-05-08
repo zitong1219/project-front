@@ -321,7 +321,7 @@ export default {
 
       superPermission: false,
 
-      peopleInfoForm: { 
+      peopleInfoForm: {
         userID: '',
         name: '',
         password: '',
@@ -482,9 +482,9 @@ export default {
       this.currentList = []
       this.listLength = this.list.length
 
-      const residueItemNum = this.list.length - (val - 1) * this.pageSize  // 剩余数据量
-      let newItemIndex = (val - 1) * this.pageSize  // 当前数据列表的起始数据在原数据列表中的下标号
-      this.startIndex = newItemIndex + 1  // 当前数据列表的起始数据的序号
+      const residueItemNum = this.list.length - (val - 1) * this.pageSize // 剩余数据量
+      let newItemIndex = (val - 1) * this.pageSize // 当前数据列表的起始数据在原数据列表中的下标号
+      this.startIndex = newItemIndex + 1 // 当前数据列表的起始数据的序号
 
       /* 对当前数据列表赋值 */
       for (let i = 0; i < this.pageSize && i < residueItemNum; i++) {
