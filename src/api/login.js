@@ -1,7 +1,7 @@
-import request from '@/utils/request'
+import service from '@/utils/request'
 
 export function login(username, password) {
-  return request({
+  return service({
     url: '/user/login',
     method: 'post',
     data: {
@@ -12,7 +12,7 @@ export function login(username, password) {
 }
 
 export function getInfo(token) {
-  return request({
+  return service({
     url: '/user/info',
     method: 'get',
     params: { token }
@@ -20,7 +20,7 @@ export function getInfo(token) {
 }
 
 export function logout() {
-  return request({
+  return service({
     url: '/user/logout',
     method: 'post'
   })

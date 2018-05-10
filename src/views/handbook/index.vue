@@ -1,5 +1,5 @@
 <template>
-  <!-- 人员信息 -->
+
   <div class="dashboard-container">
     <h2>
       Handbook

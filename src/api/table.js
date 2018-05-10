@@ -1,7 +1,7 @@
-import request from '@/utils/request'
+import service from '@/utils/request'
 
 export function getPeopleList(params) {
-  return request({
+  return service({
     url: '/table/peoplelist',
     method: 'get',
     params
@@ -9,7 +9,7 @@ export function getPeopleList(params) {
 }
 
 export function getDataList(params) {
-  return request({
+  return service({
     url: '/table/explosiveList',
     method: 'get',
     params
@@ -17,7 +17,7 @@ export function getDataList(params) {
 }
 
 export function getShapeDataList(params) {
-  return request({
+  return service({
     url: '/table/deviceShapeList',
     method: 'get',
     params
@@ -25,7 +25,7 @@ export function getShapeDataList(params) {
 }
 
 export function getExlpoMatch(params) {
-  return request({
+  return service({
     url: '/table/exlpoMatch ',
     method: 'get',
     params
@@ -33,15 +33,24 @@ export function getExlpoMatch(params) {
 }
 
 export function getDevCompMatch(params) {
-  return request({
+  return service({
     url: '/table/devCompMatch',
     method: 'get',
     params
   })
 }
 
+export function updatePeople(data) {
+  console.log('--- api updatePeople data: ', data)
+  return service({
+    url: '/table/propleListUpdate',
+    method: 'post',
+    data
+  })
+}
+
 export function updateData(data) {
-  return request({
+  return service({
     url: '/table/explosiveListUpdate',
     method: 'post',
     data
@@ -49,7 +58,7 @@ export function updateData(data) {
 }
 
 export function updateDeviceShapeData(data) {
-  return request({
+  return service({
     url: '/table/deviceShapeListUpdate',
     method: 'post',
     data

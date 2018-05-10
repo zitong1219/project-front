@@ -109,6 +109,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { addPeople } from '@/api/create'
 
 export default {
   name: 'addPeople',
@@ -215,7 +216,10 @@ export default {
       this.$refs[formName].validate((valid) => {
         console.log('--- peopleInfoForm: ', this.peopleInfoForm)
         if (valid) {
-          console.log('submit! valid: ', valid)
+          addPeople(this.peopleInfoForm).then((res) => {
+            console.log('submit! res: ', res)
+            this.goBack()
+          })
         } else {
           console.log('error submit!')
           return false

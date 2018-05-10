@@ -159,6 +159,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { addDataList } from '@/api/create'
 
 export default {
   name: 'addExplosiveComSamples',
@@ -226,7 +227,9 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          addDataList(this.explosiveComSamplesForm).then((res) => {
+            console.log('submit! res: ', res)
+          })
         } else {
           console.log('error submit!!')
           return false

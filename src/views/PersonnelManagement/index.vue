@@ -208,56 +208,51 @@
         </el-form-item>
 
         <el-form-item label="密码" prop="password">
-            <el-input  
-              v-model="peopleInfoForm.password" 
-              type="password" 
-              auto-complete="on" 
-              clearable>
-            </el-input>
+          <el-input  
+            v-model="peopleInfoForm.password" 
+            type="password" 
+            auto-complete="on" 
+            clearable>
+          </el-input>
         </el-form-item>
 
         <el-form-item label="确认密码" prop="checkPassword">
-            <el-input 
-              v-model="peopleInfoForm.checkPassword" 
-              type="password" 
-              auto-complete="on" 
-              clearable>
-            </el-input>
+          <el-input 
+            v-model="peopleInfoForm.checkPassword" 
+            type="password" 
+            auto-complete="on" 
+            clearable>
+          </el-input>
         </el-form-item>
 
         <el-form-item label="性别" prop="gender">
-            <el-radio-group v-model="peopleInfoForm.gender">
-              <el-radio label="0">Woman</el-radio>
-              <el-radio label="1">Man</el-radio>
-            </el-radio-group>
+          <el-radio-group v-model="peopleInfoForm.gender">
+            <el-radio label="0">Woman</el-radio>
+            <el-radio label="1">Man</el-radio>
+          </el-radio-group>
         </el-form-item>
 
         <el-form-item label="电话" prop="phone">
-            <el-input v-model="peopleInfoForm.phone"></el-input>
+          <el-input v-model="peopleInfoForm.phone"></el-input>
         </el-form-item>
 
         <el-form-item label="权限" prop="role">
-            <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
-              <el-option v-if = "superPermission" label="管理员" value="admin"></el-option>
-              <el-option label="用户" value="user"></el-option>
-            </el-select>
+          <el-select v-model="peopleInfoForm.role" placeholder="请选择权限">
+            <el-option v-if = "superPermission" label="管理员" value="admin"></el-option>
+            <el-option label="用户" value="user"></el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item label="备注" prop="note">
-            <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
-        </el-form-item>
-
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('peopleInfoComponent')">提交</el-button>
-          <el-button type="warning" @click="resetForm('peopleInfoComponent')" plain>重置</el-button>
+          <el-input type="textarea" v-model="peopleInfoForm.note"></el-input>
         </el-form-item>
 
       </el-form>
 
-      <!-- <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="updateEdit">确定</el-button>
         <el-button type="" @click="dialogFormVisible = false">取消</el-button>
-      </div> -->
+      </div>
 
     </el-dialog>
 
@@ -265,7 +260,7 @@
 </template>
 
 <script>
-import { getPeopleList } from '@/api/table'
+import { getPeopleList, updatePeople } from '@/api/table'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -322,6 +317,7 @@ export default {
       superPermission: false,
 
       peopleInfoForm: {
+        id: undefined,
         userID: '',
         name: '',
         password: '',
@@ -413,7 +409,28 @@ export default {
     handleEdit(index, row) {
       console.log('--- Edit: ', index, row)
       this.dialogFormVisible = true
-      this.peopleInfoForm = row
+      this.peopleInfoForm = Object.assign({}, row)
+    },
+
+    updateEdit() {
+      this.$refs['peopleInfoComponent'].validate((valid) => {
+        if(valid) {
+          const tempData = Object.assign({}, this.peopleInfoForm)
+          updatePeople(tempData).then(() => {
+            for(const v of this.list)
+            {
+              if(v.id === tempData.id) {
+                const index = this.list.indexOf(v)
+                this.list.splice(index, 1, tempData)
+                this.handleCurrentChange(this.currentPage)
+                break
+              }
+            }
+          })
+          this.dialogFormVisible = false
+        }
+        
+      })
     },
 
     handleDelete(index, row) {
@@ -444,20 +461,7 @@ export default {
     // showAvatar(file, fileList) {
     //   console.log('--- showAvatar', file, fileList)
     // },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        console.log('--- peopleInfoForm: ', this.peopleInfoForm)
-        if (valid) {
-          console.log('submit!')
-        } else {
-          console.log('error submit!')
-          return false
-        }
-      })
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
-    },
+
 
     /* 分页 */
     handleSizeChange(val) {
