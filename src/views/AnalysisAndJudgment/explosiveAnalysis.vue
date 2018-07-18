@@ -56,8 +56,17 @@
     <div 
       id="highChart" 
       v-if="drawChartFlag" 
-      style="width: 800px; height: 600px; background: #EFEFEF; margin-top: 50px">
-      {{ drawExploSampleID }}
+      style="width: 100%; height: 600px; background: #EFEFEF; margin-top: 50px">
+      <!-- {{ drawExploSampleID }} -->
+      <xrd-component :styles="styles" ref="simpleChart"></xrd-component>
+    </div>
+
+    <div
+      id="highChart_xrf"
+      v-if="drawChartFlag"
+      style="width: 100%; height: 600px; background: #EFEFEF; margin-top: 50px">
+      <!-- {{ drawExploSampleID }} -->
+      <xrf-component :stylesxrf="styles_xrf" ref="simpleChart"></xrf-component>    
     </div>
 
     <el-button 
@@ -71,6 +80,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getExlpoMatch } from '@/api/table'
+import Highcharts from 'highcharts/highstock';
+import HighchartsMore from 'highcharts/highcharts-more';
+
+HighchartsMore(Highcharts)
+
+import XrdComponent from './XrdHighchartsComponent.vue';
+import XrfComponent from './XrfHighchartsComponent.vue'
 
 export default {
   name: 'explosiveAnalysis',
@@ -83,12 +99,28 @@ export default {
     return {
       matchDataItems: [],
       drawChartFlag: false,
-      drawExploSampleID: null
+      drawExploSampleID: null,
+
+      styles: {
+        width: 1100,
+        height: 600
+      },
+
+      styles_xrf: {
+        width: 1100,
+        height: 600
+      },
+
+      
     }
+  },
+  components: {
+    XrdComponent,
+    XrfComponent
   },
 
   created() {
-    this.fetchData()
+    this.fetchData();
   },
 
   methods: {
